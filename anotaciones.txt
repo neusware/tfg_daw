@@ -1,0 +1,101 @@
+en dashboard
+
+    hacer peticion fetch sin estar autenticado
+    hacer peticion fecth estando autenticado
+
+
+En laravel hay muchas librerias para gestionar la autenticacion, la mas conocida en sactum
+
+    php artisan install:api 
+    INFO  API scaffolding installed. Please add the [Laravel\Sanctum\HasApiTokens] trait to your User model.
+
+El que manda el token para las SPAs es el back, hay que generarlo y gestionarlo.
+
+Cuando installas  INFO  Running migrations.  
+
+  2025_02_03_031939_create_personal_access_tokens_table ...................................... 65.44ms DONE
+
+Se crea la tabla que gestiona los tokens
+    ID
+    tokenable:type -> 
+    tokenable_id -> hace referencia a el usuario al que pertenece el token
+    name
+    token -> hash generado
+    abilities -> roles
+    expires_at
+    created_at
+    updated_at -> fecha ult q hace referincia
+
+Para meterle el algún token a mano, desde códig, hace falta coidgo
+
+Dentro de controllers > mkdir Api -> pegar las funciones correspondientes para manejar el login desde un SPA (AuthController.php) proporcionado por Javi
+
+Al correr el install api, todas las rutas deben de ir al api.php cambiando la ruta agregando public/api/xxxx
+
+    Auth PROTEGE LA RUTA PARA WEB
+    
+    En API las rutas se protegen con sactum, pq ya no hay web que genere la cookie que genera auth, asiq es el que trabaja con los tokens.
+
+    ¿Como conseguir que protegido con sactum obtener los datos cdo solicites a endpoint de api?
+
+Aclaración auth / auth-sactum | web vs SPA
+[
+    Si tu vas en una ruta sin auth, devuelve los datos y punto, si usas auth, necesitas de la sesión/cookie que genera, pero imagina que al app solo es API, y solicitan aplicaciones front externas a los endpoints, necesitas otro metodo de autenticacion, el de los TOKENs  -> la libreria que gestiona los tokens es auth-sactum
+]
+
+Como te logeas en el sactum -> necesitas simular una vista que llame al metodo del controlador loginUser, que llegaras mediante la ruta API
+    vistas > auth (login sample) -> copias en views a nivel general
+    hay un form que va por post a una ruta con name, pues creamos otra ruta que valla al metodo bueno del controlador que genera el token 
+    
+    Route::post('/login',[AuthController::class, 'loginUser']  )->name('api-login');
+
+Simular una vista como si estuviesees en react para llamar al metodo del controlador y que me logee, desde una vista web, lanzar peticion en submit a metodo sactum del controlador que genera api token
+
+Es importante que va a trabajar con Usuarios, asique en el modelo necesita tb tener los metodos que pueden gestionar las Api con los usuarios
+
+    Use HaskApiTokens -> en el modelo
+
+Para hacer fetch c una api necesitas pasarle el token
+    Authentication: 'Bearer + token' -> se puede poner a piñon pero lo tiene qu ecoger del almacenamiento local, para que si necesita la app obtener datos que requieren autenticación, haga la petición con el token y así valide
+
+--------------------------------------rfx
+
+Hay que diferenciar bien como funciona la autenticacion web clasica, como puede hacer auth, que genera las cookies y va checkeando que el cliente tenga la cookie, y como se hace en las APIs donde el front y la API está totalmente separado.
+
+    Se hacen con tokens, al final hay librerias que generan el token ya, lo que hay que conseguir es q si el usuario está en la base de datos de la API, genere el token, y una vez tu devuelvas el token, es el cliente el encargado de almacenar la token, ya las siguientes peticiones tendras que checkear que ese token existe y está asociado al usuario, contronlando así la lógica, la física.
+
+---------------------------- SPA
+Single Page APP, lo que hace por detras es con JS o typscript da igual el framework, lo que hace es hacer peticiones FETCH para actualizar y parchear el DOM (>2014 cdo JS tuvo tiron)
+
+Cdo igual una web coge datos de una BD lo que hace es usar peticiones asyncronas con fetch pero salta de pagina, JS a parte del DOM puede modificar las rutas, realmente cdo empiezas con un index, va redireccionando 
+
+La SPA va ligada a la eficiencia y a la innovación en cuanto al tratamiento de datos.
+
+Como todo es JS, para comunicarse con el back necesita hacer peticiones a rutas (endpoints - método que se ejecuta)
+
+
+
+sin recargar la pagina mostrar los usuarios, al final tienes que comunicarte con el back y es una app front completamente separado, (laravel back en htdocs levantado).
+
+Si desde react haces un fetch al back, no interesa que te devuelva una vista, pq ya estas en react, en front, lo que interesa es que devuelvan datos. Si devuelve una vista ya no es SPA, para que quiero React entonces, react controla los componentes a partir de los datos. 
+
+    Para ello surgen las APIs, interfaces para intercambiar datos entre dos sistemas, habia sistemas SOAP (xml, ANTIGUO) y APi RestFul, lo moderno, dependiendo de como haga la petición (con que método) desencadena una lógica u otra pero siempre a la misma ruta, para hacer el CRUD (con cada uno de los metodos HTTP generar todas las opciones de tratamientos de datos).
+
+Hoy en dia así funciona el sistema, se mejorará con el tiempo, al final cualquier Api te da los endpoints que te devuelven los JSON, al final el mejor sistema actual para tratar los datos.
+
+Normalmente cuando se llama a un endpoint en Network (developer tools) salen todos los detalles que se envian en la solicitud, sea cual sea el método que se utilice.
+
+    Al final la API es la interfaz, se ve claro cuando solicitas unos datos, al final no tienes ni idea de en que lenguaje está implementada la API, es sacar datos de la DB, desconociendo todo el sistema que hay detras, pudiendo tu ya hacer lo que quieras con los datos.
+
+    Con react no hay otra que hacer peticiones a endpoints y gestionar y renderizar los componentes x en función de los datos y la lógica.
+
+En realidad una web tradicional la vista la renderiza el servidor (return view)
+
+Al final este tipo de tecnologías molan mucho para equipos que estén muy distinguidos, claramente entre front y back, en una empresa ideal, con todo esquematizado es ideal pq no se pisan unos a otros.
+
+Es importante documentar la API, donde vendrán todos los endpoints y como intercambiar datos con la API, es lo que la apps front van necesitar.ç
+
+
+-------------------------- POSTMAN
+
+Para simular este tipo de comunicaciones se puedn usar techhs como POSTMAN, donde podemos ejecutar peticiones de la misma manera que fetch en código, pues con un email password y tocken, devolviendote los datos

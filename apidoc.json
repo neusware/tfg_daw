@@ -1,0 +1,12 @@
+{
+  "name": "API -  Fundación MEDAC",
+  "version": "1.0.0",
+  "description": "Gestión de muestreo en anatomía patológica y citología",
+  "title": "Documentación API - Fundación MEDAC",
+  "url": "http://localhost",
+  "sampleUrl": "http://localhost",
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  }
+}
