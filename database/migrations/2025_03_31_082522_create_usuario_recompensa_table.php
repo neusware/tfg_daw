@@ -4,18 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoDeEstudioTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('tipo_de_estudio', function (Blueprint $table) {
+        Schema::create('usuario_recompensa', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->foreignId('id_usuario')->constrained('usuario')->onDelete('cascade');
+            $table->foreignId('id_recompensa')->constrained('recompensas')->onDelete('cascade');
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -23,6 +25,6 @@ class CreateTipoDeEstudioTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipo_de_estudio');
+        Schema::dropIfExists('usuario_recompensa');
     }
-}
+};

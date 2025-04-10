@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('naturaleza', function (Blueprint $table) {
+        Schema::create('usuario', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('codigo');
-
+            $table->string('apellidos');
+            $table->string('email');
+            $table->string('contraseña');
+            $table->decimal('saldo');
+            $table->foreignId('id_suscripcion')->nullable()->constrained('suscripcion')->onDelete('set null');
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('naturaleza');
+        Schema::dropIfExists('usuario');
     }
 };

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('interpretacion_muestra', function (Blueprint $table) {
+        Schema::create('contenedor', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion');
-            $table->foreignId('idMuestra')->constrained('muestra')->onDelete('cascade');
-            $table->foreignId('idInterpretacion')->constrained('interpretacion')->onDelete('cascade');
+            $table->string('tipo');
+            $table->string('color');
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('interpretacion_muestra');
+        Schema::dropIfExists('contenedor');
     }
 };

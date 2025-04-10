@@ -11,15 +11,24 @@ class Usuario extends Authenticatable
 {   
     //uso de trait para factoria y token
     use HasFactory, HasApiTokens;
+    use HasFactory;
 
     protected $table = 'usuario';
-    protected $primaryKey = 'id';
 
-    protected $fillable = ['email', 'password'];
+    protected $fillable = ['nombre', 'apellidos', 'email', 'contraseña', 'saldo', 'id_suscripcion'];
 
-    protected $hidden = ['created_at', 'updated_at'];
+    public function suscripcion()
+    {
+        return $this->belongsTo(Suscripcion::class, 'id_suscripcion');
+    }
 
-    public function muestra(){
-        return $this->hasMany(Muestra::class,'idUsuario');
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class, 'productos_usuario', 'id_usuario', 'id_producto');
+    }
+
+    public function recompensas()
+    {
+        return $this->belongsToMany(Recompensas::class, 'usuario_recompensa', 'id_usuario', 'id_recompensa');
     }
 }

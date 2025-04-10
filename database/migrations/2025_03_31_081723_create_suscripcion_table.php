@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('imagen', function (Blueprint $table) {
+        Schema::create('suscripcion', function (Blueprint $table) {
             $table->id();
-            $table->string('ruta');
-            $table->string('zoom');
-            $table->unsignedBigInteger('idMuestra');
-            $table->foreign(columns: 'idMuestra')->references('id')->on('muestra')->onDelete('cascade');
+            $table->string('tipo');
+            $table->text('descripcion')->nullable();
+            $table->decimal('precio', 8, 2);
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('imagen');
+        Schema::dropIfExists('suscripcion');
     }
 };
