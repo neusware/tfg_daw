@@ -15,7 +15,7 @@ class Usuario extends Authenticatable
 
     protected $table = 'usuario';
 
-    protected $fillable = ['nombre', 'apellidos', 'email', 'contraseña', 'saldo', 'id_suscripcion'];
+    protected $fillable = ['nombre', 'apellidos', 'email', 'password', 'saldo', 'id_suscripcion'];
 
     public function suscripcion()
     {

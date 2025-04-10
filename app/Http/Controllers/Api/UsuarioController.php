@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class UsuarioController extends Controller
 {
     //todo refactorizar validaciones
+    //! revisar como funcionan los scopes
 
     public function login(Request $request)
     {
@@ -48,6 +49,7 @@ class UsuarioController extends Controller
                     "status" => false,
                     "message" => "Contraseña incorrecta, no coincide con el registro asociado a ese email",
                 ], 421);
+
             } else {
 
                 //!success reponse
@@ -252,7 +254,12 @@ class UsuarioController extends Controller
 
             //creo usuario
             $usuario = new Usuario();
+            $usuario->nombre = $request->nombre;
+            $usuario->apellidos = $request->apellidos;
             $usuario->email = $request->email;
+            // $usuario->password = $request->password;
+            $usuario->saldo = $request->saldo;
+            $usuario->id_suscripcion = $request->id_suscripcion;
 
             //hash
             $usuario->password = Hash::make($request->password);
