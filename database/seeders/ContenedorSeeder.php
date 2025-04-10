@@ -16,25 +16,37 @@ class ContenedorSeeder extends Seeder
         DB::table('contenedor')->insert([
             [
                 'tipo' => 'Plástico',
+                'color' => 'Amarillo',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'tipo' => 'Organico',
+                'color' => 'Marron',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'tipo' => 'Cartón y Papel',
                 'color' => 'Azul',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'tipo' => 'Metal',
-                'color' => 'Gris',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'tipo' => 'Cartón',
-                'color' => 'Marrón',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'tipo' => 'Vidrio',
                 'color' => 'Verde',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'tipo' => 'Restos',
+                'color' => 'Gris',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'tipo' => 'Punto Limpio',
+                'color' => 'Null',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
