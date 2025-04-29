@@ -70,11 +70,11 @@ function AppContent({ toggleSidebar, isSidebarVisible }) {
         {/* Contenido Principal */}
         <div className={`${isLoginOrRegisterPage ? "w-full flex justify-center items-center" : "p-4 mt-10"}`}>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<Inicio />} />
             <Route path="/registro" element={<Registro />} />
 
             {/* Rutas protegidas */}
-            <Route path="/inicio" element={<ProtectedRoute><Inicio /></ProtectedRoute>} />
+            <Route path="/inicio" element={<Inicio />} />
             <Route path="/usuarios" element={<ProtectedRoute><Usuarios /></ProtectedRoute>} />
             <Route path="/muestras" element={<ProtectedRoute><Muestras /></ProtectedRoute>} />
             <Route path="/interpretaciones" element={<ProtectedRoute><Interpretaciones /></ProtectedRoute>} />
