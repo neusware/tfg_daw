@@ -2,7 +2,7 @@ import React from 'react'
 
 function Button({text, bgColor, textColor, handler = ()=>{}}) {
   return (
-    <button className={`${bgColor} ${bgColor} ${textColor} cursor-pointer hover:scale-105 duration-300 py-2 px-8 rounded-full relative z-10`}>
+    <button className={`${bgColor} ${bgColor} ${textColor} w-1/3 cursor-pointer hover:scale-105 duration-300 py-2 px-8 rounded-full relative z-10`}>
         {text}
     </button>
   )

@@ -1,20 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+@layer base {
+  /* Definir la fuente por defecto para todo el proyecto */
+  body {
+    font-family: 'Urbanist', sans-serif;
+  }
+}
 
 /* Style the accordion panel. Note: hidden by default */
 .submenu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
 }
 
 .accordion-submenu:after {
-    font-size: 13px;
-    color: #777;
-    margin-left: 5px;
+  font-size: 13px;
+  color: #777;
+  margin-left: 5px;
 }
 
-.submenu-visible{
-    max-height: 100%;
+.submenu-visible {
+  max-height: 100%;
 }
