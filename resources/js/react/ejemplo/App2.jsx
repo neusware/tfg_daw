@@ -41,7 +41,6 @@ function App2() {
         <Banner data={BannerData2}/>
         <Blog/>
         <Partners/>
-
     </div>
   )
 }
