@@ -1,3 +1,5 @@
+// tailwind.config.js
+
 const { colors } = require("@mui/material");
 
 module.exports = {
@@ -8,22 +10,23 @@ module.exports = {
   ],
   theme: {
     extend: {
-        colors:{
-            primary: "#f42c37",
-            second: "#f42c37",
-            brandYellow: "#fdc62e",
-            brandGreen: "#2dcc6f",
-            brandBlue: "#1376f4",
-            brandWhite: "#eeeeee",
+      colors: {
+        primary: "#7180AC",          // Azul
+        second: "#2B4570",           // Azul oscuro
+        third: "##A8D0DB",           // Azul claro
+        red: "#E49273",             // Rojo 
+        redDark: "#A37A74",         // Rojo Oscuro
+      },
+      fontFamily: {
+        sans: ['Urbanist', 'Arial', 'sans-serif'],  // Añadir la fuente Urbanist
+      },
+      container: {
+        center: true,                // Centra el contenedor
+        padding: {
+          DEFAULT: "1rem",           // Padding por defecto
+          sm: "3rem",                // Padding para pantallas pequeñas
         },
-        container:{
-            center:true,
-            padding:{
-                DEFAULT: "1rem",
-                sm: "3rem",
-
-            }
-        }
+      },
     },
   },
   plugins: [],

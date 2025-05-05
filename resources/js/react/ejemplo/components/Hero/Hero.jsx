@@ -2,24 +2,25 @@ import React from 'react'
 import Slider from "react-slick";
 import Button from '../Shared/Button';
 
+const img= "https://png.pngtree.com/png-clipart/20231116/original/pngtree-cocacola-can-resting-on-a-blank-photo-png-image_13582802.png"
 const heroData=[
     {
         id:1,
-        img: "Image1",
+        img: img,
         subtitle: "Beats Solo",
         title: "Wireless",
         title2: "Headphone"
     },
     {
         id:2,
-        img: "Image2",
+        img: img,
         subtitle: "Beats Solo",
         title: "Wireless",
         title2: "Virtual"
     },
     {
-        id:2,
-        img: "Image2",
+        id:3,
+        img: img,
         subtitle: "Beats Solo",
         title: "Branded",
         title2: "Laptops"
@@ -55,7 +56,7 @@ function Hero() {
                                         </div>
                                         <div className='order-1 sm:order-2'>
                                             <div>
-                                                {/* <img src="" alt="" className='w-[300px] h-[300px] sm:h-[450px] sm:w-[450px] sm:scale-105 lg:scale-110- object-contain mx-auto drop-shadow-[-8px_4px_6px_rgba(0,0,0.4)] relative z-40'/> */}
+                                                <img src={data.img} alt="" className='w-[300px] h-[300px] sm:h-[450px] sm:w-[450px] sm:scale-105 lg:scale-110- object-contain mx-auto drop-shadow-[-8px_4px_6px_rgba(0,0,0.4)] relative z-40'/>
                                             </div>
                                         </div>
                                     </div>
