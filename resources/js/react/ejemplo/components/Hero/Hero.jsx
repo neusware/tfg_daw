@@ -1,6 +1,7 @@
 import React from 'react'
 import Slider from "react-slick";
 import Button from '../Shared/Button';
+import { Link } from 'react-router-dom';
 
 const img= "https://png.pngtree.com/png-clipart/20231116/original/pngtree-cocacola-can-resting-on-a-blank-photo-png-image_13582802.png"
 const heroData=[
@@ -52,7 +53,8 @@ function Hero() {
                                         <h1 className='text-5xl uppercase text-white dark:text-white/5 sm:text-[80px] md:text-[100px] xl:text-[150px] font-bold'>{data.title2}</h1>
                                         {/* seccion de imagen */}
                                         <div>
-                                            <Button text="Comprar ahora" bgColor="bg-primary" textColor="text-white"/>
+
+                                           <Link to={`/producto/1`}><Button text="Comprar ahora" bgColor="bg-primary" textColor="text-white"/></Link>
                                         </div>
                                         <div className='order-1 sm:order-2'>
                                             <div>

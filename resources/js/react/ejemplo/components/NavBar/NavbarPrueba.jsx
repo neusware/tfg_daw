@@ -3,6 +3,8 @@ import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaCaretDown } from "react-icons/fa";
 import DarkMode from './DarkMode';
+import { FaUserCircle } from "react-icons/fa";
+
 
 
 
@@ -67,9 +69,30 @@ function NavbarPrueba() {
                             </li>
                         ))
                     }
-                    {/* Desplegable */}
-                    <li className='relative cursor-pointer group'>
-                        <a href="#" className='flex items-center gap-[2px] font-sans font-semibold text-gray-500 dark:hover:text-white py-2'>Enlaces Rápidos
+                </ul>
+            </div>
+            {/*seccion derecha de la navbar */}
+            <div className='flex items-center'>
+                {/* Search Bar seccion */}
+                <div className='relative group hidden sm:block'>
+                    <input type="text" placeholder='Buscar...'
+                    className='w-[120px] transition-all duration-300 rounded-full group-hover:border
+                    group-hover:border-gray-500 px-3 py-1 focus:outline-none focus:border-1 dark:border-gray-800  group-hover:dark:dark:bg-gray-800'
+                    />
+                    <IoMdSearch
+                    className="text-xl text-gray-600 group-hover:text-primary dark:text-gray-400 absolute top-1/2 -translate-y-1/2 right-3 duration-200"
+                    />
+                </div>
+
+                {/* seccion boton comprar */}
+
+                {/* <button className='relative p-3'>
+                <FaUserCircle className='text-xl text-gray-600 dark:text-gray-400'/>
+                <div className='w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs'>4</div>
+                </button> */}
+
+                    <div className='relative cursor-pointer group mr-4'>
+                    <a href="#" className='flex items-center gap-[2px] font-sans font-semibold text-gray-500 dark:hover:text-white py-2'> <FaUserCircle className='text-4xl '/>
                         <span>
                         <FaCaretDown className='group-hover:rotate-180 duration-300'/>
                         </span>
@@ -86,27 +109,7 @@ function NavbarPrueba() {
                                 }
                             </ul>
                         </div>
-                    </li>
-                </ul>
-            </div>
-            {/*seccion derecha de la navbar */}
-            <div className='flex items-center'>
-                {/* Search Bar seccion */}
-                <div className='relative group hidden sm:block'>
-                    <input type="text" placeholder='Buscar...'
-                    className='w-[120px] transition-all duration-300 rounded-full group-hover:border 
-                    group-hover:border-gray-500 px-3 py-1 focus:outline-none focus:border-1 dark:border-gray-800  group-hover:dark:dark:bg-gray-800'
-                    />
-                    <IoMdSearch
-                    className="text-xl text-gray-600 group-hover:text-primary dark:text-gray-400 absolute top-1/2 -translate-y-1/2 right-3 duration-200"
-                    />
-                </div>
-
-                {/* seccion boton comprar */}
-                <button className='relative p-3'>
-                <FaCartShopping className='text-xl text-gray-600 dark:text-gray-400'/>
-                <div className='w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs'>4</div>
-                </button>
+                    </div>
 
                 {/* modo oscuro seccion */}
                 <div>
