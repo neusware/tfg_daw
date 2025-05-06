@@ -1,9 +1,9 @@
 import React from 'react'
 import NavbarPrueba from '../components/NavBar/NavbarPrueba'
-import Hero from '../components/Hero/Hero'
+import Slider from '../components/Slider/Slider'
 import Buscador from '../components/Buscador/Buscador'
-import Category from '../components/Category/Category'
-import Category2 from '../components/Category/Category2'
+import Info from '../components/Info/Info'
+import HowItWorks from '../components/HowItWorks/HowItWorks'
 import Services from '../components/Services/Services'
 import Banner from '../components/Banner/Banner'
 import Products from '../components/Products/Products'
@@ -36,16 +36,15 @@ const BannerData2 = {
 function Landing() {
   return (
     <div>
-        
         <Buscador/>
-        <Hero/>
-        <Category/>
-        <Category2/>
+        <Info/>
+        {/*<Slider/>*/}
+        {/*<Category2/>*/}
+        <HowItWorks/>
         <Services/>
-        <Banner data={BannerData}/>
         <Products/>
         <Banner data={BannerData2}/>
-        <Blog/>
+        {/*<Blog/>*/}
         <Partners/>
     </div>
   )
