@@ -1,39 +1,9 @@
 import React from 'react'
 import Heading from '../Shared/Heading'
 import ProductCard from './ProductCard'
+import { Link } from 'react-router-dom'
+import productos from '../../productos'
 
-const ProductsData = [
-
-    {
-        id: 1,
-        img: "https://www.dia.es/product_images/272542/272542_ISO_0_ES.jpg?imwidth=392",
-        title: "Boat Headphone",
-        price: "120",
-        aosDelay: "0"
-    },
-    {
-        id: 2,
-        img: "https://www.dia.es/product_images/30319/30319_ISO_0_ES.jpg?imwidth=392",
-        title: "Rocky Mountain",
-        price: "120",
-        aosDelay: "200"
-    },
-    {
-        id: 3,
-        img: "https://www.dia.es/product_images/161808/161808_ISO_0_ES.jpg?imwidth=392",
-        title: "Boat Headphone",
-        price: "320",
-        aosDelay: "400"
-    },
-    {
-        id: 4,
-        img: "https://www.dia.es/product_images/44073/44073_ISO_0_ES.jpg?imwidth=392",
-        title: "Goggles",
-        price: "320",
-        aosDelay: "600"
-    },
-
-]
 
 function Products() {
   return (
@@ -42,8 +12,13 @@ function Products() {
             {/* header */}
             <Heading title="Nuestros Productos" subtitle="Explora nuestros productos"/>
             {/* body */}
-            <ProductCard data={ProductsData}/>
-            <ProductCard data={ProductsData}/>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-center'>
+                {
+                    productos.map((producto)=>(
+                        <ProductCard key={producto.id} data={producto}/>
+                    ))
+                }
+            </div>
         </div>
     </div>
   )

@@ -1,6 +1,17 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
+import productos from '../productos'
 
-function ProductPage({ producto }) {
+
+
+
+function ProductPage() {
+
+    // obtener el id del producto utilizado en la URL
+    const {id} = useParams()
+    const producto = productos.find(p=>p.id == parseInt(id))
+
+
   return (
     <div className="container py-12 grid md:grid-cols-2 gap-8">
       {/* Imagen del producto */}
