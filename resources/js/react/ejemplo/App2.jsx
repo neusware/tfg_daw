@@ -25,19 +25,10 @@ const producto = {
 
 function App2() {
   return (
-    <div className='min-h-screen flex flex-col bg-white dark:bg-gray-900 dark:text-white duration-200'>
-
-            <NavbarPrueba/>
-
-            <main className='flex-grow'>
-                <Routes>
-                    <Route path='/' element={<Landing/>}/>
-                    <Route path='/producto/:id' element={<ProductPage producto={producto}/>}/>
-                </Routes>
-
-            </main>
-            <Footer/>
-
+    <div className='bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden'>
+        <NavbarPrueba/>
+        <Landing/>
+        <Footer/>
     </div>
   )
 }

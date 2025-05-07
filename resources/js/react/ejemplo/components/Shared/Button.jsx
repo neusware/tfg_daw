@@ -1,8 +1,9 @@
 import React from 'react'
 
-function Button({text, bgColor, textColor, handler = ()=>{}}) {
+function Button({text, bgColor, textColor,}) {
+  const estilosBase= "w-1/4 m-4 cursor-pointer hover:scale-105 duration-300 p-2 rounded-full relative z-10";
   return (
-    <button onClick={handler} className={`${bgColor} ${bgColor} ${textColor} w-1/3 cursor-pointer hover:scale-105 duration-300 py-2 px-8 rounded-full relative z-10`}>
+    <button className={`${bgColor} ${bgColor} ${textColor} ${estilosBase}`}>
         {text}
     </button>
   )

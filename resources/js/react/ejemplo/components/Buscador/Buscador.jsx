@@ -8,7 +8,7 @@ function Buscador() {
         <div className='container p-24'>
             <div className='flex flex-col'> {/* justify-center gap-4 sm:pl-3 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1 relative z-10 */}
             <h1 className='font-sans text-center uppercase text-white dark:text-white/5 text-[50px] font-light tracking-widest'>
-              Busca tu{' '}
+              Busca tu {' '}
               <span className="relative inline-block text-red font-medium after:absolute after:left-0 after:bottom-0 after:h-[4px] after:bg-red after:w-0 after:transition-all after:duration-300 hover:after:w-full">
                 producto
               </span>

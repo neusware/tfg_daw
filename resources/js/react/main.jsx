@@ -12,11 +12,9 @@ import { BrowserRouter } from 'react-router-dom';
 createRoot(document.getElementById('root')).render(
 
     <React.StrictMode>
-
-    <BrowserRouter>
-
-        <App2/>
-    </BrowserRouter>
+        <BrowserRouter>
+            <App2/>
+        </BrowserRouter>
     </React.StrictMode>
 
 );
