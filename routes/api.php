@@ -17,6 +17,8 @@ use App\Http\Controllers\TipodeEstudioController;
 use App\Http\Controllers\Api\NaturalezaController;
 use App\Http\Controllers\Api\InterpretacionController;
 use App\Http\Controllers\Api\InterpretacionMuestraController;
+use App\Http\Controllers\Api\ProductoController;
+use App\Http\Controllers\ProductosUsuarioController;
 
 //ruta tipo sanctum
 Route::get('/usuario-sanctum', function (Request $request) {
@@ -39,21 +41,33 @@ Route::post('usuario-login',  [UsuarioController::class,'login']);
 //insert
 Route::post('/usuario', [UsuarioController::class, 'insert_usuario']);
 
-// ------------ Agrupadas por controlador y middleware de autenticación
+// ------------ Protegidas : agrupadas por controlador y middleware de autenticación
 
-Route::controller(MuestraController::class)->middleware('auth:sanctum')->group(function(){
+// -- Usuarios
+Route::controller(UsuarioController::class)->middleware('auth:sanctum')->group(function(){
 
-    Route::get('usuario', [UsuarioController::class, 'select_usuarios']);
+    Route::get('usuario', [UsuarioController::class, 'select_usuarios']); //select
+    Route::put('/usuario_email',  'update_email');    //update email por id
+    Route::put('/usuario_password', 'update_password'); //update password por id
+    Route::delete('/usuario', 'delete_usuario');    //delete por id
+});
 
-    //update email por id
-    Route::put('/usuario_email',  'update_email');
+// -- Productos
+Route::controller(ProductoController::class)->middleware('auth:sanctum')->group(function () {
+    Route::get('/productos', 'index'); // Obtener todos los productos
+    Route::post('/productos', 'store'); // Crear un nuevo producto
+    Route::get('/productos/{id}', 'show'); // Obtener un producto por ID
+    Route::put('/productos/{id}', 'update'); // Actualizar un producto por ID
+    Route::delete('/productos/{id}', 'destroy'); // Eliminar un producto por ID
+});
 
-    //update password por id
-    Route::put('/usuario_password', 'update_password');
-
-    //delete por id
-    Route::delete('/usuario', 'delete_usuario');
-
+// -- Productos-Usuario
+Route::controller(ProductosUsuarioController::class)->middleware('auth:sanctum')->group(function () {
+    Route::get('/productos-usuario', 'index');
+    Route::post('/productos-usuario', 'store');
+    Route::get('/productos-usuario/{id}', 'show');
+    Route::put('/productos-usuario/{id}', 'update');
+    Route::delete('/productos-usuario/{id}', 'destroy');
 });
 
 //! estalínea

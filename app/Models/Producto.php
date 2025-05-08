@@ -13,7 +13,7 @@ class Producto extends Model
 
     protected $fillable = [
         'nombre', 'descripcion', 'ingredientes', 'fabricante', 
-        'tipo_de_composicion', 'puntos', 'imagen', 'enlace_qr', 
+        'composicion', 'puntos', 'imagen', 'enlace_qr', 
         'id_categoria', 'id_empresa'
     ];
 
