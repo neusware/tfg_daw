@@ -25,51 +25,54 @@ POST /api/usuario
 
 **JSON de solicitud:**
 
+```json
 {
 
-  "nombre": "Nombre del usuario",
+"nombre": "Nombre del usuario",
 
-  "apellidos": "Apellidos del usuario",
+"apellidos": "Apellidos del usuario",
 
-  "email": "email@example.com",
+"email": "email@example.com",
 
-  "password": "contraseña123",
+"password": "contraseña123",
 
-  "saldo": 100.50,
+"saldo": 100.50,
 
-  "id_suscripcion": 1
+"id_suscripcion": 1
 
 }
+```
 
 **Respuesta exitosa:**
 
+```json
 {
+  "status": true,
 
-  "status": true,
+  "message": "Usuario creado",
 
-  "message": "Usuario creado",
+  "usuario": {
 
-  "usuario": {
+    "id": 1,
 
-    "id": 1,
+    "nombre": "Nombre del usuario",
 
-    "nombre": "Nombre del usuario",
+    "apellidos": "Apellidos del usuario",
 
-    "apellidos": "Apellidos del usuario",
+    "email": "email@example.com",
 
-    "email": "email@example.com",
+    "saldo": 100.50,
 
-    "saldo": 100.50,
+    "id_suscripcion": 1,
 
-    "id_suscripcion": 1,
+    "created_at": "2025-05-08T11:20:06.000000Z",
 
-    "created_at": "2025-05-08T11:20:06.000000Z",
+    "updated_at": "2025-05-08T11:20:06.000000Z"
 
-    "updated_at": "2025-05-08T11:20:06.000000Z"
-
-  }
+  }
 
 }
+```
 
 ### 2\. Iniciar sesión
 
@@ -77,41 +80,45 @@ POST /api/usuario-login
 
 **JSON de solicitud:**
 
-{
-
-  "email": "email@example.com",
-
-  "password": "contraseña123"
-
-}
+´´´json
+    
+    {
+    
+      "email": "email@example.com",
+    
+      "password": "contraseña123"
+    
+    }
 
 **Respuesta exitosa:**
 
-{
+´´´json
 
-  "status": true,
-
-  "message": "Has iniciado sesión en la API",
-
-  "token": "2|PCKeAr7o0VqynzWzwtdm4psfgyM1gIaBtFSuwvlf027fa962",
-
-  "usuario": {
-
-    "id": 1,
-
-    "nombre": "Nombre del usuario",
-
-    "apellidos": "Apellidos del usuario",
-
-    "email": "email@example.com",
-
-    "saldo": 100.50,
-
-    "id_suscripcion": 1
-
-  }
-
-}
+    {
+    
+      "status": true,
+    
+      "message": "Has iniciado sesión en la API",
+    
+      "token": "2|PCKeAr7o0VqynzWzwtdm4psfgyM1gIaBtFSuwvlf027fa962",
+    
+      "usuario": {
+    
+        "id": 1,
+    
+        "nombre": "Nombre del usuario",
+    
+        "apellidos": "Apellidos del usuario",
+    
+        "email": "email@example.com",
+    
+        "saldo": 100.50,
+    
+        "id_suscripcion": 1
+    
+      }
+    
+    }
 
 ### 3\. Uso del token en solicitudes posteriores
 
@@ -136,48 +143,50 @@ Authorization: Bearer {tu_token}
 
 **Respuesta:**
 
-{
-
-  "productos_usuarios": [
-
-    {
-
-      "id": 1,
-
-      "id_usuario": 1,
-
-      "id_producto": 2,
-
-      "created_at": "2025-05-08T11:20:06.000000Z",
-
-      "updated_at": "2025-05-08T11:20:06.000000Z",
-
-      "usuario": {
-
-        "id": 1,
-
-        "nombre": "Nombre del usuario",
-
-        "email": "email@example.com"
-
-      },
-
-      "producto": {
-
-        "id": 2,
-
-        "nombre": "Botella de plástico",
-
-        "puntos": 10
-
-      }
-
-    }
-
-  ]
-
-}
-
+```json
+    
+    {
+    
+      "productos_usuarios": [
+    
+        {
+    
+          "id": 1,
+    
+          "id_usuario": 1,
+    
+          "id_producto": 2,
+    
+          "created_at": "2025-05-08T11:20:06.000000Z",
+    
+          "updated_at": "2025-05-08T11:20:06.000000Z",
+    
+          "usuario": {
+    
+            "id": 1,
+    
+            "nombre": "Nombre del usuario",
+    
+            "email": "email@example.com"
+    
+          },
+    
+          "producto": {
+    
+            "id": 2,
+    
+            "nombre": "Botella de plástico",
+    
+            "puntos": 10
+    
+          }
+    
+        }
+    
+      ]
+    
+    }
+```
 #### Registrar un nuevo producto para un usuario
 
 POST /api/productos-usuario
@@ -190,30 +199,33 @@ Content-Type: application/json
 
 **JSON de solicitud:**
 
-{
+```json
 
-  "id_usuario": 1,
-
-  "id_producto": 2
-
-}
-
-**Respuesta exitosa:**
-
-{
-
-  "id_usuario": 1,
-
-  "id_producto": 2,
-
-  "created_at": "2025-05-08T11:30:06.000000Z",
-
-  "updated_at": "2025-05-08T11:30:06.000000Z",
-
-  "id": 3
-
-}
-
+    {
+    
+      "id_usuario": 1,
+    
+      "id_producto": 2
+    
+    }
+    
+    **Respuesta exitosa:**
+    
+    {
+    
+      "id_usuario": 1,
+    
+      "id_producto": 2,
+    
+      "created_at": "2025-05-08T11:30:06.000000Z",
+    
+      "updated_at": "2025-05-08T11:30:06.000000Z",
+    
+      "id": 3
+    
+    }
+```
+    
 #### Obtener un producto de usuario específico
 
 GET /api/productos-usuario/{id}
@@ -224,39 +236,42 @@ Authorization: Bearer {tu_token}
 
 **Respuesta:**
 
-{
-
-  "id": 1,
-
-  "id_usuario": 1,
-
-  "id_producto": 2,
-
-  "created_at": "2025-05-08T11:20:06.000000Z",
-
-  "updated_at": "2025-05-08T11:20:06.000000Z",
-
-  "usuario": {
-
-    "id": 1,
-
-    "nombre": "Nombre del usuario",
-
-    "email": "email@example.com"
-
-  },
-
-  "producto": {
-
-    "id": 2,
-
-    "nombre": "Botella de plástico",
-
-    "puntos": 10
-
-  }
-
-}
+```json
+    
+    {
+    
+      "id": 1,
+    
+      "id_usuario": 1,
+    
+      "id_producto": 2,
+    
+      "created_at": "2025-05-08T11:20:06.000000Z",
+    
+      "updated_at": "2025-05-08T11:20:06.000000Z",
+    
+      "usuario": {
+    
+        "id": 1,
+    
+        "nombre": "Nombre del usuario",
+    
+        "email": "email@example.com"
+    
+      },
+    
+      "producto": {
+    
+        "id": 2,
+    
+        "nombre": "Botella de plástico",
+    
+        "puntos": 10
+    
+      }
+    
+    }
+````
 
 #### Actualizar un producto de usuario
 
@@ -270,31 +285,34 @@ Content-Type: application/json
 
 **JSON de solicitud:**
 
-{
-
-  "id_usuario": 1,
-
-  "id_producto": 3
-
-}
-
-**Respuesta exitosa:**
-
-´´´json 
+````json
     
     {
     
-      "id": 1,
-    
       "id_usuario": 1,
     
-      "id_producto": 3,
-    
-      "created_at": "2025-05-08T11:20:06.000000Z",
-    
-      "updated_at": "2025-05-08T11:35:06.000000Z"
+      "id_producto": 3
     
     }
+````
+    
+**Respuesta exitosa:**
+```json
+    
+    {
+    
+      "id": 1,
+    
+      "id_usuario": 1,
+    
+      "id_producto": 3,
+    
+      "created_at": "2025-05-08T11:20:06.000000Z",
+    
+      "updated_at": "2025-05-08T11:35:06.000000Z"
+    
+    }
+````
 
 #### Eliminar un producto de usuario
 
