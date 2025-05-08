@@ -1,43 +1,25 @@
 ## API Documentation
 
-### Endpoints
+### Introducción
 
-#### Insert User
+#### Flujo Inicial
 
--   **URL**: `/api/insert_usuario`
-    -   **Method**: `POST`
+##### Crear un usuario
+
+-   **Method + URL**: `POST /api/insert_usuario`
     -   **Headers**:
         -   `Content-Type: application/json`
-    -   **Body**:
+    -   **Request tipo**:
         ```json
-        {
-            "email": "example@example.com",
-            "password": "password123"
-        }
-        ```
--   **Response**:
-    -   **Status Code**: `200`
-    -   **Body**:
-        ```json
-        {
-          "status" : "success",
-            "message" : "Usuario creado",
-            "usuario" : {
-              "id" : "",
-              "email" : "",
-              "password" : ""
-        }
-        ```
-    ```
-- **Error Response**:
-    - **Status Code**: `400`
-    - **Body**:
-        ```json
-        {
-            "status": false,
-            "message": "Error en la validación",
-            "errors":{
-
+           {
+            "nombre": "Nombre del usuario",
+            "apellidos": "Apellidos del usuario",
+            "email": "email@example.com",
+            "password": "contraseña123",
+            "saldo": 100.50,
+            "id_suscripcion": 1
             }
-        }
         ```
+- **Notas**
+    -  El campo **email** debe ser único.
+    -  La password debe tener al menos 8 caracteres.
