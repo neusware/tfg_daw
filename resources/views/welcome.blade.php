@@ -7,8 +7,7 @@
         <title>Inicio</title>
         @viteReactRefresh
         @vite([ 'resources/js/react/main.jsx'])
-
-
+        <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     </head>
     <body>
 
