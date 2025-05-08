@@ -80,7 +80,7 @@ POST /api/usuario-login
 
 **JSON de solicitud:**
 
-´´´json
+```json
     
     {
     
@@ -89,10 +89,11 @@ POST /api/usuario-login
       "password": "contraseña123"
     
     }
+```
 
 **Respuesta exitosa:**
 
-´´´json
+```json
 
     {
     
@@ -119,6 +120,7 @@ POST /api/usuario-login
       }
     
     }
+````
 
 ### 3\. Uso del token en solicitudes posteriores
 
