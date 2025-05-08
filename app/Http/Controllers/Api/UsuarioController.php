@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UsuarioController extends Controller
 {
-    //todo refactorizar validaciones
+
     //! revisar como funcionan los scopes
 
     public function login(Request $request)
@@ -86,6 +86,24 @@ class UsuarioController extends Controller
         }
     }
 
+/*Response tipo
+{
+  "status": true,
+  "message": "Has iniciado sesión en la API",
+  "token": "2|PCKeAr7o0VqynzWzwtdm4psfgyM1gIaBtFSuwvlf027fa962",
+  "usuario": {
+    "id": 2,
+    "nombre": "Nombre del usuario",
+    "apellidos": "Apellidos del usuario",
+    "email": "email2@example.com",
+    "password": "$2y$12$blQbTrZqiaEe6cTN211RJe9XVO3IRNj9bFnMH.NYD8HQcFGQzCL0O",
+    "saldo": "100.50",
+    "id_suscripcion": 1,
+    "created_at": "2025-05-08T11:20:06.000000Z",
+    "updated_at": "2025-05-08T11:20:06.000000Z"
+  }
+}
+
 
 
 
@@ -156,14 +174,17 @@ class UsuarioController extends Controller
 
 
     /*
-        Formato JSON tipo a recibir
-            {
-                "email": "email_unique@example.com",
-                "password": "12345678"
-            }
+        {
+            "nombre": "Nombre del usuario",
+            "apellidos": "Apellidos del usuario",
+            "email": "email@example.com",
+            "password": "contraseña123",
+            "saldo": 100.50,
+            "id_suscripcion": 1
+        }
     */
     /**
-     * Inserta un nuevo usuario en la base de datos.
+     * * Sign Up un nuevo usuario en la base de datos.
      *
      * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos del usuario.
      * 
