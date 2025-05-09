@@ -19,6 +19,10 @@ use App\Http\Controllers\Api\InterpretacionController;
 use App\Http\Controllers\Api\InterpretacionMuestraController;
 use App\Http\Controllers\Api\ProductoController;
 use App\Http\Controllers\ProductosUsuarioController;
+use App\Http\Controllers\ContenedorController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\SuscripcionController;
+use App\Http\Controllers\EmpresaController;
 
 //ruta tipo sanctum
 Route::get('/usuario-sanctum', function (Request $request) {
@@ -62,12 +66,50 @@ Route::controller(ProductoController::class)->middleware('auth:sanctum')->group(
 });
 
 // -- Productos-Usuario
+
+
 Route::controller(ProductosUsuarioController::class)->middleware('auth:sanctum')->group(function () {
     Route::get('/productos-usuario', 'index');
     Route::post('/productos-usuario', 'store');
     Route::get('/productos-usuario/{id}', 'show');
     Route::put('/productos-usuario/{id}', 'update');
     Route::delete('/productos-usuario/{id}', 'destroy');
+});
+
+// -- Contenedores
+Route::controller(ContenedorController::class)->middleware('auth:sanctum')->group(function () {
+    Route::get('/contenedores', 'index'); // Obtener todos los contenedores
+    Route::post('/contenedores', 'store'); // Crear un nuevo contenedor
+    Route::get('/contenedores/{id}', 'show'); // Obtener un contenedor por ID
+    Route::put('/contenedores/{id}', 'update'); // Actualizar un contenedor por ID
+    Route::delete('/contenedores/{id}', 'destroy'); // Eliminar un contenedor por ID
+});
+
+// -- Categorías
+Route::controller(CategoriaController::class)->middleware('auth:sanctum')->group(function () {
+    Route::get('/categorias', 'index'); // Obtener todas las categorías
+    Route::post('/categorias', 'store'); // Crear una nueva categoría
+    Route::get('/categorias/{id}', 'show'); // Obtener una categoría por ID
+    Route::put('/categorias/{id}', 'update'); // Actualizar una categoría por ID
+    Route::delete('/categorias/{id}', 'destroy'); // Eliminar una categoría por ID
+});
+
+// -- Suscripciones
+Route::controller(SuscripcionController::class)->middleware('auth:sanctum')->group(function () {
+    Route::get('/suscripciones', 'index'); // Obtener todas las suscripciones
+    Route::post('/suscripciones', 'store'); // Crear una nueva suscripción
+    Route::get('/suscripciones/{id}', 'show'); // Obtener una suscripción por ID
+    Route::put('/suscripciones/{id}', 'update'); // Actualizar una suscripción por ID
+    Route::delete('/suscripciones/{id}', 'destroy'); // Eliminar una suscripción por ID
+});
+
+// -- Empresas
+Route::controller(EmpresaController::class)->middleware('auth:sanctum')->group(function () {
+    Route::get('/empresas', 'index'); // Obtener todas las empresas
+    Route::post('/empresas', 'store'); // Crear una nueva empresa
+    Route::get('/empresas/{id}', 'show'); // Obtener una empresa por ID
+    Route::put('/empresas/{id}', 'update'); // Actualizar una empresa por ID
+    Route::delete('/empresas/{id}', 'destroy'); // Eliminar una empresa por ID
 });
 
 //! estalínea
