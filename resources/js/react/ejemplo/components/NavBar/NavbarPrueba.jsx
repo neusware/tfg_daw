@@ -4,6 +4,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { FaCaretDown } from "react-icons/fa";
 import DarkMode from './DarkMode';
 import { FaUserCircle } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 
 
@@ -12,12 +13,12 @@ const MenuLinks = [
     {
         id:1,
         name:"Inicio",
-        link:"/#"
+        link:"/"
     },
     {
         id:2,
         name:"Productos",
-        link:"/#shop"
+        link: '/productos'
     },
     {
         id:3,
@@ -33,8 +34,8 @@ const MenuLinks = [
 const DropdownLinks = [
     {
         id:1,
-        name:"Home",
-        link:"/#"
+        name:"Editar productos",
+        link:"/editarProductos"
     },
     {
         id:2,
@@ -58,14 +59,14 @@ function NavbarPrueba() {
     <div className='dark:bg-gray-900 dark:text-white py-8'>
         <div className='flex items-center gap-8 mx-14 justify-around'>
             {/*Logo*/}
-            <a href="#" className='text-red font-semibold tracking-widest text-2xl sm:text-3xl '>EcoScan</a>
+            <Link to={"/"} className='text-red font-semibold tracking-widest text-2xl sm:text-3xl '>EcoScan</Link>
             {/*items del menu */}
             <div className='lg:block'>
                 <ul className='flex items-center space-x-12'>
                     {
                         MenuLinks.map((data, index)=>(
                             <li key={index}>
-                                <a href={data.link} className='font-sans inline-block px-6 font-semibold text-gray-500 hover:text-black dark:hover-text:white duration-200'>{data.name}</a>
+                               <Link className='font-sans inline-block px-6 font-semibold text-gray-500 hover:text-black dark:hover-text:white duration-200' to={data.link}>{data.name}</Link>
                             </li>
                         ))
                     }
@@ -103,7 +104,7 @@ function NavbarPrueba() {
                                 {
                                     DropdownLinks.map((data,index)=>(
                                         <li key={data.id}>
-                                            <a href={data.link} className='text-gray-500 hover:text-black dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semiboldl'>{data.name}</a>
+                                            <Link to={data.link} className='text-gray-500 hover:text-black dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold'>{data.name}</Link>
                                         </li>
                                     ))
                                 }
@@ -113,7 +114,7 @@ function NavbarPrueba() {
 
                 {/* modo oscuro seccion */}
                 <div>
-                    <DarkMode/>
+                    {/* <DarkMode/> */}
                 </div>
             </div>
         </div>

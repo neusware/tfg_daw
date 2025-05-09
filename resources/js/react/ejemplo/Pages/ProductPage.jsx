@@ -1,6 +1,17 @@
-import React from 'react';
+import React from 'react'
+import { useParams } from 'react-router-dom'
+import productos from '../productos'
 
-function ProductPage({ producto }) {
+
+
+
+function ProductPage() {
+
+    // obtener el id del producto utilizado en la URL
+    const {id} = useParams()
+    const producto = productos.find(p=>p.id == parseInt(id))
+
+
   return (
     <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 space-y-16">
       {/* Fila de imagen e información del producto */}
