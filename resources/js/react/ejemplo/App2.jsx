@@ -15,12 +15,9 @@ import ProtectedRoute from './ProtectedRoute'
 import AllSuscripciones from './Pages/All/AllSuscripciones'
 
 
-
 function App2() {
   return (
     <div className='bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden'>
-
-
 
         <NavbarPrueba/>
         <Routes>

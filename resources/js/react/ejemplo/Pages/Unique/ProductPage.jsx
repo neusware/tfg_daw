@@ -60,54 +60,6 @@ function ProductPage() {
 
         </div>
       </div>
-
-      {/* Valoraciones */}
-      {/* <section className="space-y-6 text-center">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Reseñas de los clientes</h2>
-        <div className="flex flex-wrap justify-center gap-6">
-          {producto.reseñas.map((res, index) => (
-            <div key={index} className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg w-full sm:w-64 shadow-md">
-              <p className="font-semibold text-gray-900 dark:text-white">{res.usuario}</p>
-              <p className="text-sm text-gray-600 dark:text-gray-300">{res.comentario}</p>
-            </div>
-          ))}
-        </div>
-      </section> */}
-
-      {/* Disponibilidad
-      <section className="text-center space-y-2">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Disponibilidad</h2>
-        <p className="text-base text-gray-700 dark:text-gray-300">
-          {producto.stock > 0 ? `Quedan ${producto.stock} unidades disponibles` : 'Agotado'}
-        </p>
-      </section>
-      */}
-
-      {/* Galería */}
-      {/* <section className="space-y-6 text-center">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Galería de imágenes</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {producto.imagenes.map((img, index) => (
-            <img key={index} src={img} alt={`Imagen ${index + 1}`} className="rounded-lg shadow-lg object-cover h-48 w-full transition-transform duration-300 hover:scale-105" />
-          ))}
-        </div>
-      </section> */}
-
-      {/* Productos Relacionados */}
-      {/* <section className="space-y-6 text-center">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Productos Relacionados</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-          {producto.relacionados.map((item, index) => (
-            <div key={index} className="group relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
-              <img src={item.imagen} alt={item.nombre} className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" />
-              <div className="p-4 space-y-1">
-                <p className="text-sm text-gray-700 dark:text-gray-300">{item.nombre}</p>
-                <p className="font-semibold text-gray-900 dark:text-white">{item.precio} €</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section> */}
     </div>
   );
 }

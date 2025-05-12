@@ -28,7 +28,6 @@ function Products() {
             {/* body */}
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-center'>
                 {
-
                     // mostrar solo los 4 primeros productos de la lista
                     productos.slice(0, 4).map((producto, index) => (
                         <ProductCard key={index} data={producto} />
