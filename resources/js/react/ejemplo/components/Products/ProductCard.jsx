@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../Shared/Button'
 import { Link } from 'react-router-dom'
 
-function ProductCard({data}) {
+function ProductCard({ data }) {
   return (
     <div className="mb-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 place-items-center">
@@ -23,7 +23,7 @@ function ProductCard({data}) {
         </Link>
       </div>
     </div>
-  )
+  );
 }
 
-export default ProductCard
+export default ProductCard;
