@@ -20,12 +20,14 @@ function App2() {
   return (
     <div className='bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden'>
 
-        <Routes>
-            <Route path='/register' element={<RegisterPage/>}/>
-            <Route path='/login' element={<LoginPage/>}/>
-        </Routes>
+
+
         <NavbarPrueba/>
         <Routes>
+            {/* rutas sin proteger login y register */}
+            <Route path='/register' element={<RegisterPage/>}/>
+            <Route path='/login' element={<LoginPage/>}/>
+
             {/* Ruta de incio principal */}
             <Route path='/' element={<Landing/>}/>
             <Route path='/producto/:id' element={<ProductPage/>}/>
