@@ -22,13 +22,18 @@ const MenuLinks = [
     },
     {
         id:3,
-        name:"Contacto",
-        link:"/#about"
+        name:"Contenedores",
+        link:"/contenedores"
     },
     {
         id:4,
-        name:"Blogs",
-        link:"/#blogs"
+        name:"Recompensas",
+        link:"/recompensas"
+    },
+    {
+        id:5,
+        name:"Suscripciones",
+        link:"/suscripciones"
     },
 ]
 const DropdownLinks = [
@@ -39,17 +44,17 @@ const DropdownLinks = [
     },
     {
         id:2,
-        name:"Shop",
-        link:"/#shop"
+        name:"Registrar",
+        link:"/register"
     },
     {
         id:3,
-        name:"About",
-        link:"/#about"
+        name:"login",
+        link:"/login"
     },
     {
         id:4,
-        name:"Blogs",
+        name:"Suscripciones",
         link:"/#blogs"
     },
 ]

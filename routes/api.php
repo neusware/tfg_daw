@@ -49,25 +49,25 @@ Route::post('/usuario', [UsuarioController::class, 'insert_usuario']);
 
 // -- Usuarios
 Route::controller(UsuarioController::class)->middleware('auth:sanctum')->group(function(){
-
     Route::get('usuario', [UsuarioController::class, 'select_usuarios']); //select
     Route::put('/usuario_email',  'update_email');    //update email por id
     Route::put('/usuario_password', 'update_password'); //update password por id
     Route::delete('/usuario', 'delete_usuario');    //delete por id
 });
 
-// -- Productos
+// -- Productos sin autenticacion
+Route::get('/productos', [ProductoController::class, 'index']);
+Route::get('/productos/{id}', [ProductoController::class, 'show']);
+
+
+// -- Productos con autenticacion
 Route::controller(ProductoController::class)->middleware('auth:sanctum')->group(function () {
-    Route::get('/productos', 'index'); // Obtener todos los productos
     Route::post('/productos', 'store'); // Crear un nuevo producto
-    Route::get('/productos/{id}', 'show'); // Obtener un producto por ID
     Route::put('/productos/{id}', 'update'); // Actualizar un producto por ID
     Route::delete('/productos/{id}', 'destroy'); // Eliminar un producto por ID
 });
 
-// -- Productos-Usuario
-
-
+// -- Productos-Usuario con autenticacion
 Route::controller(ProductosUsuarioController::class)->middleware('auth:sanctum')->group(function () {
     Route::get('/productos-usuario', 'index');
     Route::post('/productos-usuario', 'store');
@@ -76,29 +76,36 @@ Route::controller(ProductosUsuarioController::class)->middleware('auth:sanctum')
     Route::delete('/productos-usuario/{id}', 'destroy');
 });
 
-// -- Contenedores
+// -- Contedores sin autenticación
+Route::get('/contenedores', [ContenedorController::class, 'index']); // Obtener todos los contenedores
+Route::get('/contenedores/{id}', [ContenedorController::class, 'show']); // Obtener un contenedor por ID
+
+// -- Contenedores con autenticacion
 Route::controller(ContenedorController::class)->middleware('auth:sanctum')->group(function () {
-    Route::get('/contenedores', 'index'); // Obtener todos los contenedores
     Route::post('/contenedores', 'store'); // Crear un nuevo contenedor
-    Route::get('/contenedores/{id}', 'show'); // Obtener un contenedor por ID
     Route::put('/contenedores/{id}', 'update'); // Actualizar un contenedor por ID
     Route::delete('/contenedores/{id}', 'destroy'); // Eliminar un contenedor por ID
 });
 
-// -- Categorías
+// -- Categorías sin autenticación
+Route::get('/categorias',[CategoriaController::class,'index']); // Obtener todas las categorías
+Route::get('/categorias/{id}',[CategoriaController::class, 'show']); // Obtener una categoría por ID
+
+
+// -- Categorías con autenticación
 Route::controller(CategoriaController::class)->middleware('auth:sanctum')->group(function () {
-    Route::get('/categorias', 'index'); // Obtener todas las categorías
     Route::post('/categorias', 'store'); // Crear una nueva categoría
-    Route::get('/categorias/{id}', 'show'); // Obtener una categoría por ID
     Route::put('/categorias/{id}', 'update'); // Actualizar una categoría por ID
     Route::delete('/categorias/{id}', 'destroy'); // Eliminar una categoría por ID
 });
 
-// -- Suscripciones
+// -- Suscripciones sin autenticación
+Route::get('/suscripciones',[SuscripcionController::class, 'index']); // Obtener todas las suscripciones
+Route::get('/suscripciones/{id}', [SuscripcionController::class, 'show']); // Obtener una suscripción por ID
+
+// -- Suscripciones con autenticación
 Route::controller(SuscripcionController::class)->middleware('auth:sanctum')->group(function () {
-    Route::get('/suscripciones', 'index'); // Obtener todas las suscripciones
     Route::post('/suscripciones', 'store'); // Crear una nueva suscripción
-    Route::get('/suscripciones/{id}', 'show'); // Obtener una suscripción por ID
     Route::put('/suscripciones/{id}', 'update'); // Actualizar una suscripción por ID
     Route::delete('/suscripciones/{id}', 'destroy'); // Eliminar una suscripción por ID
 });

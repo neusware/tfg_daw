@@ -1,15 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import productos from '../productos'
 
 
 
 
 function ProductPage() {
 
-    // obtener el id del producto utilizado en la URL
-    const {id} = useParams()
-    const producto = productos.find(p=>p.id == parseInt(id))
+    const { id } = useParams();
+    const [productos, setProductos] = useState([]);
+    const [loading, setLoading] = useState(true); // Estado de carga
+
+    useEffect(() => {
+      fetch('/api/productos')
+        .then(response => response.json())
+        .then(data => {
+          setProductos(data.productos || []); // aseguramos que sea array
+          setLoading(false);
+        })
+        .catch(error => {
+          console.error("Error al obtener los productos en el fetch.", error);
+          setLoading(false);
+        });
+    }, []);
+
+    const producto = productos.find(p => p.id === parseInt(id));
+
+    if (loading) return <div className="text-center mt-10">Cargando producto...</div>;
+    if (!producto) return <div className="text-center mt-10 text-red-600">Producto no encontrado</div>;
+
 
 
   return (
@@ -18,11 +36,11 @@ function ProductPage() {
       <div className="flex flex-col md:flex-row gap-12 items-center">
         {/* Imagen */}
         <div className="flex-1 max-w-md w-full rounded-2xl overflow-hidden shadow-xl">
-          <img
+          {/* <img
             src={producto.imagen}
             alt={producto.nombre}
             className="object-cover w-full h-auto transition-transform duration-300 hover:scale-105"
-          />
+          /> */}
         </div>
 
         {/* Detalles */}
@@ -39,19 +57,12 @@ function ProductPage() {
             <p><strong>ID Empresa:</strong> {producto.id_empresa}</p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <button className="bg-primary text-white font-medium py-3 px-6 rounded-xl shadow hover:bg-opacity-90 transition">
-              Añadir al carrito
-            </button>
-            <button className="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white py-3 px-6 rounded-xl shadow hover:bg-opacity-80 transition">
-              Añadir a favoritos
-            </button>
-          </div>
+
         </div>
       </div>
 
       {/* Valoraciones */}
-      <section className="space-y-6 text-center">
+      {/* <section className="space-y-6 text-center">
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Reseñas de los clientes</h2>
         <div className="flex flex-wrap justify-center gap-6">
           {producto.reseñas.map((res, index) => (
@@ -61,9 +72,9 @@ function ProductPage() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
-      {/* Disponibilidad 
+      {/* Disponibilidad
       <section className="text-center space-y-2">
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Disponibilidad</h2>
         <p className="text-base text-gray-700 dark:text-gray-300">
@@ -71,19 +82,19 @@ function ProductPage() {
         </p>
       </section>
       */}
-      
+
       {/* Galería */}
-      <section className="space-y-6 text-center">
+      {/* <section className="space-y-6 text-center">
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Galería de imágenes</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {producto.imagenes.map((img, index) => (
             <img key={index} src={img} alt={`Imagen ${index + 1}`} className="rounded-lg shadow-lg object-cover h-48 w-full transition-transform duration-300 hover:scale-105" />
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Productos Relacionados */}
-      <section className="space-y-6 text-center">
+      {/* <section className="space-y-6 text-center">
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Productos Relacionados</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           {producto.relacionados.map((item, index) => (
@@ -96,7 +107,7 @@ function ProductPage() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

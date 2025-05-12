@@ -1,8 +1,22 @@
-import React from 'react'
-import ProductCard from '../components/Products/ProductCard';
-import productos from '../productos'
+import React, { useEffect, useState } from 'react'
+import ProductCard from '../../components/Products/ProductCard';
+import productos from '../../productos'
 
 function AllProducts() {
+
+    const [productos, setProductos] = useState([]);
+
+    useEffect(()=>{
+
+        // llamada a la API para obtener todos los productos de la BBDD
+        fetch('/api/productos')
+        .then(response => response.json())
+        .then(data => {
+            setProductos(data.productos)
+        })
+        .catch(error => console.error("Error al obtener los productos en el fetch.", error))
+
+    })
 
   return (
     <div className='container mt-10'>
