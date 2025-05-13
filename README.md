@@ -1,4 +1,4 @@
-# 📎 Documentación de la API de EcoScan
+# 📎 Documentación de la API de *EcoScan*
 --------------------------------------
 
 Introducción
