@@ -1,5 +1,75 @@
-# 📎 Documentación de la API de *EcoScan*
+# Documentación de la API de *EcoScan* ♻️ 
 --------------------------------------
+
+### [Index for API Documentation](https://github.com/neusware/tfg_daw/edit/main/README.md)
+
+1. [Introduction](#introducción)
+   - Overview of the API
+
+2. [Authentication](#autenticación)
+   - Token-based Authentication Details
+
+3. [Unprotected Routes (No Authentication Required)](#rutas-desprotegidas-no-requieren-autenticación)
+   - [User Authentication](#autenticación-de-usuarios)
+     - [Login](#login-de-usuario)
+     - [Register](#registro-de-nuevo-usuario)
+   - [Public Listings](#listados-públicos-autenticación-no-requerida)
+     - [Get Categories](#obtener-todas-las-categorías)
+     - [Get Containers](#obtener-todos-los-contenedores)
+     - [Get Products](#obtener-todos-los-productos)
+     - [Get Rewards](#obtener-todas-las-recompensas)
+     - [Get Subscriptions](#obtener-todas-las-suscripciones)
+
+4. [Protected Routes (Authentication Required)](#rutas-protegidas-requieren-autenticación---bearer-token)
+   - [Users](#entidad-usuarios)
+     - [Update Email](#actualizar-email-de-usuario)
+     - [Update Password](#actualizar-contraseña-de-usuario)
+     - [Delete User](#eliminar-usuario)
+   - [Products](#entidad-productos)
+     - [Create Product](#crear-un-nuevo-producto)
+     - [Get Product by ID](#obtener-un-producto-por-id)
+     - [Update Product](#actualizar-un-producto-existente)
+     - [Delete Product](#eliminar-un-producto-por-id)
+   - [Product-User Relationships](#entidad-productos-usuario-relación)
+     - [List Relationships](#listar-todas-las-relaciones-productos-usuario)
+     - [Register Product to User](#registrar-un-nuevo-producto-para-un-usuario-asociar-producto-a-usuario)
+     - [Get Relationship by ID](#obtener-una-relación-producto-usuario-por-su-id)
+     - [Update Relationship](#actualizar-una-relación-producto-usuario)
+     - [Delete Relationship](#eliminar-una-relación-producto-usuario-por-su-id)
+   - [Containers](#entidad-contenedores)
+     - [Create Container](#crear-un-nuevo-contenedor)
+     - [Get Container by ID](#obtener-un-contenedor-por-id)
+     - [Update Container](#actualizar-un-contenedor-existente)
+     - [Delete Container](#eliminar-un-contenedor-por-id)
+   - [Categories](#entidad-categorías)
+     - [Create Category](#crear-una-nueva-categoría)
+     - [Get Category by ID](#obtener-una-categoría-por-id)
+     - [Update Category](#actualizar-una-categoría-existente)
+     - [Delete Category](#eliminar-una-categoría-por-id)
+   - [Subscriptions](#entidad-suscripciones)
+     - [Create Subscription](#crear-un-nuevo-tipo-de-suscripción)
+     - [Get Subscription by ID](#obtener-una-suscripción-por-id)
+     - [Update Subscription](#actualizar-un-tipo-de-suscripción)
+     - [Delete Subscription](#eliminar-una-suscripción-por-id)
+   - [Companies](#entidad-empresas)
+     - [List All Companies](#obtener-todas-las-empresas)
+     - [Create Company](#crear-una-nueva-empresa)
+     - [Get Company by ID](#obtener-una-empresa-por-id)
+     - [Update Company](#actualizar-una-empresa-existente)
+     - [Delete Company](#eliminar-una-empresa-por-id)
+   - [Rewards](#entidad-recompensas)
+     - [Create Reward](#crear-una-nueva-recompensa)
+     - [Get Reward by ID](#obtener-una-recompensa-por-id)
+     - [Update Reward](#actualizar-una-recompensa-existente)
+     - [Delete Reward](#eliminar-una-recompensa-por-id)
+     - [Get Users for Reward](#obtener-usuarios-por-recompensa)
+   - [User-Reward Relationships](#entidad-usuario-recompensas-tabla-pivote)
+     - [List Relationships](#listar-todas-las-relaciones-usuario-recompensa)
+     - [Assign Reward to User](#asignar-recompensa-a-usuario-canjear-recompensa)
+     - [Get Relationship by ID](#mostrar-una-relación-específica-usuario-recompensa-por-id-de-la-relación)
+     - [Delete Relationship](#eliminar-asignación-de-recompensa-a-usuario)
+     - [Get Rewards of a User](#obtener-las-recompensas-de-un-usuario-específico)
+     - [Get Users Assigned to a Reward](#obtener-los-usuarios-asignados-a-una-recompensa-específica)
 
 Introducción
 ------------
@@ -10,8 +80,7 @@ Esta API permite gestionar la lógica de negocio de la app, facilitando el segui
 --------------------------
 ## Autenticación
 
-Antes de utilizar los endpoints protegidos, es necesario crear un usuario e iniciar sesión para obtener un token de autenticación.
-Los endpoints que indican `Autenticación: Requerida` necesitan el token Bearer:
+Antes de utilizar los *endpoints* protegidos, es necesario crear un usuario e iniciar sesión para obtener un token de autenticación.
 
 ```
 Authorization: Bearer <TU_TOKEN_SANCTUM>
@@ -19,7 +88,7 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 ---
 
-## Rutas Desprotegidas (No requieren autenticación)
+## 🔺*Endpoints* desprotegidos (no requieren autenticación)
 
 ### Autenticación de Usuarios 
 
@@ -63,51 +132,14 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
     "apellidos": "Apellidos del usuario",
     "email": "email@example.com",
     "password": "contraseña123",
-    "saldo": 100.50, //opcional
-    "id_suscripcion": 1 //opcional
-}
-```
-- **Response tipo** `CODE OK`:
-```json
-{
-"status": true,
-"message": "Usuario creado",
-"usuario": {
- "id": 1,
- "email": "ejemplo@dominio.com",
- "password" : "12345678"
-}
-}
-```
-- **Response tipo** `CODE BAD`:
-```json
-{
-"status": false,
-"message": "Error en la validacion",
-"errors": {
-"email": [
-"El campo email es obligatorio.",
-"El campo email debe ser una dirección de correo válida.",
-"El campo email ya ha sido registrado."
-],
-"password": [
-"El campo password es obligatorio.",
-"El campo password debe tener al menos 8 caracteres."
-]
-}
-}
-```
-- **Response tipo** `CODE 500`:
-```json
-{
-"status": false,
-"message": "Error al crear el usuario en la base de datos"
+    "saldo": 100.50, 
+    "id_suscripcion": 1
 }
 ```
 
 ---
 
-### 📚 Listados Públicos (**Autenticación no requerida**)
+### Listados Públicos
   
 #### 🔸 Obtener todas las Categorías
 
@@ -131,7 +163,7 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 ---
 
-## 🔐 Rutas Protegidas (Requieren autenticación - Bearer Token)
+## 🔺*Endpoints* protegidos (requieren autenticación - *Bearer Token*)
 
 ### Entidad: Usuarios
 
@@ -146,43 +178,19 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
             "new_email": "nuevo_email_unico@example.com"
         }
         ```
-    *   **Response tipo** `CODE OK`:
-        ```json
-          {
-            "status": true,
-            "message": "Email actualizado",
-            "usuario": {
-          "id": 1,
-          "email": "nuevo_email@dominio.com",
-          "password": "12345678"
-            }
-          }
-        ```
-    *   **Response tipo** `CODE BAD`:
-        ```json
-           {
-            "status": false,
-            "message": "Error en la validacion",
-            "errors": {
-            "field": [
-                "Mensaje de error de validación"
-              ]
-            }
-          }
-        ```
 2.  🔸 **Actualizar contraseña de usuario**
     *   **Endpoint:** `PUT /api/usuario_password`
     *   **Request Body tipo**
         ```json
         {
             "id": 1,
-            "old_password": "contraseña_actual_min8",
-            "new_password": "nueva_contraseña_fuerte_min8"
+            "old_password": "password_actual",
+            "new_password": "nueva_password"
         }
         ```
-4.  🔸 **Eliminar usuario**
+3.  🔸 **Eliminar usuario**
     *   **Endpoint:** `DELETE /api/usuario`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
             "id": 1,
@@ -197,17 +205,17 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 1.  🔸 **Crear un nuevo producto**
     *   **Endpoint:** `POST /api/productos`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
-            "nombre": "Botella de Plástico PET",
-            "descripcion": "Botella de agua de 1L.",
-            "ingredientes": "Plástico PET",
-            "fabricante": "Aguas Frescas S.A.",
-            "composicion": "100% PET",
-            "puntos": 5,
-            "imagen": "https://example.com/images/botella_pet.jpg",
-            "enlace_qr": "https://example.com/qr/producto/102",
+            "nombre": "required",
+            "descripcion": "nullable",
+            "ingredientes": "nullable",
+            "fabricante": "nullable",
+            "composicion": "nullable",
+            "puntos": 1,
+            "imagen": "nullable",
+            "enlace_qr": "nullable",
             "id_categoria": 1,
             "id_empresa": 1
         }
@@ -218,12 +226,19 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 3.  🔸 **Actualizar un producto existente**
     *   **Endpoint:** `PUT /api/productos/{id}`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**`Prod`
         ```json
         {
-            "nombre": "Botella de Plástico PET Reciclada",
-            "puntos": 7,
-            "descripcion": "Botella de agua de 1L, hecha con 30% plástico reciclado."
+            "nombre": "nullable",
+            "puntos": 1,
+            "descripcion": "nullable",
+            "ingredientes": "nullable",
+            "fabricante": "nullable",
+            "composicion": "nullable",
+            "imagen": "nullable",
+            "enlace_qr": "nullable",
+            "id_categoria": "nullable",
+            "id_empresa": "nullable",
         }
         ```
 
@@ -239,7 +254,7 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 2.  🔸 **Registrar un nuevo producto para un usuario (Asociar producto a usuario)**
     *   **Endpoint:** `POST /api/productos-usuario`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
             "id_usuario": 1,
@@ -252,7 +267,7 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 4.  🔸 **Actualizar una relación producto-usuario**
     *   **Endpoint:** `PUT /api/productos-usuario/{id}`
-    *   **Cuerpo de la Solicitud (Request Body) JSON (si tuviera campos actualizables en la tabla pivote):**
+    *   **Request Body JSON:**
         ```json
         {
             "id_usuario": 1,
@@ -269,11 +284,11 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 1.  🔸 **Crear un nuevo contenedor**
     *   **Endpoint:** `POST /api/contenedores`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
-            "tipo": "Plástico",
-            "color": "Amarillo"
+            "tipo": "required",
+            "color": "required"
         }
         ```
 
@@ -282,11 +297,11 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 3.  🔸 **Actualizar un contenedor existente**
     *   **Endpoint:** `PUT /api/contenedores/{id}`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
-            "tipo": "Envases",
-            "color": "Amarillo Fuerte"
+            "tipo": "sometimes",
+            "color": "sometimes"
         }
         ```
 
@@ -299,11 +314,11 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 1.  🔸 **Crear una nueva categoría**
     *   **Endpoint:** `POST /api/categorias`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
-            "nombre": "Plásticos",
-            "descripcion": "Para todo tipo de envases de plástico.",
+            "nombre": "required",
+            "descripcion": "nullable",
             "id_contenedor": 1
         }
         ```
@@ -313,11 +328,11 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 3.  🔸 **Actualizar una categoría existente**
     *   **Endpoint:** `PUT /api/categorias/{id}`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
-            "nombre": "Plásticos y Envases",
-            "descripcion": "Para todo tipo de envases de plástico y bricks.",
+            "nombre": "sometimes",
+            "descripcion": "nullable",
             "id_contenedor": 1
         }
         ```
@@ -329,13 +344,13 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 ### Entidad: Suscripciones
 
-1.  🔸 **Crear un nuevo tipo de suscripción**
+1.  🔸 **Crear un nuevo tipo de suscripción**``
     *   **Endpoint:** `POST /api/suscripciones`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
-            "tipo": "Básica",
-            "descripcion": "Plan de suscripción básico.",
+            "tipo": "required",
+            "descripcion": "nullable",
             "precio": 0.00
         }
         ```
@@ -345,12 +360,12 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 3.  🔸 **Actualizar un tipo de suscripción**
     *   **Endpoint:** `PUT /api/suscripciones/{id}`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
-            "tipo": "Premium",
-            "descripcion": "Plan de suscripción con todas las ventajas.",
-            "precio": 9.99
+            "tipo": "sometimes",
+            "descripcion": "nullable",
+            "precio": 1
         }
         ```
 
@@ -366,13 +381,13 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 2.  🔸 **Crear una nueva empresa**
     *   **Endpoint:** `POST /api/empresas`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
-            "nombre": "Reciclajes Unidos S.A.",
-            "CIF": "A12345678",
-            "direccion": "Polígono Industrial Las Fuentes, Nave 5",
-            "id_suscripcion": 2
+            "nombre": "required",
+            "CIF": "required",
+            "direccion": "nullable",
+            "id_suscripcion": 1
         }
         ```
 
@@ -381,13 +396,13 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 4.  🔸 **Actualizar una empresa existente**
     *   **Endpoint:** `PUT /api/empresas/{id}`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
-            "nombre": "Reciclajes Unidos Global",
-            "CIF": "A87654321",
-            "direccion": "Parque Empresarial Innova, Edificio Beta",
-            "id_suscripcion": 3
+            "nombre": "sometimes",
+            "CIF": "sometimes",
+            "direccion": "nullable",
+            "id_suscripcion": 1
         }
         ```
 
@@ -400,14 +415,14 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 1.  🔸 **Crear una nueva recompensa**
     *   **Endpoint:** `POST /api/recompensas`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
-            "nombre": "Vale Descuento 5€",
-            "descripcion": "Descuento de 5€ en comercios asociados.",
-            "foto": "https://example.com/images/vale5eur.png",
-            "cantidad": 100,
-            "precio_pts": 500
+            "nombre": "required",
+            "descripcion": "nullable",
+            "foto": "nullable",
+            "cantidad": 1,
+            "precio_pts": 1
         }
         ```
 
@@ -416,13 +431,14 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 3.  🔸 **Actualizar una recompensa existente**
     *   **Endpoint:** `PUT /api/recompensas/{id}`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
-            "nombre": "Vale Descuento 10€",
-            "descripcion": "Descuento de 10€ en una amplia red de comercios.",
-            "cantidad": 50,
-            "precio_pts": 900
+            "nombre": "sometimes",
+            "descripcion": "nullable",
+            "foto" : "nullable",
+            "cantidad": 1,
+            "precio_pts": 1
         }
         ```
 
@@ -434,14 +450,14 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 
 ---
 
-### Entidad: Usuario-Recompensas (Tabla Pivote)
+### Entidad: Usuario-Recompensas (Relación)
 
 1.  🔸 **Listar todas las relaciones usuario-recompensa**
     *   **Endpoint:** `GET /api/usuario-recompensas`
 
-2.  🔸**Asignar recompensa a usuario (Canjear recompensa)**
+2.  🔸**Asignar recompensa a usuario**
     *   **Endpoint:** `POST /api/usuario-recompensas`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
             "id_usuario": 1,
@@ -449,12 +465,12 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
         }
         ```
 
-3.  🔸**Mostrar una relación específica usuario-recompensa (por ID de la relación)**
+3.  🔸**Mostrar una relación específica usuario-recompensa (por ID)**
     *   **Endpoint:** `GET /api/usuario-recompensas/{id}`
 
 4.  🔸**Eliminar asignación de recompensa a usuario**
     *   **Endpoint:** `DELETE /api/usuario-recompensas`
-    *   **Cuerpo de la Solicitud (Request Body) JSON:**
+    *   **Request Body JSON:**
         ```json
         {
             "id_usuario": 1,
@@ -465,7 +481,7 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 5.  🔸**Obtener las recompensas de un usuario específico**
     *   **Endpoint:** `GET /api/usuarios/{id_usuario}/recompensas`
 
-6.  🔸 **Obtener los usuarios asignados a una recompensa específica**
+6.  🔸 **Obtener los usuarios con a una recompensa específica**
     *   **Endpoint:** `GET /api/recompensas/{id_recompensa}/usuarios_asignados`
 
 
