@@ -1,49 +1,63 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Models\Tipo_de_estudio;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DatosController;
-
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\SedeController;
-use App\Http\Controllers\Api\CalidadController;
-use App\Http\Controllers\Api\FormatoController;
-use App\Http\Controllers\Api\MuestraController;
+
 use App\Http\Controllers\Api\UsuarioController;
-use App\Http\Controllers\ImagenController;
-use App\Http\Controllers\TipodeEstudioController;
-use App\Http\Controllers\Api\NaturalezaController;
-use App\Http\Controllers\Api\InterpretacionController;
-use App\Http\Controllers\Api\InterpretacionMuestraController;
+
 use App\Http\Controllers\Api\ProductoController;
 use App\Http\Controllers\ProductosUsuarioController;
 use App\Http\Controllers\ContenedorController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\SuscripcionController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\RecompensaController; // Añadir esta línea
+use App\Http\Controllers\UsuarioRecompensaController; // Añadir esta línea
 
 //ruta tipo sanctum
-Route::get('/usuario-sanctum', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// Route::get('/usuario-sanctum', function (Request $request) {
+//     return $request->user();
+// })->middleware('auth:sanctum');
 
-
-// Route::get('/datos', [DatosController::class, 'index']);
-
-// Route::post('/login', [AuthController::class, 'loginUser'])->name('api-login');
-
-//API endpoints v1.2
+//API endpoints
 
 //----------------Desprotegidas
 
 //!login
 Route::post('usuario-login',  [UsuarioController::class,'login']);
 
+    /*
+        {
+        "status": true,
+        "message": "Has iniciado sesión en la API",
+        "token": "5|MBQob35B80GYedLCoZAWFVBzi22dVmID4b4RBIks47f88e6e",  *******************
+            "usuario": {
+                "id": 1,
+                "nombre": "Nombre del usuario",
+                "apellidos": "Apellidos del usuario",
+                "email": "email@example.com",
+                "password": "$2y$12$eb5/4odtlQDdVfYEw7gD3uA./O1GlEUYap6UwP.6LWoWP5kCVFa4K",
+                "saldo": "100.50",
+                "id_suscripcion": 1,
+                "created_at": "2025-05-08T10:37:53.000000Z",
+                "updated_at": "2025-05-08T10:37:53.000000Z"
+            }
+        }
+    } */
+
 //!sign up
 //insert
 Route::post('/usuario', [UsuarioController::class, 'insert_usuario']);
+
+// !selects
+Route::get('/categorias', [CategoriaController::class, 'index']); // Obtener todas las categorías
+Route::get('/contenedores', [ContenedorController::class, 'index']); // Obtener todos los contenedores
+Route::get('/productos', [ProductoController::class, 'index']); // Obtener todos los productos
+Route::get('/recompensas', [RecompensaController::class, 'index']); // Obtener todas las recompensas
+Route::get('/suscripciones', [SuscripcionController::class, 'index']); // Obtener todas las suscripciones
 
 // ------------ Protegidas : agrupadas por controlador y middleware de autenticación
 
@@ -58,7 +72,6 @@ Route::controller(UsuarioController::class)->middleware('auth:sanctum')->group(f
 
 // -- Productos
 Route::controller(ProductoController::class)->middleware('auth:sanctum')->group(function () {
-    Route::get('/productos', 'index'); // Obtener todos los productos
     Route::post('/productos', 'store'); // Crear un nuevo producto
     Route::get('/productos/{id}', 'show'); // Obtener un producto por ID
     Route::put('/productos/{id}', 'update'); // Actualizar un producto por ID
@@ -66,8 +79,6 @@ Route::controller(ProductoController::class)->middleware('auth:sanctum')->group(
 });
 
 // -- Productos-Usuario
-
-
 Route::controller(ProductosUsuarioController::class)->middleware('auth:sanctum')->group(function () {
     Route::get('/productos-usuario', 'index');
     Route::post('/productos-usuario', 'store');
@@ -78,7 +89,6 @@ Route::controller(ProductosUsuarioController::class)->middleware('auth:sanctum')
 
 // -- Contenedores
 Route::controller(ContenedorController::class)->middleware('auth:sanctum')->group(function () {
-    Route::get('/contenedores', 'index'); // Obtener todos los contenedores
     Route::post('/contenedores', 'store'); // Crear un nuevo contenedor
     Route::get('/contenedores/{id}', 'show'); // Obtener un contenedor por ID
     Route::put('/contenedores/{id}', 'update'); // Actualizar un contenedor por ID
@@ -87,7 +97,6 @@ Route::controller(ContenedorController::class)->middleware('auth:sanctum')->grou
 
 // -- Categorías
 Route::controller(CategoriaController::class)->middleware('auth:sanctum')->group(function () {
-    Route::get('/categorias', 'index'); // Obtener todas las categorías
     Route::post('/categorias', 'store'); // Crear una nueva categoría
     Route::get('/categorias/{id}', 'show'); // Obtener una categoría por ID
     Route::put('/categorias/{id}', 'update'); // Actualizar una categoría por ID
@@ -96,7 +105,6 @@ Route::controller(CategoriaController::class)->middleware('auth:sanctum')->group
 
 // -- Suscripciones
 Route::controller(SuscripcionController::class)->middleware('auth:sanctum')->group(function () {
-    Route::get('/suscripciones', 'index'); // Obtener todas las suscripciones
     Route::post('/suscripciones', 'store'); // Crear una nueva suscripción
     Route::get('/suscripciones/{id}', 'show'); // Obtener una suscripción por ID
     Route::put('/suscripciones/{id}', 'update'); // Actualizar una suscripción por ID
@@ -110,6 +118,25 @@ Route::controller(EmpresaController::class)->middleware('auth:sanctum')->group(f
     Route::get('/empresas/{id}', 'show'); // Obtener una empresa por ID
     Route::put('/empresas/{id}', 'update'); // Actualizar una empresa por ID
     Route::delete('/empresas/{id}', 'destroy'); // Eliminar una empresa por ID
+});
+
+// -- Recompensas
+Route::controller(RecompensaController::class)->middleware('auth:sanctum')->group(function () {
+    Route::post('/recompensas', 'store'); // Crear una nueva recompensa
+    Route::get('/recompensas/{id}', 'show'); // Obtener una recompensa por ID
+    Route::put('/recompensas/{id}', 'update'); // Actualizar una recompensa por ID
+    Route::delete('/recompensas/{id}', 'destroy'); // Eliminar una recompensa por ID
+    Route::get('/recompensas/{id}/usuarios', 'usuariosPorRecompensa'); // Obtener usuarios por recompensa
+});
+
+// -- UsuarioRecompensas (Tabla Pivote)
+Route::controller(UsuarioRecompensaController::class)->middleware('auth:sanctum')->group(function () {
+    Route::get('/usuario-recompensas', 'index'); // Listar todas las relaciones
+    Route::post('/usuario-recompensas', 'store'); // Asignar recompensa a usuario
+    Route::get('/usuario-recompensas/{id}', 'show'); // Mostrar una relación específica (por ID)
+    Route::delete('/usuario-recompensas', 'destroy'); // Eliminar asignación (espera id_usuario e id_recompensa)
+    Route::get('/usuarios/{id_usuario}/recompensas', 'recompensasPorUsuario'); // Recompensas de un usuario
+    Route::get('/recompensas/{id_recompensa}/usuarios_asignados', 'usuariosPorRecompensa'); // Usuarios con una recompensa específica (espera id_recompensa)
 });
 
 //! estalínea
