@@ -6,7 +6,6 @@ import { Lan } from '@mui/icons-material'
 import ProductPage from './Pages/Unique/ProductPage'
 import NavbarPrueba from './components/NavBar/NavbarPrueba'
 import AllProducts from './Pages/All/AllProducts'
-import EditarProductos from './components/Admin/EditarProductos'
 import AllContenedores from './Pages/All/AllContenedores'
 import ContenedorPage from './Pages/Unique/ContenedorPage'
 import RegisterPage from './Pages/RegisterPage'
@@ -29,11 +28,7 @@ function App2() {
             <Route path='/' element={<Landing/>}/>
             <Route path='/producto/:id' element={<ProductPage/>}/>
             <Route path='/productos' element={<AllProducts/>}/>
-            <Route path='/editarProductos' element={
-                <ProtectedRoute>
-                    <EditarProductos/>
-                </ProtectedRoute>
-                }/>
+
             <Route path='/contenedores' element={<AllContenedores/>}/>
             <Route path='/contenedores/:id' element={<ContenedorPage/>}/>
             <Route path='/suscripciones' element={<AllSuscripciones/>}/>
