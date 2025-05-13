@@ -1,3 +1,36 @@
+
+
+
+********************Para proyecto
+
+Rutas desprotegidas:
+
+selects
+    categoria
+    contenedor
+    producto
+    recompensas
+    subs
+
+Protegidas todas las demás
+
+
+!pendiente
+    recompensas y revisar si falta alguno
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------
+
 en dashboard
 
     hacer peticion fetch sin estar autenticado
@@ -6,18 +39,18 @@ en dashboard
 
 En laravel hay muchas librerias para gestionar la autenticacion, la mas conocida en sactum
 
-    php artisan install:api 
+    php artisan install:api
     INFO  API scaffolding installed. Please add the [Laravel\Sanctum\HasApiTokens] trait to your User model.
 
 El que manda el token para las SPAs es el back, hay que generarlo y gestionarlo.
 
-Cuando installas  INFO  Running migrations.  
+Cuando installas  INFO  Running migrations.
 
   2025_02_03_031939_create_personal_access_tokens_table ...................................... 65.44ms DONE
 
 Se crea la tabla que gestiona los tokens
     ID
-    tokenable:type -> 
+    tokenable:type ->
     tokenable_id -> hace referencia a el usuario al que pertenece el token
     name
     token -> hash generado
@@ -33,7 +66,7 @@ Dentro de controllers > mkdir Api -> pegar las funciones correspondientes para m
 Al correr el install api, todas las rutas deben de ir al api.php cambiando la ruta agregando public/api/xxxx
 
     Auth PROTEGE LA RUTA PARA WEB
-    
+
     En API las rutas se protegen con sactum, pq ya no hay web que genere la cookie que genera auth, asiq es el que trabaja con los tokens.
 
     ¿Como conseguir que protegido con sactum obtener los datos cdo solicites a endpoint de api?
@@ -45,8 +78,8 @@ Aclaración auth / auth-sactum | web vs SPA
 
 Como te logeas en el sactum -> necesitas simular una vista que llame al metodo del controlador loginUser, que llegaras mediante la ruta API
     vistas > auth (login sample) -> copias en views a nivel general
-    hay un form que va por post a una ruta con name, pues creamos otra ruta que valla al metodo bueno del controlador que genera el token 
-    
+    hay un form que va por post a una ruta con name, pues creamos otra ruta que valla al metodo bueno del controlador que genera el token
+
     Route::post('/login',[AuthController::class, 'loginUser']  )->name('api-login');
 
 Simular una vista como si estuviesees en react para llamar al metodo del controlador y que me logee, desde una vista web, lanzar peticion en submit a metodo sactum del controlador que genera api token
@@ -67,7 +100,7 @@ Hay que diferenciar bien como funciona la autenticacion web clasica, como puede 
 ---------------------------- SPA
 Single Page APP, lo que hace por detras es con JS o typscript da igual el framework, lo que hace es hacer peticiones FETCH para actualizar y parchear el DOM (>2014 cdo JS tuvo tiron)
 
-Cdo igual una web coge datos de una BD lo que hace es usar peticiones asyncronas con fetch pero salta de pagina, JS a parte del DOM puede modificar las rutas, realmente cdo empiezas con un index, va redireccionando 
+Cdo igual una web coge datos de una BD lo que hace es usar peticiones asyncronas con fetch pero salta de pagina, JS a parte del DOM puede modificar las rutas, realmente cdo empiezas con un index, va redireccionando
 
 La SPA va ligada a la eficiencia y a la innovación en cuanto al tratamiento de datos.
 
@@ -77,7 +110,7 @@ Como todo es JS, para comunicarse con el back necesita hacer peticiones a rutas 
 
 sin recargar la pagina mostrar los usuarios, al final tienes que comunicarte con el back y es una app front completamente separado, (laravel back en htdocs levantado).
 
-Si desde react haces un fetch al back, no interesa que te devuelva una vista, pq ya estas en react, en front, lo que interesa es que devuelvan datos. Si devuelve una vista ya no es SPA, para que quiero React entonces, react controla los componentes a partir de los datos. 
+Si desde react haces un fetch al back, no interesa que te devuelva una vista, pq ya estas en react, en front, lo que interesa es que devuelvan datos. Si devuelve una vista ya no es SPA, para que quiero React entonces, react controla los componentes a partir de los datos.
 
     Para ello surgen las APIs, interfaces para intercambiar datos entre dos sistemas, habia sistemas SOAP (xml, ANTIGUO) y APi RestFul, lo moderno, dependiendo de como haga la petición (con que método) desencadena una lógica u otra pero siempre a la misma ruta, para hacer el CRUD (con cada uno de los metodos HTTP generar todas las opciones de tratamientos de datos).
 
