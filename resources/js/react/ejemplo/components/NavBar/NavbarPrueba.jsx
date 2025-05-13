@@ -39,8 +39,8 @@ const MenuLinks = [
 const DropdownLinks = [
     {
         id:1,
-        name:"Editar productos",
-        link:"/editarProductos"
+        name:"Administrar Productos",
+        link:"/admin-panel"
     },
     {
         id:2,

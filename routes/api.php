@@ -124,16 +124,19 @@ Route::controller(SuscripcionController::class)->middleware('auth:sanctum')->gro
     Route::delete('/suscripciones/{id}', 'destroy'); // Eliminar una suscripción por ID
 });
 
-// -- Empresas
+// -- Empresas sin autenticación
+Route::get('/empresas', [EmpresaController::class, 'index']); // Obtener todas las empresas
+Route::get('/empresas/{id}',[EmpresaController::class, 'show']); // Obtener una empresa por ID
+
+// -- Empresas con autenticación
 Route::controller(EmpresaController::class)->middleware('auth:sanctum')->group(function () {
-    Route::get('/empresas', 'index'); // Obtener todas las empresas
-    Route::post('/empresas', 'store'); // Crear una nueva empresa
-    Route::get('/empresas/{id}', 'show'); // Obtener una empresa por ID
+    Route::post('/empresas',  'store'); // Crear una nueva empresa
     Route::put('/empresas/{id}', 'update'); // Actualizar una empresa por ID
     Route::delete('/empresas/{id}', 'destroy'); // Eliminar una empresa por ID
 });
 
-// -- Recompensas
+// -- Recompensas sin autenticacion
+// -- Recompensas con autenticacion
 Route::controller(RecompensaController::class)->middleware('auth:sanctum')->group(function () {
     Route::post('/recompensas', 'store'); // Crear una nueva recompensa
     Route::get('/recompensas/{id}', 'show'); // Obtener una recompensa por ID

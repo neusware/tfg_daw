@@ -12,6 +12,9 @@ import RegisterPage from './Pages/RegisterPage'
 import LoginPage from './Pages/LoginPage'
 import ProtectedRoute from './ProtectedRoute'
 import AllSuscripciones from './Pages/All/AllSuscripciones'
+import DashboardLayout from './Pages/Dashboard/DashboardLayout'
+import AdminProductos from './components/Admin/Productos/AdminProductos'
+
 
 
 function App2() {
@@ -24,15 +27,19 @@ function App2() {
             <Route path='/register' element={<RegisterPage/>}/>
             <Route path='/login' element={<LoginPage/>}/>
 
-            {/* Ruta de incio principal */}
+            {/* Ruta públicas */}
             <Route path='/' element={<Landing/>}/>
             <Route path='/producto/:id' element={<ProductPage/>}/>
             <Route path='/productos' element={<AllProducts/>}/>
-
             <Route path='/contenedores' element={<AllContenedores/>}/>
             <Route path='/contenedores/:id' element={<ContenedorPage/>}/>
             <Route path='/suscripciones' element={<AllSuscripciones/>}/>
             <Route path='/suscripcion/:id' element={<ProductPage/>}/>
+
+            {/* rutas para el panel de administrador */}
+            <Route path='/admin-panel' element={<ProtectedRoute><DashboardLayout/></ProtectedRoute>}>
+                <Route path='productos' element={<ProtectedRoute><AdminProductos/></ProtectedRoute>}/>
+            </Route>
         </Routes>
         <Footer/>
     </div>
