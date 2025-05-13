@@ -1,4 +1,4 @@
-# 📎 Documentación de la API de Reciclaje
+# 📎 Documentación de la API de EcoScan
 --------------------------------------
 
 Introducción
