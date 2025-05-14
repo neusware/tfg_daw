@@ -56,8 +56,6 @@ function ProductPage() {
             <p><strong>ID Categoría:</strong> {producto.id_categoria}</p>
             <p><strong>ID Empresa:</strong> {producto.id_empresa}</p>
           </div>
-
-
         </div>
       </div>
     </div>

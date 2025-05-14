@@ -18,16 +18,21 @@ function AllContenedores() {
 
     })
   return (
-    <div className='container mt-10'>
-        {/* bucle que recorre todos los contenedores y los convierte a una tarjeta a cada uno de ellos utilizando el respectivo componente
-        y se muestran en una lista todos juntos */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-center">
-            {
-                contenedores.map((contenedor,index)=>(
-                    <ContenedorCard key={index} data={contenedor}/>
-                ))
-            }
-        </div>
+    <div className="container mx-auto px-4 mt-10 pb-20">
+      <h2 className="text-3xl sm:text-4xl font-bold text-center mb-10 text-gray-800">
+        Nuestros Contenedores
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {contenedores.map((contenedor, index) => (
+          <div
+            key={index}
+            className="transform transition duration-300 hover:scale-[1.03]"
+          >
+            <ContenedorCard data={contenedor} />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

@@ -18,16 +18,21 @@ function AllProducts() {
     })
 
   return (
-    <div className='container mt-10'>
-        {/* bucle que recorre todos los productos y los convierte a una tarjeta a cada uno de ellos utilizando el respectivo componente
-        y se muestran en una lista todos juntos */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-center">
-            {
-                productos.map((producto,index)=>(
-                    <ProductCard key={index} data={producto}/>
-                ))
-            }
-        </div>
+    <div className="container mx-auto p-16">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-gray-800 dark:text-white">
+          Todos los productos
+        </h1>
+        <p className="mt-2 text-gray-600 dark:text-gray-300 text-lg">
+          Explora todos nuestros productos
+        </p>
+      </div>
+
+      <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {productos.map((producto, index) => (
+          <ProductCard key={index} data={producto} /> 
+        ))}
+      </div>
     </div>
   )
 }

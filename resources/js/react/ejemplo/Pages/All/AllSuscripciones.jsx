@@ -29,18 +29,24 @@ function AllSuscripciones() {
   if (error) return <div className="text-center text-red-600">{error}</div>;
 
   return (
-    <div className='container mt-10'>
-        {/* bucle que recorre todos los productos y los convierte a una tarjeta a cada uno de ellos utilizando el respectivo componente
-        y se muestran en una lista todos juntos */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-center">
-            {
-                suscripciones.map((suscripcion,index)=>(
-                    <SuscripcionCard key={index} data={suscripcion}/>
-                ))
-            }
-        </div>
+    <div className="container mx-auto px-4 mt-10 pb-20">
+      <h2 className="text-3xl sm:text-4xl font-bold text-center mb-10 text-gray-800">
+        Planes de Suscripción
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {suscripciones.map((suscripcion, index) => (
+          <div
+            key={index}
+            className="transform transition duration-300 hover:scale-[1.03]"
+          >
+            <SuscripcionCard data={suscripcion} />
+          </div>
+        ))}
+      </div>
     </div>
   );
+
 }
 
 export default AllSuscripciones;
