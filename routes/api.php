@@ -136,10 +136,11 @@ Route::controller(EmpresaController::class)->middleware('auth:sanctum')->group(f
 });
 
 // -- Recompensas sin autenticacion
+Route::post('/recompensas',[RecompensaController::class, 'store'] ); // Crear una nueva recompensa
+Route::get('/recompensas/{id}',[RecompensaController::class, 'show'] ); // Obtener una recompensa por ID
+
 // -- Recompensas con autenticacion
 Route::controller(RecompensaController::class)->middleware('auth:sanctum')->group(function () {
-    Route::post('/recompensas', 'store'); // Crear una nueva recompensa
-    Route::get('/recompensas/{id}', 'show'); // Obtener una recompensa por ID
     Route::put('/recompensas/{id}', 'update'); // Actualizar una recompensa por ID
     Route::delete('/recompensas/{id}', 'destroy'); // Eliminar una recompensa por ID
     Route::get('/recompensas/{id}/usuarios', 'usuariosPorRecompensa'); // Obtener usuarios por recompensa

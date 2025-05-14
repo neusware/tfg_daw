@@ -12,22 +12,27 @@ const Sidebar = () => {
         {
             id:2,
             name:"Contenedores",
-            link: '/admin-contenedores'
+            link: '/admin-panel/contenedores'
         },
         {
             id:3,
             name:"Recompensas",
-            link:"/admin-recompensas"
+            link:"/admin-panel/recompensas"
         },
         {
             id:4,
             name:"Suscripciones",
-            link:"/admin-suscripciones"
+            link:"/admin-panel/suscripciones"
         },
         {
             id:5,
             name:"Categorías",
-            link:"/admin-categorias"
+            link:"/admin-panel/categorias"
+        },
+        {
+            id:6,
+            name:"Empresas",
+            link:"/admin-panel/empresas"
         }
     ]
   return (

@@ -43,16 +43,19 @@ const ProductosList = () => {
 
   if (cargando) return <p className='p-4'>Cargando productos...</p>;
 
+//   funcion para obtener el nombre de una categoria a partir de un id
   const getNombreCategoria = (id) => {
     const categoria = categorias.find((cat) => cat.id === id);
     return categoria ? categoria.nombre : 'Sin categoría';
   };
 
+//   funcion para obtener el nombre de la empresa mediante un id
   const getNombreEmpresa = (id) => {
     const empresa = empresas.find((emp) => emp.id === id);
     return empresa ? empresa.nombre : 'Sin empresa';
   };
 
+//   funcion para eliminar un producto
   const handleDeleteProduct = async (idProducto) => {
     const confirm = await Swal.fire({
       title: '¿Estás seguro?',
@@ -83,6 +86,7 @@ const ProductosList = () => {
     }
   };
 
+//   funcion para mostrar el codigo QR de un producto
   const handleMostrarQr = (idProducto) => {
     const qrElemento = (
       <div className='p-4'>
@@ -121,6 +125,7 @@ const ProductosList = () => {
     });
   };
 
+//   funcion para editar un producto
   const handleEditarProducto = (producto) => {
     const categoriaOptions = categorias.map(cat => `<option value="${cat.id}" ${cat.id === producto.id_categoria ? 'selected' : ''}>${cat.nombre}</option>`).join('');
     const empresaOptions = empresas.map(emp => `<option value="${emp.id}" ${emp.id === producto.id_empresa ? 'selected' : ''}>${emp.nombre}</option>`).join('');
@@ -177,15 +182,80 @@ const ProductosList = () => {
     }).then(result => {
       if (result.isConfirmed) {
         Swal.fire('Producto actualizado', '', 'success');
-        
+
       }
     });
   };
+
+//   funcion para crear un nuevo producto
+const handleCrearProducto = () => {
+    MySwal.fire({
+      title: 'Añadir nuevo producto',
+      html: `
+        <input id="nombre" class="swal2-input" placeholder="Nombre">
+        <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción"></textarea>
+        <textarea id="ingredientes" class="swal2-textarea" placeholder="Ingredientes"></textarea>
+        <input id="fabricante" class="swal2-input" placeholder="Fabricante">
+        <input id="composicion" class="swal2-input" placeholder="Composición">
+        <input id="puntos" type="number" class="swal2-input" placeholder="Puntos">
+        <input id="imagen" class="swal2-input" placeholder="URL de imagen">
+        <select id="id_categoria" class="swal2-select">
+          ${categorias.map(cat => `<option value="${cat.id}">${cat.nombre}</option>`).join('')}
+        </select>
+        <select id="id_empresa" class="swal2-select">
+          ${empresas.map(emp => `<option value="${emp.id}">${emp.nombre}</option>`).join('')}
+        </select>
+      `,
+      showCancelButton: true,
+      confirmButtonText: 'Crear',
+      preConfirm: async () => {
+        const token = localStorage.getItem('token');
+        const nuevoProducto = {
+          nombre: document.getElementById('nombre').value,
+          descripcion: document.getElementById('descripcion').value,
+          ingredientes: document.getElementById('ingredientes').value,
+          fabricante: document.getElementById('fabricante').value,
+          composicion: document.getElementById('composicion').value,
+          puntos: parseInt(document.getElementById('puntos').value),
+          imagen: document.getElementById('imagen').value,
+          id_categoria: parseInt(document.getElementById('id_categoria').value),
+          id_empresa: parseInt(document.getElementById('id_empresa').value),
+        };
+
+        try {
+          const res = await fetch('/api/productos', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(nuevoProducto)
+          });
+
+          if (!res.ok) throw new Error('Error al crear producto');
+          return true;
+        } catch (error) {
+          Swal.showValidationMessage(`Error: ${error.message}`);
+          return false;
+        }
+      }
+    }).then(result => {
+      if (result.isConfirmed) {
+        Swal.fire('Producto creado', '', 'success');
+      }
+    });
+  };
+
 
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Lista de Productos</h2>
       <div className="overflow-x-auto">
+
+        {/* boton para crear nuevo producto */}
+        <button onClick={()=>handleCrearProducto()} className='mb-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800 transition'>Crear Producto</button>
+
+        {/* tabla para mostrar los resultados */}
         <table className="min-w-full border text-sm text-left bg-white dark:bg-gray-800 shadow-md rounded">
           <thead className="bg-gray-100 dark:bg-gray-700">
             <tr>

@@ -14,6 +14,11 @@ import ProtectedRoute from './ProtectedRoute'
 import AllSuscripciones from './Pages/All/AllSuscripciones'
 import DashboardLayout from './Pages/Dashboard/DashboardLayout'
 import AdminProductos from './components/Admin/Productos/AdminProductos'
+import AdminContenedores from './components/Admin/Contenedores/AdminContenedores'
+import AdminRecompensas from './components/Admin/Recompensas/AdminRecompensas'
+import AdminSuscripciones from './components/Admin/Suscripciones/AdminSuscripciones'
+import AdminCategorias from './components/Admin/Categorias/AdminCategorias'
+import AdminEmpresas from './components/Admin/Empresas/AdminEmpresas'
 
 
 
@@ -39,6 +44,11 @@ function App2() {
             {/* rutas para el panel de administrador */}
             <Route path='/admin-panel' element={<ProtectedRoute><DashboardLayout/></ProtectedRoute>}>
                 <Route path='productos' element={<ProtectedRoute><AdminProductos/></ProtectedRoute>}/>
+                <Route path='contenedores' element={<ProtectedRoute><AdminContenedores/></ProtectedRoute>}/>
+                <Route path='recompensas' element={<ProtectedRoute><AdminRecompensas/></ProtectedRoute>}/>
+                <Route path='suscripciones' element={<ProtectedRoute><AdminSuscripciones/></ProtectedRoute>}/>
+                <Route path='categorias' element={<ProtectedRoute><AdminCategorias/></ProtectedRoute>}/>
+                <Route path='empresas' element={<ProtectedRoute><AdminEmpresas/></ProtectedRoute>}/>
             </Route>
         </Routes>
         <Footer/>
