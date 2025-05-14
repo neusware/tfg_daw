@@ -2,28 +2,29 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../Shared/Button'
 
-function ContenedorCard({data}) {
-
+function ContenedorCard({ data, image }) {
   return (
     <div className="mb-10">
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 place-items-center">
-      <Link to={`/contenedores/${data.id}`} key={data.id}>
-        <div className="group">
-          <div className="relative">
-            {/* <img src={data.imagen} alt={data.nombre} className="h-[180px] w-[180px] object-cover rounded-md"/> */}
-            {/* Botón en hover */}
-            <div className="hidden group-hover:flex absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 h-full w-full text-center group-hover:backdrop:blur-sm justify-center items-center duration-200">
-              <Button text={"Ver más"} bgColor={"bg-primary"} textColor={"text-white"} />
+        <Link to={`/contenedores/${data.id}`} key={data.id}>
+          <div className="group w-full max-w-xs mx-auto rounded-lg border shadow-lg hover:shadow-2xl transition duration-300">
+            <div className="relative">
+              <img 
+                src={image} 
+                alt={data.tipo} 
+                className="w-full h-48 object-cover rounded-t-lg "
+              />
+              {/* Botón en hover */}
+              <div className="hidden group-hover:flex absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-full h-full text-center justify-center items-center backdrop-blur-sm bg-black/50 rounded-lg">
+                <Button text={"Ver más"} bgColor={"bg-primary"} textColor={"text-white"} />
+              </div>
+            </div>
+            <div className="p-4 text-center">
+              <h2 className="font-semibold text-xl text-gray-800">{data.tipo}</h2>
+              <h2 className="font-bold text-lg text-primary mt-2">Color: {data.color}</h2>
             </div>
           </div>
-          <div className="leading-7 text-center mt-2">
-            <h2 className="font-semibold">{data.tipo}</h2>
-            <h2 className="font-bold text-primary">Color: {data.color}</h2>
-          </div>
-        </div>
-      </Link>
+        </Link>
     </div>
-  </div>
   )
 }
 
