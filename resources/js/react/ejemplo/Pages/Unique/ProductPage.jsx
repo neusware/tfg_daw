@@ -9,6 +9,8 @@ function ProductPage() {
 
     const { id } = useParams();
     const [productos, setProductos] = useState([]);
+    const [categorias, setCategorias] = useState([])
+    const [empresas, setEmpresas] = useState([])
     const [loading, setLoading] = useState(true); // Estado de carga
 
     useEffect(() => {
@@ -24,10 +26,48 @@ function ProductPage() {
         });
     }, []);
 
+
+    //useEffect para los datos adicionales
+    useEffect(() => {
+    const fetchData = async () => {
+        try {
+        const [prodRes, catRes] = await Promise.all([
+            fetch('/api/categorias'),
+            fetch('/api/empresas')
+        ]);
+
+        const categoriasData = await prodRes.json();
+        const empresasData = await catRes.json();
+
+        setCategorias(categoriasData);
+        setEmpresas(empresasData)
+        } catch (error) {
+        console.error("Error al obtener datos:", error);
+        } finally {
+        setCargando(false);
+        }
+    };
+
+    fetchData();
+    }, [id]);
+
+
     const producto = productos.find(p => p.id === parseInt(id));
 
     if (loading) return <div className="text-center mt-10">Cargando producto...</div>;
     if (!producto) return <div className="text-center mt-10 text-red-600">Producto no encontrado</div>;
+
+    //funcion para encontrar el nombre de la categoria
+    const getNombreCategoria = (idCategoria) => {
+    const categoria = categorias.find((cat) => cat.id === idCategoria);
+    return categoria ? categoria.nombre : 'Sin categoria';
+    };
+
+    //funcion para encontrar el nombre de la empresa
+    const getNombreEmpresa = (idEmpresa) => {
+    const empresa = empresas.find((emp) => emp.id === idEmpresa);
+    return empresa ? empresa.nombre : 'Sin empresa';
+    };
 
 
 
@@ -35,7 +75,7 @@ function ProductPage() {
     <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 space-y-20">
       {/* Fila principal */}
       <div className="flex flex-col md:flex-row gap-16 items-center">
-        
+
         {/* Imagen del producto */}
         <div className="flex-1 max-w-md w-full rounded-2xl overflow-hidden shadow-2xl">
           <img
@@ -70,10 +110,10 @@ function ProductPage() {
               <p><span className="font-semibold text-primary">🎁 Recompensa:</span> {producto.puntos} puntos </p>
             )}
             {producto.id_categoria && (
-              <p><span className="font-semibold text-primary">📂 Categoría:</span> #{producto.id_categoria}</p>
+              <p><span className="font-semibold text-primary">📂 Categoría:</span> {getNombreCategoria(producto.id)}</p>
             )}
             {producto.id_empresa && (
-              <p><span className="font-semibold text-primary">🏢 Empresa:</span> #{producto.id_empresa}</p>
+              <p><span className="font-semibold text-primary">🏢 Empresa:</span> {getNombreEmpresa(producto.id)}</p>
             )}
           </div>
         </div>
