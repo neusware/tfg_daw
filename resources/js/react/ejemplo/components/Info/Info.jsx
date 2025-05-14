@@ -12,11 +12,12 @@ function Info() {
               ¿Qué es <span className="text-red">EcoScan</span>?
             </h2>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              EcoScan te ofrece acceso instantáneo a información clara y completa sobre los productos que compras. Solo escanea el código QR del envase y descubre ingredientes, valores nutricionales, impacto ambiental, alérgenos y más. Compra con conciencia, vive mejor.
+              <strong>EcoScan</strong> te ofrece acceso instantáneo a <strong>información clara y completa</strong> sobre los productos que compras. Solo escanea el código QR del envase y descubre <strong>ingredientes</strong>, <strong>valores nutricionales</strong>, <strong>impacto ambiental</strong>, <strong>alérgenos</strong> y más. <strong>Compra con conciencia, vive mejor.</strong>
             </p>
-            <div className="mt-8">
-              <Button text="Descubrir más" />
-            </div>
+            <br />
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+              Además, podrás <strong>comparar productos</strong>, <strong>identificar alternativas más sostenibles</strong> y <strong>adaptar tus elecciones</strong> a tus necesidades personales o restricciones alimentarias. <strong>EcoScan no solo informa: te empodera</strong> para cuidar de ti y del planeta cada vez que haces la compra.
+            </p>
           </div>
 
           {/* Imagen */}

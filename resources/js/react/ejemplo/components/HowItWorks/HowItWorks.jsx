@@ -3,7 +3,7 @@ import Button from '../Shared/Button'
 
 function HowItWorks() {
   return (
-    <div className="px-4 py-16 bg-white">
+    <div className="px-4 my-12 py-16 bg-white">
       <div className="container mx-auto">
         <h2 className="text-4xl font-bold text-center mb-14 text-gray-800">
           ¿Cómo funciona <span className="text-primary">EcoScan</span>?

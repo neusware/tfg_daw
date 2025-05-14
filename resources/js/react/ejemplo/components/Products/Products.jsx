@@ -25,10 +25,7 @@ function Products() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12 text-center">
-          <Heading
-            title="Nuestros Productos"
-            subtitle="Explora algunos de los productos disponibles en EcoScan"
-          />
+            <h2 className="text-4xl font-bold text-center mb-14 text-gray-800">Nuestros Productos</h2>
         </div>
 
         {/* Grid de productos */}
