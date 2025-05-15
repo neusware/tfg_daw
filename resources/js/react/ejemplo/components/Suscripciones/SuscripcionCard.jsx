@@ -17,7 +17,7 @@ function SuscripcionCard({ data }) {
         <p className="text-2xl font-bold text-primary mb-6">{data.precio} €</p>
 
         <Link to={`#`}>
-          <button className="bg-primary text-white px-5 py-2 rounded-full hover:bg-second transition">
+          <button className="bg-primary text-white px-5 py-2 rounded-full hover:bg-red transition">
             Comprar
           </button>
         </Link>
