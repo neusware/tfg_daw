@@ -54,8 +54,8 @@ const DropdownLinks = [
     },
     {
         id:4,
-        name:"Suscripciones",
-        link:"/#blogs"
+        name:"Mi perfil",
+        link:"/perfil"
     },
 ]
 
@@ -80,7 +80,7 @@ function NavbarPrueba() {
             {/*seccion derecha de la navbar */}
             <div className='flex items-center'>
                 {/* Search Bar seccion */}
-               
+
 
                 {/* seccion boton comprar */}
 

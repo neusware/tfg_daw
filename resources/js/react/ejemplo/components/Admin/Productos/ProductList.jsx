@@ -93,7 +93,7 @@ const ProductosList = () => {
   const handleMostrarQr = (idProducto) => {
     const qrElemento = (
       <div className='p-4'>
-        <QRCode value={`https://ecoscan.com/productos/${idProducto}`} />
+        <QRCode value={`https://tfgdaw-production.up.railway.app/producto/${idProducto}`} />
       </div>
     );
 
@@ -251,7 +251,7 @@ const handleCrearProducto = () => {
 
 
   return (
-    <div className="p-4">      
+    <div className="p-4">
 
       <div className=" flex space-x-8 mb-4">
         <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">Lista de Productos</h2>

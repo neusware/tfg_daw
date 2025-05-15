@@ -19,6 +19,9 @@ import AdminRecompensas from './components/Admin/Recompensas/AdminRecompensas'
 import AdminSuscripciones from './components/Admin/Suscripciones/AdminSuscripciones'
 import AdminCategorias from './components/Admin/Categorias/AdminCategorias'
 import AdminEmpresas from './components/Admin/Empresas/AdminEmpresas'
+import AllRecompensas from './Pages/All/AllRecompensas'
+import RecompensaPage from './Pages/Unique/RecompensaPage'
+import MiPerfil from './components/Admin/MiPerfil'
 
 
 
@@ -40,6 +43,8 @@ function App2() {
             <Route path='/contenedores/:id' element={<ContenedorPage/>}/>
             <Route path='/suscripciones' element={<AllSuscripciones/>}/>
             <Route path='/suscripcion/:id' element={<ProductPage/>}/>
+            <Route path='/recompensas' element={<AllRecompensas/>}/>
+            <Route path='/recompensas/:id' element={<RecompensaPage/>}/>
 
             {/* rutas para el panel de administrador */}
             <Route path='/admin-panel' element={<ProtectedRoute><DashboardLayout/></ProtectedRoute>}>
@@ -50,6 +55,9 @@ function App2() {
                 <Route path='categorias' element={<ProtectedRoute><AdminCategorias/></ProtectedRoute>}/>
                 <Route path='empresas' element={<ProtectedRoute><AdminEmpresas/></ProtectedRoute>}/>
             </Route>
+
+            {/* ruta para acceder a la info del perfil */}
+            <Route path='/perfil' element={<ProtectedRoute><MiPerfil/></ProtectedRoute>}/>
         </Routes>
         <Footer/>
     </div>

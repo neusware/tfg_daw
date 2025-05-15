@@ -63,7 +63,7 @@ Route::get('/suscripciones', [SuscripcionController::class, 'index']); // Obtene
 
 // -- Usuarios
 Route::controller(UsuarioController::class)->middleware('auth:sanctum')->group(function(){
-    Route::get('usuario', [UsuarioController::class, 'select_usuarios']); //select
+    Route::get('usuario','select_usuarios'); //select
     Route::put('/usuario_email',  'update_email');    //update email por id
     Route::put('/usuario_password', 'update_password'); //update password por id
     Route::delete('/usuario', 'delete_usuario');    //delete por id
