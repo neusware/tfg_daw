@@ -20,6 +20,10 @@ Route::get('/{any}', function () {
     return view('welcome');
 })->where('any', '.*');
 
+// routes/web.php
+Route::get('/{any}', function () {
+    return file_get_contents(public_path('index.html'));
+})->where('any', '.*');
 
 
 
