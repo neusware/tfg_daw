@@ -5,6 +5,7 @@ import { FaCaretDown } from "react-icons/fa";
 import DarkMode from './DarkMode';
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'
 
 
 
@@ -60,8 +61,12 @@ const DropdownLinks = [
 ]
 
 function NavbarPrueba() {
+    const location = useLocation()
+    const isAdmin = location.pathname.includes("admin-panel")
+
+
   return (
-    <div className='h-[15vh] dark:bg-gray-900 dark:text-white py-8'>
+    <div className={`${isAdmin ? 'ml-60' : ''} h-[15vh] dark:bg-gray-900 dark:text-white py-8`}>
         <div className='flex items-center gap-8 mx-14 justify-around'>
             {/*Logo*/}
             <Link to={"/"} className='text-red font-semibold tracking-widest text-2xl sm:text-3xl '>EcoScan</Link>
