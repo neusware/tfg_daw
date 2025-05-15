@@ -15,10 +15,10 @@ Route::get('/', function () {
 
 
 
-// // permite que al escribir un enlace en la barra de navegacion aun siendo SPA se pueda redirigir
-// Route::get('/{any}', function () {
-//     return view('welcome');
-// })->where('any', '.*');
+// permite que al escribir un enlace en la barra de navegacion aun siendo SPA se pueda redirigir
+Route::get('/{any}', function () {
+    return view('welcome');
+})->where('any', '.*');
 
 
 
