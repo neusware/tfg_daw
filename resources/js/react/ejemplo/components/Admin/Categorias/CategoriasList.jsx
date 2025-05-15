@@ -154,8 +154,9 @@ const handleCrearCategoria = () => {
             id_contenedor: parseInt(document.getElementById('id_contenedor'))
         };
 
+        const endpointCrear = "/api/categorias"
         try {
-          const res = await fetch('/api/categorias', {
+          const res = await fetch(endpointCrear, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
