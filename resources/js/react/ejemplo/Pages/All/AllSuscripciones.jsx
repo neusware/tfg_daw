@@ -29,22 +29,20 @@ function AllSuscripciones() {
   if (error) return <div className="text-center text-red-600">{error}</div>;
 
   return (
-    <div className="container mx-auto px-4 mt-10 pb-20">
-      <h2 className="text-3xl sm:text-4xl font-bold text-center mb-10 text-gray-800">
+    <div className="container mx-auto px-4 m-8 pb-20">
+      <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">
         Planes de Suscripción
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {suscripciones.map((suscripcion, index) => (
-          <div
-            key={index}
-            className="transform transition duration-300 hover:scale-[1.03]"
-          >
-            <SuscripcionCard data={suscripcion} />
-          </div>
-        ))}
+      <div className="flex justify-center">
+        <div className="grid w-fit grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 p-8">
+          {suscripciones.map((suscripcion) => (
+            <SuscripcionCard key={suscripcion.id} data={suscripcion} />
+          ))}
+        </div>
       </div>
     </div>
+
   );
 
 }
