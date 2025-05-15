@@ -2,14 +2,14 @@ import React from 'react'
 import Button from '../Shared/Button'
 import { Link } from 'react-router-dom'
 
-function ProductCard({ data }) {
+function RecompensaCard({ data }) {
   return (
     <div className="mb-8">
-      <Link to={`/producto/${data.id}`} key={data.id}>
+      <Link to={`/recompensas/${data.id}`} key={data.id}>
         <div className="group bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden m-3">
           <div className="relative">
             <img
-              src="https://www.dia.es/product_images/150102/150102_ISO_0_ES.jpg?imwidth=392"
+              src="https://www.lavanguardia.com/files/og_thumbnail/uploads/2018/06/15/5fa43d71a111f.jpeg"
               alt={data.nombre}
               className="h-[220px] w-full object-cover"
             />
@@ -23,7 +23,7 @@ function ProductCard({ data }) {
               {data.nombre}
             </h2>
             <p className="text-primary font-bold text-base">
-              {data.puntos} puntos
+              {data.precio_pts} puntos
             </p>
           </div>
         </div>
@@ -32,4 +32,4 @@ function ProductCard({ data }) {
   );
 }
 
-export default ProductCard;
+export default RecompensaCard;

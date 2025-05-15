@@ -90,17 +90,17 @@ class UsuarioController extends Controller
 {
   "status": true,
   "message": "Has iniciado sesión en la API",
-  "token": "2|PCKeAr7o0VqynzWzwtdm4psfgyM1gIaBtFSuwvlf027fa962",
+  "token": "3|g7L3Rxj3RwGlBDwzDXJB8PPqsYMU0fVVQ6V3Xo2Dc6169ef3",
   "usuario": {
-    "id": 2,
+    "id": 1,
     "nombre": "Nombre del usuario",
     "apellidos": "Apellidos del usuario",
-    "email": "email2@example.com",
-    "password": "$2y$12$blQbTrZqiaEe6cTN211RJe9XVO3IRNj9bFnMH.NYD8HQcFGQzCL0O",
+    "email": "email@example.com",
+    "password": "$2y$12$eb5/4odtlQDdVfYEw7gD3uA./O1GlEUYap6UwP.6LWoWP5kCVFa4K",
     "saldo": "100.50",
     "id_suscripcion": 1,
-    "created_at": "2025-05-08T11:20:06.000000Z",
-    "updated_at": "2025-05-08T11:20:06.000000Z"
+    "created_at": "2025-05-08T10:37:53.000000Z",
+    "updated_at": "2025-05-08T10:37:53.000000Z"
   }
 }
 

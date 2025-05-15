@@ -6,15 +6,17 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Api\MuestraController;
 
 
-// Ruta domPdf
-Route::get('/descargar/{id}', [MuestraController::class, 'download']);
-
 
 
 //ruta basica para probar react
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
+// permite que al escribir un enlace en la barra de navegacion aun siendo SPA se pueda redirigir
+Route::get('/{any}', function () {
+    return view('welcome');
+})->where('any', '.*');
 
 
 Route::get('/api-login', function () {

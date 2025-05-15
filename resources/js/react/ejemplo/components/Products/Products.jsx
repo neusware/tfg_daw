@@ -1,26 +1,51 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Heading from '../Shared/Heading'
 import ProductCard from './ProductCard'
 import { Link } from 'react-router-dom'
-import productos from '../../productos'
 
 
 function Products() {
+
+    const [productos, setProductos] = useState([]);
+
+    useEffect(()=>{
+
+        // llamada a la API para obtener todos los productos de la BBDD
+        fetch('/api/productos')
+        .then(response => response.json())
+        .then(data => {
+            setProductos(data.productos)
+        })
+        .catch(error => console.error("Error al obtener los productos en el fetch.", error))
+
+    })
+
   return (
-    <div>
-        <div className="container">
-            {/* header */}
-            <Heading title="Nuestros Productos" subtitle="Explora nuestros productos"/>
-            {/* body */}
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-center'>
-                {
-                    productos.map((producto)=>(
-                        <ProductCard key={producto.id} data={producto}/>
-                    ))
-                }
-            </div>
+    <section className="bg-white dark:bg-gray-900 py-2">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="mb-12 text-center">
+            <h2 className="text-4xl font-bold text-center mb-14 text-gray-800">Nuestros Productos</h2>
         </div>
-    </div>
+
+        {/* Grid de productos */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {productos.slice(0, 4).map((producto, index) => (
+            <ProductCard key={index} data={producto} />
+          ))}
+        </div>
+
+        {/* Botón para ver más */}
+        <div className="mt-12 text-center">
+          <Link
+            to="/productos"
+            className="inline-block px-6 py-3 text-white font-medium bg-indigo-600 rounded-lg shadow hover:bg-indigo-700 transition-colors"
+          >
+            Ver todos los productos
+          </Link>
+        </div>
+      </div>
+    </section>
   )
 }
 

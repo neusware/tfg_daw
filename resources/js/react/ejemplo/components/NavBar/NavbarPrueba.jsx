@@ -22,41 +22,46 @@ const MenuLinks = [
     },
     {
         id:3,
-        name:"Contacto",
-        link:"/#about"
+        name:"Contenedores",
+        link:"/contenedores"
     },
     {
         id:4,
-        name:"Blogs",
-        link:"/#blogs"
+        name:"Recompensas",
+        link:"/recompensas"
+    },
+    {
+        id:5,
+        name:"Suscripciones",
+        link:"/suscripciones"
     },
 ]
 const DropdownLinks = [
     {
         id:1,
-        name:"Editar productos",
-        link:"/editarProductos"
+        name:"Administrar Productos",
+        link:"/admin-panel/productos"
     },
     {
         id:2,
-        name:"Shop",
-        link:"/#shop"
+        name:"Registrar",
+        link:"/register"
     },
     {
         id:3,
-        name:"About",
-        link:"/#about"
+        name:"login",
+        link:"/login"
     },
     {
         id:4,
-        name:"Blogs",
-        link:"/#blogs"
+        name:"Mi perfil",
+        link:"/perfil"
     },
 ]
 
 function NavbarPrueba() {
   return (
-    <div className='dark:bg-gray-900 dark:text-white py-8'>
+    <div className='h-[15vh] dark:bg-gray-900 dark:text-white py-8'>
         <div className='flex items-center gap-8 mx-14 justify-around'>
             {/*Logo*/}
             <Link to={"/"} className='text-red font-semibold tracking-widest text-2xl sm:text-3xl '>EcoScan</Link>
@@ -75,15 +80,7 @@ function NavbarPrueba() {
             {/*seccion derecha de la navbar */}
             <div className='flex items-center'>
                 {/* Search Bar seccion */}
-                <div className='relative group hidden sm:block'>
-                    <input type="text" placeholder='Buscar...'
-                    className='w-[120px] transition-all duration-300 rounded-full group-hover:border
-                    group-hover:border-gray-500 px-3 py-1 focus:outline-none focus:border-1 dark:border-gray-800  group-hover:dark:dark:bg-gray-800'
-                    />
-                    <IoMdSearch
-                    className="text-xl text-gray-600 group-hover:text-primary dark:text-gray-400 absolute top-1/2 -translate-y-1/2 right-3 duration-200"
-                    />
-                </div>
+
 
                 {/* seccion boton comprar */}
 
