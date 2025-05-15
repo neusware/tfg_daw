@@ -3,6 +3,9 @@ import QRCode from 'react-qr-code';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import ReactDOMServer from 'react-dom/server';
+import { MdDelete } from 'react-icons/md';
+import { FaQrcode } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 
 const MySwal = withReactContent(Swal);
 
@@ -248,37 +251,60 @@ const handleCrearProducto = () => {
 
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Lista de Productos</h2>
+    <div className="p-4">      
+
+      <div className=" flex space-x-8 mb-4">
+        <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">Lista de Productos</h2>
+        <button
+          onClick={() => handleCrearProducto()}
+          className="bg-blue-600 text-white px-4 py-1.5 rounded hover:bg-blue-700 transition text-sm font-medium"
+        >
+          + Crear Producto
+        </button>
+      </div>
+
       <div className="overflow-x-auto">
-
-        {/* boton para crear nuevo producto */}
-        <button onClick={()=>handleCrearProducto()} className='mb-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800 transition'>Crear Producto</button>
-
-        {/* tabla para mostrar los resultados */}
-        <table className="min-w-full border text-sm text-left bg-white dark:bg-gray-800 shadow-md rounded">
-          <thead className="bg-gray-100 dark:bg-gray-700">
+        <table className="w-full table-auto text-sm border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded">
+          <thead className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-left">
             <tr>
-              <th className="px-4 py-2 border">Nombre</th>
-              <th className="px-4 py-2 border">Descripción</th>
-              <th className="px-4 py-2 border">Puntos</th>
-              <th className="px-4 py-2 border">Categoría</th>
-              <th className="px-4 py-2 border">Empresa</th>
-              <th className="px-4 py-2 border">Acciones</th>
+              <th className="px-3 py-2">Nombre</th>
+              <th className="px-3 py-2">Puntos</th>
+              <th className="px-3 py-2">Categoría</th>
+              <th className="px-3 py-2">Empresa</th>
+              <th className="px-3 py-2 text-center">Acciones</th>
             </tr>
           </thead>
           <tbody>
             {productos.map((producto) => (
-              <tr key={producto.id} className="border-b hover:bg-gray-50 dark:hover:bg-gray-700">
-                <td className="px-4 py-2 border">{producto.nombre}</td>
-                <td className="px-4 py-2 border">{producto.descripcion}</td>
-                <td className="px-4 py-2 border">{producto.puntos}</td>
-                <td className="px-4 py-2 border">{getNombreCategoria(producto.id_categoria)}</td>
-                <td className="px-4 py-2 border">{getNombreEmpresa(producto.id_empresa)}</td>
-                <td className="px-4 py-2 border space-x-2">
-                  <button onClick={() => handleDeleteProduct(producto.id)} className="bg-rose-800 text-white px-4 py-1 rounded hover:bg-red-700">Eliminar</button>
-                  <button onClick={() => handleMostrarQr(producto.id)} className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-700">QR</button>
-                  <button onClick={() => handleEditarProducto(producto)} className="bg-indigo-800 text-white px-4 py-1 rounded hover:bg-indigo-900">Editar</button>
+              <tr key={producto.id} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                <td className="px-3 py-2">{producto.nombre}</td>
+                <td className="px-3 py-2">{producto.puntos}</td>
+                <td className="px-3 py-2">{getNombreCategoria(producto.id_categoria)}</td>
+                <td className="px-3 py-2">{getNombreEmpresa(producto.id_empresa)}</td>
+                <td className="px-3 py-2 text-center">
+                  <div className="flex justify-center gap-1">
+                    <button
+                      onClick={() => handleDeleteProduct(producto.id)}
+                      className="bg-rose-900 hover:bg-rose-700 text-white p-1.5 rounded"
+                      title="Eliminar"
+                    >
+                      <MdDelete size={20}/>
+                    </button>
+                    <button
+                      onClick={() => handleMostrarQr(producto.id)}
+                      className="bg-green-600 hover:bg-green-700 text-white p-1.5 rounded"
+                      title="QR"
+                    >
+                      <FaQrcode size={16} />
+                    </button>
+                    <button
+                      onClick={() => handleEditarProducto(producto)}
+                      className="bg-indigo-600 hover:bg-indigo-700 text-white p-1.5 rounded"
+                      title="Editar"
+                    >
+                      <FaEdit size={16} />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -286,6 +312,7 @@ const handleCrearProducto = () => {
         </table>
       </div>
     </div>
+
   );
 };
 

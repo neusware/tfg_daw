@@ -41,7 +41,7 @@ function AllContenedores() {
 
     
   return (
-    <div className="container mx-auto p-4 mt-10 pb-32">
+    <div className="container mx-auto p-4 mt-10 pb-32 font-sans">
       <h2 className="text-3xl sm:text-4xl font-bold text-center mb-10 text-gray-800">
         Los Contenedores
       </h2>

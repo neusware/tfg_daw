@@ -18,7 +18,7 @@ function AllProducts() {
     })
 
   return (
-    <div className="container mx-auto p-16">
+    <div className="container mx-auto p-16 font-sans">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-800 dark:text-white">
           Todos los productos

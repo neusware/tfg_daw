@@ -3,6 +3,8 @@ import QRCode from 'react-qr-code';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import ReactDOMServer from 'react-dom/server';
+import { MdDelete } from 'react-icons/md';
+import { FaEdit } from 'react-icons/fa';
 
 const MySwal = withReactContent(Swal);
 
@@ -178,32 +180,51 @@ const handleCrearCategoria = () => {
 
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Lista de Categorías</h2>
+    <div className="p-4">
+
+      <div className="flex space-x-8 mb-4">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-white">Lista de Categorías</h2>
+        <button
+          onClick={() => handleCrearCategoria()}
+          className="bg-blue-600 text-white px-4 py-1.5 rounded hover:bg-blue-700 transition text-sm font-medium"
+        >
+          + Crear Categoría
+        </button>
+      </div>
+
       <div className="overflow-x-auto">
-
-        {/* boton para crear nuevo producto */}
-        <button onClick={()=>handleCrearCategoria()} className='mb-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800 transition'>Crear Categoría</button>
-
-        {/* tabla para mostrar los resultados */}
-        <table className="min-w-full border text-sm text-left bg-white dark:bg-gray-800 shadow-md rounded">
-          <thead className="bg-gray-100 dark:bg-gray-700">
+        <table className="w-full table-auto text-sm border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded">
+          <thead className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-left">
             <tr>
-              <th className="px-4 py-2 border">Nombre</th>
-              <th className="px-4 py-2 border">Descripción</th>
-              <th className="px-4 py-2 border">Contenedor</th>
-              <th className="px-4 py-2 border">Acciones</th>
+              <th className="px-3 py-2">Nombre</th>
+              <th className="px-3 py-2">Descripción</th>
+              <th className="px-3 py-2">Contenedor</th>
+              <th className="px-3 py-2 text-center">Acciones</th>
             </tr>
           </thead>
           <tbody>
             {categorias.map((categoria) => (
-              <tr key={categoria.id} className="border-b hover:bg-gray-50 dark:hover:bg-gray-700">
-                <td className="px-4 py-2 border">{categoria.nombre}</td>
-                <td className="px-4 py-2 border">{categoria.descripcion}</td>
-                <td className="px-4 py-2 border">{getNombreContenedor(categoria.id_contenedor)}</td>
-                <td className="px-4 py-2 border space-x-2">
-                  <button onClick={() => handleDeleteCategoria(categoria.id)} className="bg-rose-800 text-white px-4 py-1 rounded hover:bg-red-700">Eliminar</button>
-                  <button onClick={() => handleEditarCategoria(categoria)} className="bg-indigo-800 text-white px-4 py-1 rounded hover:bg-indigo-900">Editar</button>
+              <tr key={categoria.id} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                <td className="px-3 py-2">{categoria.nombre}</td>
+                <td className="px-3 py-2">{categoria.descripcion}</td>
+                <td className="px-3 py-2">{getNombreContenedor(categoria.id_contenedor)}</td>
+                <td className="px-3 py-2 text-center">
+                  <div className="flex justify-center gap-1">
+                    <button
+                      onClick={() => handleDeleteCategoria(categoria.id)}
+                      className="bg-rose-900 hover:bg-rose-700 text-white p-1.5 rounded"
+                      title="Eliminar"
+                    >
+                      <MdDelete size={20} />
+                    </button>
+                    <button
+                      onClick={() => handleEditarCategoria(categoria)}
+                      className="bg-indigo-600 hover:bg-indigo-700 text-white p-1.5 rounded"
+                      title="Editar"
+                    >
+                      <FaEdit size={16} />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -211,6 +232,7 @@ const handleCrearCategoria = () => {
         </table>
       </div>
     </div>
+
   );
 };
 

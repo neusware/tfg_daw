@@ -4,25 +4,26 @@ import { Link } from 'react-router-dom'
 
 function SuscripcionCard({ data }) {
   return (
-    <div className="mb-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 place-items-center">
-        <Link to={`/suscripcion/${data.id}`} key={data.id}>
-          <div className="group">
-            <div className="relative">
-              <img src={data.imagen} alt={data.tipo} className="h-[180px] w-[180px] object-cover rounded-md"/>
-              {/* Botón en hover */}
-              <div className="hidden group-hover:flex absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 h-full w-full text-center group-hover:backdrop:blur-sm justify-center items-center duration-200">
-                <Button text={"Ver más"} bgColor={"bg-primary"} textColor={"text-white"} />
-              </div>
-            </div>
-            <div className="leading-7 text-center mt-2">
-              <h2 className="font-semibold">{data.tipo}</h2>
-              <h2 className="font-bold text-primary">{data.precio} €</h2>
-            </div>
-          </div>
+    <div className="bg-gray-100 dark:bg-gray-800 flex shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-[1.02] ">
+      {/*<img
+        src={data.imagen}
+        alt={data.tipo}
+        className="w-full h-40 object-cover"
+      />*/}
+
+      <div className="p-5 text-center ">
+        <h3 className="text-3xl font-semibold text-gray-800 dark:text-white mb-2 font-sans">{data.tipo}</h3>
+        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{data.descripcion}</p>
+        <p className="text-2xl font-bold text-primary mb-6">{data.precio} €</p>
+
+        <Link to={`#`}>
+          <button className="bg-primary text-white px-5 py-2 rounded-full hover:bg-second transition">
+            Comprar
+          </button>
         </Link>
       </div>
     </div>
+
   );
 }
 

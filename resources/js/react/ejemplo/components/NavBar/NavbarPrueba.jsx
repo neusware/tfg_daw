@@ -40,7 +40,7 @@ const DropdownLinks = [
     {
         id:1,
         name:"Administrar Productos",
-        link:"/admin-panel"
+        link:"/admin-panel/productos"
     },
     {
         id:2,
