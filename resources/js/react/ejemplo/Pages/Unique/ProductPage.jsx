@@ -1,76 +1,90 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import Map from '../../components/Map/Map';
 
 
 
 
 function ProductPage() {
 
-    const { id } = useParams();
-    const [productos, setProductos] = useState([]);
-    const [categorias, setCategorias] = useState([])
-    const [empresas, setEmpresas] = useState([])
-    const [loading, setLoading] = useState(true); // Estado de carga
+  const { id } = useParams();
+  const [productos, setProductos] = useState([]);
+  const [categorias, setCategorias] = useState([])
+  const [empresas, setEmpresas] = useState([])
+  const [loading, setLoading] = useState(true); // Estado de carga
 
-    useEffect(() => {
-      fetch('/api/productos')
-        .then(response => response.json())
-        .then(data => {
-          setProductos(data.productos || []); // aseguramos que sea array
-          setLoading(false);
-        })
-        .catch(error => {
-          console.error("Error al obtener los productos en el fetch.", error);
-          setLoading(false);
-        });
-    }, []);
-
-
-    //useEffect para los datos adicionales
-    useEffect(() => {
-    const fetchData = async () => {
-        try {
-        const [prodRes, catRes] = await Promise.all([
-            fetch('/api/categorias'),
-            fetch('/api/empresas')
-        ]);
-
-        const categoriasData = await prodRes.json();
-        const empresasData = await catRes.json();
-
-        setCategorias(categoriasData);
-        setEmpresas(empresasData)
-        } catch (error) {
-        console.error("Error al obtener datos:", error);
-        } finally {
-        setCargando(false);
-        }
-    };
-
-    fetchData();
-    }, [id]);
+  useEffect(() => {
+    fetch('/api/productos')
+      .then(response => response.json())
+      .then(data => {
+        setProductos(data.productos || []); // aseguramos que sea array
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error("Error al obtener los productos en el fetch.", error);
+        setLoading(false);
+      });
+  }, []);
 
 
-    const producto = productos.find(p => p.id === parseInt(id));
+  //useEffect para los datos adicionales
+  useEffect(() => {
+  const fetchData = async () => {
+      try {
+      const [prodRes, catRes] = await Promise.all([
+          fetch('/api/categorias'),
+          fetch('/api/empresas')
+      ]);
 
-    if (loading) return <div className="text-center mt-10">Cargando producto...</div>;
-    if (!producto) return <div className="text-center mt-10 text-red-600">Producto no encontrado</div>;
+      const categoriasData = await prodRes.json();
+      const empresasData = await catRes.json();
 
-    //funcion para encontrar el nombre de la categoria
-    const getNombreCategoria = (idCategoria) => {
-    const categoria = categorias.find((cat) => cat.id === idCategoria);
-    return categoria ? categoria.nombre : 'Sin categoria';
-    };
+      setCategorias(categoriasData);
+      setEmpresas(empresasData)
+      } catch (error) {
+      console.error("Error al obtener datos:", error);
+      } finally {
+      setCargando(false);
+      }
+  };
 
-    //funcion para encontrar el nombre de la empresa
-    const getNombreEmpresa = (idEmpresa) => {
-    const empresa = empresas.find((emp) => emp.id === idEmpresa);
-    return empresa ? empresa.nombre : 'Sin empresa';
-    };
+  fetchData();
+  }, [id]);
 
 
+  const producto = productos.find(p => p.id === parseInt(id));
 
+  if (loading) return <div className="text-center mt-10">Cargando producto...</div>;
+  if (!producto) return <div className="text-center mt-10 text-red-600">Producto no encontrado</div>;
+
+  //funcion para encontrar el nombre de la categoria
+  const getNombreCategoria = (idCategoria) => {
+  const categoria = categorias.find((cat) => cat.id === idCategoria);
+  return categoria ? categoria.nombre : 'Sin categoria';
+  };
+
+  //funcion para encontrar el nombre de la empresa
+  const getNombreEmpresa = (idEmpresa) => {
+  const empresa = empresas.find((emp) => emp.id === idEmpresa);
+  return empresa ? empresa.nombre : 'Sin empresa';
+  };
+
+  delete L.Icon.Default.prototype._getIconUrl;
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon-2x.png',
+    iconUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png',
+    shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png',
+  });
+
+  const CATEGORIA_MAP = {
+    1: 'ORGANICA',
+    2: 'VIDRIO',
+    3: 'PAPEL/CARTON',
+    4: 'INERTE'
+  };
+
+  const residuoNombre = CATEGORIA_MAP[producto.id_categoria];
   return (
     <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 space-y-20">
       {/* Fila principal */}
@@ -110,15 +124,23 @@ function ProductPage() {
               <p><span className="font-semibold text-primary">🎁 Recompensa:</span> {producto.puntos} puntos </p>
             )}
             {producto.id_categoria && (
-              <p><span className="font-semibold text-primary">📂 Categoría:</span> {getNombreCategoria(producto.id)}</p>
+              <p><span className="font-semibold text-primary">📂 Categoría:</span> {getNombreCategoria(producto.id_categoria)}</p>
             )}
             {producto.id_empresa && (
-              <p><span className="font-semibold text-primary">🏢 Empresa:</span> {getNombreEmpresa(producto.id)}</p>
+              <p><span className="font-semibold text-primary">🏢 Empresa:</span> {getNombreEmpresa(producto.id_empresa)}</p>
             )}
           </div>
+
+
         </div>
       </div>
 
+      {/* Mapa con los contenedores de la categoría */}
+      {producto.id_categoria && (
+        <div className="rounded-2xl overflow-hidden shadow-lg">
+          <Map categoriaId={residuoNombre} />
+        </div>
+      )}
       {/* Llamado a la acción */}
       <div className="bg-primary text-white rounded-2xl shadow-xl px-8 py-10 text-center space-y-4">
         <h2 className="text-2xl font-bold">¡Sigue explorando productos responsables!</h2>
@@ -131,9 +153,8 @@ function ProductPage() {
         </Link>
       </div>
     </div>
-
-
   );
+
 }
 
 export default ProductPage;
