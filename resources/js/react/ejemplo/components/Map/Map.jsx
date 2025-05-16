@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+// Componente para centrar el mapa en la posición del usuario
+function SetViewToUser({ position }) {
+  const map = useMap();
+  useEffect(() => {
+    if (position) {
+      map.setView(position, 14);
+    }
+  }, [map, position]);
+  return null;
+}
+
 const Map = ({ categoriaId }) => {
   const [geoData, setGeoData] = useState(null);
+  const [userPosition, setUserPosition] = useState(null);
 
   useEffect(() => {
     fetch('/data/contenedores.geojson')
@@ -24,6 +36,20 @@ const Map = ({ categoriaId }) => {
       })
       .catch((error) => console.error('Error al cargar los datos GeoJSON:', error));
   }, [categoriaId]);
+
+  // Obtener la ubicación del usuario al montar el componente
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setUserPosition([pos.coords.latitude, pos.coords.longitude]);
+        },
+        (err) => {
+          console.error('Error al obtener la ubicación:', err);
+        }
+      );
+    }
+  }, []);
 
   const getColorByCategoria = (categoria) => {
     switch (categoria) {
@@ -70,6 +96,7 @@ const Map = ({ categoriaId }) => {
         attribution='&copy; OpenStreetMap contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
+
       {geoData && (
         <GeoJSON
           data={geoData}
@@ -81,6 +108,15 @@ const Map = ({ categoriaId }) => {
             feature.geometry.type !== 'Point' ? geoJsonStyle(feature) : {}
           }
         />
+      )}
+
+      {userPosition && (
+        <>
+          <SetViewToUser position={userPosition} />
+          <Marker position={userPosition}>
+            <Popup>Tú estás aquí</Popup>
+          </Marker>
+        </>
       )}
     </MapContainer>
   );
