@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ContenedorCard from '../../components/Contenedores/ContenedorCard'
+import Map from '../../components/Map/Map';
 
 function AllContenedores() {
 
@@ -20,16 +21,16 @@ function AllContenedores() {
     const getImagenPorTipo = (tipo) => {
         switch (tipo.toLowerCase()) {
             case 'plástico':
-            return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBOb2FODbgfbsZlObJdTn1VltR9rroHtraLA&s' // Contenedor amarillo
+            return 'https://www.solocontenedores.com/wp-content/uploads/04014-amarillo.jpg' // Contenedor amarillo
             case 'vidrio':
-            return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBOb2FODbgfbsZlObJdTn1VltR9rroHtraLA&s' // Contenedor verde
+            return 'https://www.solocontenedores.com/wp-content/uploads/04014-verde-600x600.jpg' // Contenedor verde
             case 'Cartón y Papel':
-            return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBOb2FODbgfbsZlObJdTn1VltR9rroHtraLA&s' // Contenedor azul
+            return 'https://www.solocontenedores.com/wp-content/uploads/04014-azul-600x600.jpg' // Contenedor azul
             case 'organico':
-            return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBOb2FODbgfbsZlObJdTn1VltR9rroHtraLA&s' // Contenedor marrón
+            return 'https://www.solocontenedores.com/wp-content/uploads/04014-marron-768x768.jpg' // Contenedor marrón
             case 'residuos':
             case 'resto':
-            return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBOb2FODbgfbsZlObJdTn1VltR9rroHtraLA&s' // Contenedor gris o negro
+            return 'https://www.solocontenedores.com/wp-content/uploads/04014-gris-600x600.jpg' // Contenedor gris o negro
             case 'pilas':
             return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBOb2FODbgfbsZlObJdTn1VltR9rroHtraLA&s' // Contenedor pilas/baterías
             default:
@@ -57,7 +58,10 @@ function AllContenedores() {
           </div>
         ))}
       </div>
-
+      <div>
+        <h1>Mapa de Contenedores</h1>
+        <Map />
+      </div>
     </div>
 
   )

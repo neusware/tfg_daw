@@ -6,7 +6,7 @@ function HowItWorks() {
     <div className="px-4 my-12 py-16 bg-white">
       <div className="container mx-auto">
         <h2 className="text-4xl font-bold text-center mb-14 text-gray-800">
-          ¿Cómo funciona <span className="text-primary">EcoScan</span>?
+          ¿Cómo funciona <span className="text-red">EcoScan</span>?
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

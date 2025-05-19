@@ -8,6 +8,8 @@ import App2 from './ejemplo/App2.jsx';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { BrowserRouter } from 'react-router-dom';
+import 'leaflet/dist/leaflet.css';
+
 
 createRoot(document.getElementById('root')).render(
 
