@@ -135,7 +135,7 @@ const handleCrearContenedor = () => {
         };
 
         try {
-          const res = await fetch('/api/productos', {
+          const res = await fetch('/api/contenedores', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ const handleCrearContenedor = () => {
 
 
   return (
-  <div className="p-2">      
+  <div className="p-2">
 
     <div className="flex space-x-8 mb-4">
       <h2 className="text-xl font-bold text-gray-800 dark:text-white">Lista de Contenedores</h2>

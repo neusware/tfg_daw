@@ -25,7 +25,6 @@ Route::get('/{any}', function () {
 
 
 
-
 Route::get('/api-login', function () {
     return view('login');
 });
