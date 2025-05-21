@@ -75,14 +75,24 @@ const ContenedoresList = () => {
     MySwal.fire({
       title: 'Editar Contenedor',
       html: `
-        <label for="tipo">Tipo</label>
-        <input id="tipo" class="swal2-input" placeholder="Tipo" value="${contenedor.tipo || ''}">
-        <label for="color">Color</label>
-        <input id="color" class="swal2-input" placeholder="Color" value="${contenedor.color || ''}">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.875rem;">
+          <div style="display: flex; flex-direction: column;">
+            <label for="tipo" style="font-weight: 700; margin-bottom: 0.25rem;">Tipo</label>
+            <input id="tipo" class="swal2-input" placeholder="Tipo" value="${contenedor.tipo || ''}">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="color" style="font-weight: 700; margin-bottom: 0.25rem;">Color</label>
+            <input id="color" class="swal2-input" placeholder="Color" value="${contenedor.color || ''}">
+          </div>
+        </div>
       `,
+
       confirmButtonText: 'Guardar cambios',
       showCancelButton: true,
       focusConfirm: false,
+      customClass: {
+        popup: 'w-[900px]'
+      },
       preConfirm: async () => {
         const data = {
           tipo: document.getElementById('tipo').value,
@@ -120,13 +130,22 @@ const handleCrearContenedor = () => {
     MySwal.fire({
       title: 'Añadir nuevo contenedor',
       html: `
-        <label for="tipo">Tipo</label>
-        <input id="tipo" class="swal2-input" placeholder="Tipo">
-        <label for="color">Tipo</label>
-        <input id="color" class="swal2-input" placeholder="Color">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.875rem;">
+          <div style="display: flex; flex-direction: column;">
+            <label for="tipo" style="font-weight: 700; margin-bottom: 0.25rem;">Tipo</label>
+            <input id="tipo" class="swal2-input" placeholder="Tipo">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="color" style="font-weight: 700; margin-bottom: 0.25rem;">Color</label>
+            <input id="color" class="swal2-input" placeholder="Color">
+          </div>
+        </div>
       `,
       showCancelButton: true,
       confirmButtonText: 'Crear',
+      customClass: {
+        popup: 'w-[900px]'
+      },
       preConfirm: async () => {
         const token = localStorage.getItem('token');
         const nuevoContendor = {

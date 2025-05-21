@@ -41,14 +41,14 @@ const CategoriasList = () => {
 
   if (cargando) return <p className='p-4'>Cargando categorias...</p>;
 
-//   funcion para obtener el nombre de una categoria a partir de un id
+  //funcion para obtener el nombre de una categoria a partir de un id
   const getNombreContenedor = (id) => {
     const contenedor = contenedores.find((cont) => cont.id === id);
     return contenedor ? contenedor.tipo : 'Sin categoría';
   };
 
 
-//   funcion para eliminar un producto
+  //funcion para eliminar un producto
   const handleDeleteCategoria = async (idCategoria) => {
     const confirm = await Swal.fire({
       title: '¿Estás seguro?',
@@ -80,23 +80,36 @@ const CategoriasList = () => {
   };
 
 
-//   funcion para editar un producto
+  //funcion para editar un producto
   const handleEditarCategoria = (categoria) => {
     const contenedorOptions = contenedores.map(cont => `<option value="${cont.id}" ${cont.id === categoria.id_contenedor ? 'selected' : ''}>${cont.tipo}</option>`).join('');
 
     MySwal.fire({
       title: 'Editar categoría',
       html: `
-        <label for="nombre">Nombre</label>
-        <input id="nombre" class="swal2-input" placeholder="Nombre" value="${categoria.nombre || ''}">
-        <label for="descripcion">Descripcion</label>
-        <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción">${categoria.descripcion || ''}</textarea>
-        <label for="id_contenedor">Contenedor</label>
-        <select id="id_contenedor" class="swal2-select">${contenedorOptions}</select>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.875rem;">
+          <div style="display: flex; flex-direction: column;">
+            <label for="nombre" style="font-weight: 700; margin-bottom: 0.25rem;">Nombre</label>
+            <input id="nombre" class="swal2-input" placeholder="Nombre" value="${categoria.nombre || ''}">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="id_contenedor" style="font-weight: 700; margin-bottom: 0.25rem;">Contenedor</label>
+            <select id="id_contenedor" class="swal2-select" style="border: 1px solid #ccc; border-radius: 4px;">
+              ${contenedorOptions}
+            </select>
+          </div>
+          <div style="display: flex; flex-direction: column; grid-column: span 2;">
+            <label for="descripcion" style="font-weight: 700; margin-bottom: 0.25rem;">Descripción</label>
+            <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción">${categoria.descripcion || ''}</textarea>
+          </div>
+        </div>
       `,
       confirmButtonText: 'Guardar cambios',
       showCancelButton: true,
       focusConfirm: false,
+      customClass: {
+        popup: 'w-[900px]'
+      },
       preConfirm: async () => {
         const data = {
           nombre: document.getElementById('nombre').value,
@@ -130,22 +143,33 @@ const CategoriasList = () => {
     });
   };
 
-//   funcion para crear un nuevo producto
-const handleCrearCategoria = () => {
+  //funcion para crear un nuevo producto
+  const handleCrearCategoria = () => {
     MySwal.fire({
       title: 'Añadir nueva categoria',
       html: `
-        <label for="nombre">Nombre</label>
-        <input id="nombre" class="swal2-input" placeholder="Nombre">
-        <label for="descripcion">Descripcion</label>
-        <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción"></textarea>
-        <label for="id_contenedor">Contenedor</label>
-        <select id="contenedor" class="swal2-select">
-          ${contenedores.map(cont => `<option value="${cont.id}">${cont.tipo}</option>`).join('')}
-        </select>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.875rem;">
+          <div style="display: flex; flex-direction: column;">
+            <label for="nombre" style="font-weight: 700; margin-bottom: 0.25rem;">Nombre</label>
+            <input id="nombre" class="swal2-input" placeholder="Nombre">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="contenedor" style="font-weight: 700; margin-bottom: 0.25rem;">Contenedor</label>
+            <select id="contenedor" class="swal2-select" style="border: 1px solid #ccc; border-radius: 4px;">
+              ${contenedores.map(cont => `<option value="${cont.id}">${cont.tipo}</option>`).join('')}
+            </select>
+          </div>
+          <div style="display: flex; flex-direction: column; grid-column: span 2;">
+            <label for="descripcion" style="font-weight: 700; margin-bottom: 0.25rem;">Descripción</label>
+            <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción"></textarea>
+          </div>
+        </div>
       `,
       showCancelButton: true,
       confirmButtonText: 'Crear',
+      customClass: {
+        popup: 'w-[900px]'
+      },
       preConfirm: async () => {
         const token = localStorage.getItem('token');
         const nuevaCategoria = {
