@@ -92,11 +92,11 @@ const ProductosList = () => {
 //   funcion para mostrar el codigo QR de un producto
   const handleMostrarQr = (idProducto) => {
     const qrElemento = (
-      <div className='p-4'>
+      <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem'}}>
         <QRCode value={`https://tfgdaw-production.up.railway.app/producto/${idProducto}`} />
       </div>
     );
-
+    
     MySwal.fire({
       title: `Código QR`,
       html: ReactDOMServer.renderToString(qrElemento),
@@ -111,7 +111,11 @@ const ProductosList = () => {
             <html>
               <head>
                 <style>
-                  body { display: flex; justify-content: center; align-items: center; height: 100vh; }
+                  body {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  }
                 </style>
               </head>
               <body>
@@ -128,6 +132,7 @@ const ProductosList = () => {
     });
   };
 
+
 //   funcion para editar un producto
   const handleEditarProducto = (producto) => {
     const categoriaOptions = categorias.map(cat => `<option value="${cat.id}" ${cat.id === producto.id_categoria ? 'selected' : ''}>${cat.nombre}</option>`).join('');
@@ -136,21 +141,60 @@ const ProductosList = () => {
     MySwal.fire({
       title: 'Editar producto',
       html: `
-        <input id="nombre" class="swal2-input" placeholder="Nombre" value="${producto.nombre || ''}">
-        <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción">${producto.descripcion || ''}</textarea>
-        <textarea id="ingredientes" class="swal2-textarea" placeholder="Ingredientes">${producto.ingredientes || ''}</textarea>
-        <input id="fabricante" class="swal2-input" placeholder="Fabricante" value="${producto.fabricante || ''}">
-        <input id="composicion" class="swal2-input" placeholder="Composición" value="${producto.composicion || ''}">
-        <input id="puntos" type="number" class="swal2-input" placeholder="Puntos" value="${producto.puntos || 0}">
-        <input id="imagen" class="swal2-input" placeholder="URL Imagen" value="${producto.imagen || ''}">
-        <label for="id_categoria">Categoría</label>
-        <select id="id_categoria" class="swal2-select">${categoriaOptions}</select>
-        <label for="id_empresa">Empresa</label>
-        <select id="id_empresa" class="swal2-select">${empresaOptions}</select>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.875rem;">
+          <div style="display: flex; flex-direction: column;">
+            <label for="nombre" style="font-weight: 700; margin-bottom: 0.25rem;">Nombre</label>
+            <input id="nombre" class="swal2-input" placeholder="Nombre" value="${producto.nombre || ''}">
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <label for="fabricante" style="font-weight: 700; margin-bottom: 0.25rem;">Fabricante</label>
+            <input id="fabricante" class="swal2-input" placeholder="Fabricante" value="${producto.fabricante || ''}">
+          </div>
+          
+          <div style="display: flex; flex-direction: column;">
+            <label for="descripcion" style="font-weight: 700; margin-bottom: 0.25rem;">Descripción</label>
+            <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción">${producto.descripcion || ''}</textarea>
+          </div>
+          
+          <div style="display: flex; flex-direction: column;">
+            <label for="ingredientes" style="font-weight: 700; margin-bottom: 0.25rem;">Ingredientes</label>
+            <textarea id="ingredientes" class="swal2-textarea" placeholder="Ingredientes">${producto.ingredientes || ''}</textarea>
+          </div>
+                    
+          <div style="display: flex; flex-direction: column;">
+            <label for="composicion" style="font-weight: 700; margin-bottom: 0.25rem;">Composición</label>
+            <input id="composicion" class="swal2-input" placeholder="Composición" value="${producto.composicion || ''}">
+          </div>
+          
+          <div style="display: flex; flex-direction: column;">
+            <label for="puntos" style="font-weight: 700; margin-bottom: 0.25rem;">Puntos</label>
+            <input id="puntos" type="number" class="swal2-input" placeholder="Puntos" value="${producto.puntos || 0}">
+          </div>         
+          
+          <div style="display: flex; flex-direction: column;">
+            <label for="id_categoria" style="font-weight: 700; margin-bottom: 0.25rem;">Categoría</label>
+            <select id="id_categoria" class="swal2-select" style="border: 1px solid #ccc; border-radius: 4px;">${categoriaOptions}</select>
+          </div>
+          
+          <div style="display: flex; flex-direction: column;">
+            <label for="id_empresa" style="font-weight: 700; margin-bottom: 0.25rem;">Empresa</label>
+            <select id="id_empresa" class="swal2-select" style="border: 1px solid #ccc; border-radius: 4px;">${empresaOptions}</select>
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <label for="imagen" style="font-weight: 700; margin-bottom: 0.25rem;">URL Imagen</label>
+            <input id="imagen" class="swal2-input" placeholder="URL Imagen" value="${producto.imagen || ''}">
+          </div>
+        </div>
       `,
+
       confirmButtonText: 'Guardar cambios',
       showCancelButton: true,
       focusConfirm: false,
+      customClass: {
+        popup: 'w-[1100px]'
+      },
       preConfirm: async () => {
         const data = {
           nombre: document.getElementById('nombre').value,
@@ -191,25 +235,66 @@ const ProductosList = () => {
   };
 
 //   funcion para crear un nuevo producto
-const handleCrearProducto = () => {
+  const handleCrearProducto = () => {
     MySwal.fire({
       title: 'Añadir nuevo producto',
       html: `
-        <input id="nombre" class="swal2-input" placeholder="Nombre">
-        <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción"></textarea>
-        <textarea id="ingredientes" class="swal2-textarea" placeholder="Ingredientes"></textarea>
-        <input id="fabricante" class="swal2-input" placeholder="Fabricante">
-        <input id="composicion" class="swal2-input" placeholder="Composición">
-        <input id="puntos" type="number" class="swal2-input" placeholder="Puntos">
-        <input id="imagen" class="swal2-input" placeholder="URL de imagen">
-        <select id="id_categoria" class="swal2-select">
-          ${categorias.map(cat => `<option value="${cat.id}">${cat.nombre}</option>`).join('')}
-        </select>
-        <select id="id_empresa" class="swal2-select">
-          ${empresas.map(emp => `<option value="${emp.id}">${emp.nombre}</option>`).join('')}
-        </select>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.875rem;">
+          <div style="display: flex; flex-direction: column;">
+            <label for="nombre" style="font-weight: 700; margin-bottom: 0.25rem;">Nombre</label>
+            <input id="nombre" class="swal2-input" placeholder="Nombre">
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <label for="fabricante" style="font-weight: 700; margin-bottom: 0.25rem;">Fabricante</label>
+            <input id="fabricante" class="swal2-input" placeholder="Fabricante">
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <label for="descripcion" style="font-weight: 700; margin-bottom: 0.25rem;">Descripción</label>
+            <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción"></textarea>
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <label for="ingredientes" style="font-weight: 700; margin-bottom: 0.25rem;">Ingredientes</label>
+            <textarea id="ingredientes" class="swal2-textarea" placeholder="Ingredientes"></textarea>
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <label for="composicion" style="font-weight: 700; margin-bottom: 0.25rem;">Composición</label>
+            <input id="composicion" class="swal2-input" placeholder="Composición">
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <label for="puntos" style="font-weight: 700; margin-bottom: 0.25rem;">Puntos</label>
+            <input id="puntos" type="number" class="swal2-input" placeholder="Puntos">
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <label for="imagen" style="font-weight: 700; margin-bottom: 0.25rem;">URL de imagen</label>
+            <input id="imagen" class="swal2-input" placeholder="URL de imagen">
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <label for="id_categoria" style="font-weight: 700; margin-bottom: 0.25rem;">Categoría</label>
+            <select id="id_categoria" class="swal2-select" style="border: 1px solid #ccc; border-radius: 4px;">
+              ${categorias.map(cat => `<option value="${cat.id}">${cat.nombre}</option>`).join('')}
+            </select>
+          </div>
+
+          <div style="display: flex; flex-direction: column;">
+            <label for="id_empresa" style="font-weight: 700; margin-bottom: 0.25rem;">Empresa</label>
+            <select id="id_empresa" class="swal2-select" style="border: 1px solid #ccc; border-radius: 4px;">
+              ${empresas.map(emp => `<option value="${emp.id}">${emp.nombre}</option>`).join('')}
+            </select>
+          </div>
+        </div>
       `,
+
       showCancelButton: true,
+      customClass: {
+        popup: 'w-[1100px]'
+      },
       confirmButtonText: 'Crear',
       preConfirm: async () => {
         const token = localStorage.getItem('token');
