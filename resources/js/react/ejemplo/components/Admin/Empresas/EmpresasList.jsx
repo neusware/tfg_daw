@@ -87,18 +87,33 @@ const EmpresasList = () => {
     MySwal.fire({
       title: 'Editar Empresa',
       html: `
-        <label for="nombre">Nombre</label>
-        <input id="nombre" class="swal2-input" placeholder="Nombre" value="${empresa.nombre || ''}">
-        <label for="cif">CIF</label>
-        <input id="cif" class="swal2-input" placeholder="CIF" value="${empresa.CIF || ''}">
-        <label for="direccion">Direccion</label>
-        <input id="direccion" class="swal2-input" placeholder="Dirección" value="${empresa.direccion || ''}">
-        <label for="id_suscripcion">Tipo de Suscripcion</label>
-        <select id="id_suscripcion" class="swal2-select">${suscripcionOptions}</select>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.875rem;">
+          <div style="display: flex; flex-direction: column;">
+            <label for="nombre" style="font-weight: 700; margin-bottom: 0.25rem;">Nombre</label>
+            <input id="nombre" class="swal2-input" placeholder="Nombre" value="${empresa.nombre || ''}">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="cif" style="font-weight: 700; margin-bottom: 0.25rem;">CIF</label>
+            <input id="cif" class="swal2-input" placeholder="CIF" value="${empresa.CIF || ''}">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="direccion" style="font-weight: 700; margin-bottom: 0.25rem;">Dirección</label>
+            <input id="direccion" class="swal2-input" placeholder="Dirección" value="${empresa.direccion || ''}">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="id_suscripcion" style="font-weight: 700; margin-bottom: 0.25rem;">Tipo de Suscripción</label>
+            <select id="id_suscripcion" class="swal2-select" style="border: 1px solid #ccc; border-radius: 4px;">
+              ${suscripcionOptions}
+            </select>
+          </div>
+        </div>
       `,
       confirmButtonText: 'Guardar cambios',
       showCancelButton: true,
       focusConfirm: false,
+      customClass: {
+        popup: 'w-[900px]'
+      },
       preConfirm: async () => {
         const data = {
           nombre: document.getElementById('nombre').value,
@@ -138,19 +153,32 @@ const EmpresasList = () => {
       MySwal.fire({
         title: 'Añadir nueva empreas',
         html: `
-          <label for="nombre">Nombre</label>
-          <input id="nombre" class="swal2-input" placeholder="Nombre">
-          <label for="cif">CIF</label>
-          <input id="cif" class="swal2-input" placeholder="CIF">
-          <label for="direccion">Direccion</label>
-          <input id="direccion" class="swal2-input" placeholder="Dirección">
-          <label for="id_suscripcion">Tipo de Suscripcion</label>
-          <select id="id_suscripcion" class="swal2-select">
-          ${suscripciones.map(sus => `<option value="${sus.id}">${sus.tipo}</option>`).join('')}
-          </select>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.875rem;">
+            <div style="display: flex; flex-direction: column;">
+              <label for="nombre" style="font-weight: 700; margin-bottom: 0.25rem;">Nombre</label>
+              <input id="nombre" class="swal2-input" placeholder="Nombre">
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <label for="cif" style="font-weight: 700; margin-bottom: 0.25rem;">CIF</label>
+              <input id="cif" class="swal2-input" placeholder="CIF">
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <label for="direccion" style="font-weight: 700; margin-bottom: 0.25rem;">Dirección</label>
+              <input id="direccion" class="swal2-input" placeholder="Dirección">
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <label for="id_suscripcion" style="font-weight: 700; margin-bottom: 0.25rem;">Tipo de Suscripción</label>
+              <select id="id_suscripcion" class="swal2-select" style="border: 1px solid #ccc; border-radius: 4px;">
+                ${suscripciones.map(sus => `<option value="${sus.id}">${sus.tipo}</option>`).join('')}
+              </select>
+            </div>
+          </div>
         `,
         showCancelButton: true,
         confirmButtonText: 'Crear',
+        customClass: {
+          popup: 'w-[900px]'
+        },
         preConfirm: async () => {
           const token = localStorage.getItem('token');
           const nuevaEmpresa = {

@@ -78,20 +78,35 @@ const RecompensasList = () => {
     MySwal.fire({
       title: 'Editar recompensa',
       html: `
-        <label for="nombre">Nombre</label>
-        <input id="nombre" class="swal2-input" placeholder="Nombre" value="${recompensa.nombre || ''}">
-        <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción">${recompensa.descripcion || ''}</textarea>
-        <label for="imagen">Imagen</label>
-        <input id="imagen" class="swal2-input" placeholder="Imagen" value="${recompensa.foto || 0}">
-        <label for="cantidad">Cantidad</label>
-        <input id="cantidad" type="number" class="swal2-input" placeholder="Cantidad" value="${recompensa.cantidad || 0}">
-        <label for="precio">Precio de Puntos</label>
-        <input id="precio" type="number" class="swal2-input" placeholder="Precio en Puntos" value="${recompensa.precio_pts || 0}">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.875rem;">
+          <div style="display: flex; flex-direction: column;">
+            <label for="nombre" style="font-weight: 700; margin-bottom: 0.25rem;">Nombre</label>
+            <input id="nombre" class="swal2-input" placeholder="Nombre" value="${recompensa.nombre || ''}">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="descripcion" style="font-weight: 700; margin-bottom: 0.25rem;">Descripción</label>
+            <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción">${recompensa.descripcion || ''}</textarea>
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="imagen" style="font-weight: 700; margin-bottom: 0.25rem;">Imagen</label>
+            <input id="imagen" class="swal2-input" placeholder="Imagen" value="${recompensa.foto || ''}">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="cantidad" style="font-weight: 700; margin-bottom: 0.25rem;">Cantidad</label>
+            <input id="cantidad" type="number" class="swal2-input" placeholder="Cantidad" value="${recompensa.cantidad || 0}">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="precio" style="font-weight: 700; margin-bottom: 0.25rem;">Precio de Puntos</label>
+            <input id="precio" type="number" class="swal2-input" placeholder="Precio en Puntos" value="${recompensa.precio_pts || 0}">
+          </div>
+        </div>
       `,
       confirmButtonText: 'Guardar cambios',
       showCancelButton: true,
       focusConfirm: false,
+      customClass: {
+        popup: 'w-[1100px]'
+      },
       preConfirm: async () => {
         const data = {
           nombre: document.getElementById('nombre').value,
@@ -128,23 +143,38 @@ const RecompensasList = () => {
   };
 
 //   funcion para crear una nueva recompensa
-const handleCrearRecompensa = () => {
+  const handleCrearRecompensa = () => {
     MySwal.fire({
       title: 'Añadir nueva recompensa',
       html: `
-        <label for="nombre">Nombre</label>
-        <input id="nombre" class="swal2-input" placeholder="Nombre"">
-        <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción"></textarea>
-        <label for="imagen">Imagen</label>
-        <input id="imagen" class="swal2-input" placeholder="Imagen">
-        <label for="cantidad">Cantidad</label>
-        <input id="cantidad" type="number" class="swal2-input" placeholder="Cantidad"">
-        <label for="precio">Precio de Puntos</label>
-        <input id="precio" type="number" class="swal2-input" placeholder="Precio en Puntos"">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.875rem;">
+          <div style="display: flex; flex-direction: column;">
+            <label for="nombre" style="font-weight: 700; margin-bottom: 0.25rem;">Nombre</label>
+            <input id="nombre" class="swal2-input" placeholder="Nombre">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="descripcion" style="font-weight: 700; margin-bottom: 0.25rem;">Descripción</label>
+            <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción"></textarea>
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="imagen" style="font-weight: 700; margin-bottom: 0.25rem;">Imagen</label>
+            <input id="imagen" class="swal2-input" placeholder="Imagen">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="cantidad" style="font-weight: 700; margin-bottom: 0.25rem;">Cantidad</label>
+            <input id="cantidad" type="number" class="swal2-input" placeholder="Cantidad">
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <label for="precio" style="font-weight: 700; margin-bottom: 0.25rem;">Precio de Puntos</label>
+            <input id="precio" type="number" class="swal2-input" placeholder="Precio en Puntos">
+          </div>
+        </div>
       `,
       showCancelButton: true,
       confirmButtonText: 'Crear',
+      customClass: {
+        popup: 'w-[1100px]'
+      },
       preConfirm: async () => {
         const token = localStorage.getItem('token');
         const nuevaRecompensa = {

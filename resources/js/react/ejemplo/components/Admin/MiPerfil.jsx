@@ -34,7 +34,7 @@ function MiPerfil() {
         <Link to={'/'}>
         <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition bg-black"
             onClick={()=>{
-                localStorage.removeItem("token");
+                sessionStorage.removeItem("token");
                 localStorage.removeItem("usuario");
             }}
         >

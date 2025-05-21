@@ -11,7 +11,7 @@ function SuscripcionCard({ data }) {
         className="w-full h-40 object-cover"
       />*/}
 
-      <div className="p-5 text-center ">
+      <div className="p-5 text-center">
         <h3 className="text-3xl font-semibold text-gray-800 dark:text-white mb-2 font-sans">{data.tipo}</h3>
         <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{data.descripcion}</p>
         <p className="text-2xl font-bold text-primary mb-6">{data.precio} €</p>
