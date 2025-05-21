@@ -98,7 +98,7 @@ function ProductPage() {
                 <div className="flex-1 max-w-md w-full rounded-2xl overflow-hidden shadow-2xl">
                     <img
                         src={
-                            "https://www.dia.es/product_images/150102/150102_ISO_0_ES.jpg?imwidth=392"
+                            producto.imagen
                         }
                         alt={producto.nombre}
                         className="object-cover w-full h-auto transition-transform duration-300 hover:scale-105"

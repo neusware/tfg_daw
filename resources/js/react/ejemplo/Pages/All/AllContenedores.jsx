@@ -20,26 +20,6 @@ function AllContenedores() {
             );
     });
 
-    const getImagenPorTipo = (tipo) => {
-        switch (tipo.toLowerCase()) {
-            case "plástico":
-                return "https://www.solocontenedores.com/wp-content/uploads/04014-amarillo.jpg"; // Contenedor amarillo
-            case "vidrio":
-                return "https://www.solocontenedores.com/wp-content/uploads/04014-verde-600x600.jpg"; // Contenedor verde
-            case "Cartón y Papel":
-                return "https://www.solocontenedores.com/wp-content/uploads/04014-azul-600x600.jpg"; // Contenedor azul
-            case "organico":
-                return "https://www.solocontenedores.com/wp-content/uploads/04014-marron-768x768.jpg"; // Contenedor marrón
-            case "residuos":
-            case "resto":
-                return "https://www.solocontenedores.com/wp-content/uploads/04014-gris-600x600.jpg"; // Contenedor gris o negro
-            case "pilas":
-                return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBOb2FODbgfbsZlObJdTn1VltR9rroHtraLA&s"; // Contenedor pilas/baterías
-            default:
-                return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBOb2FODbgfbsZlObJdTn1VltR9rroHtraLA&s"; // Imagen genérica de basura
-        }
-    };
-
     return (
         <div className="container mx-auto p-6 mt-10 pb-32 font-sans">
             <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-8 text-gray-800 dark:text-white">
@@ -59,7 +39,7 @@ function AllContenedores() {
                     <div key={contenedor.id || index} className="flex flex-col">
                         <ContenedorCard
                             data={contenedor}
-                            image={getImagenPorTipo(contenedor.tipo)}
+                            image={contenedor.imagen}
                         />
                     </div>
                 ))}

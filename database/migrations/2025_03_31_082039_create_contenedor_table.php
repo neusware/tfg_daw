@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('tipo');
             $table->string('color');
+            $table->string('imagen');
             $table->timestamps();
         });
-        
+
     }
 
     /**

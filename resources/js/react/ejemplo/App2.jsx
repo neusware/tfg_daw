@@ -46,6 +46,7 @@ function App2() {
             <Route path='/recompensas' element={<AllRecompensas/>}/>
             <Route path='/recompensas/:id' element={<RecompensaPage/>}/>
 
+
             {/* rutas para el panel de administrador */}
             <Route path='/admin-panel' element={<ProtectedRoute><DashboardLayout/></ProtectedRoute>}>
                 <Route path='productos' element={<ProtectedRoute><AdminProductos/></ProtectedRoute>}/>

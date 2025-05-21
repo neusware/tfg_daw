@@ -71,9 +71,9 @@ function NavbarPrueba() {
                 {/*Logo*/}
                 <Link
                     to={"/"}
-                    className="text-red font-semibold tracking-widest text-2xl sm:text-3xl "
+                    className=" tracking-widest text-xl sm:text-3xl "
                 >
-                    EcoScan
+                    <img src="./img/letras.png" alt="logo" className="w-40" />
                 </Link>
                 {/*items del menu */}
                 <div className="lg:block">

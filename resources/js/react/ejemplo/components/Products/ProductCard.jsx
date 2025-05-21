@@ -9,7 +9,7 @@ function ProductCard({ data }) {
         <div className="group bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden m-3">
           <div className="relative">
             <img
-              src="https://www.dia.es/product_images/150102/150102_ISO_0_ES.jpg?imwidth=392"
+              src={data.imagen}
               alt={data.nombre}
               className="h-[220px] w-full object-cover"
             />
