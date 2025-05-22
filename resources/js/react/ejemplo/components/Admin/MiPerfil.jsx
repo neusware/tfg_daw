@@ -8,11 +8,10 @@ function MiPerfil() {
 
 //   obtener los datos del usuario
 
-    useEffect(()=>{
-
-        setUsuario(JSON.parse(localStorage.getItem("usuario")))
-        setLoading(false)
-    })
+  useEffect(()=>{
+    setUsuario(JSON.parse(localStorage.getItem("usuario")))
+    setLoading(false)
+  })
 
   if (loading) return <div className="text-center mt-10">Cargando perfil...</div>;
   if (!usuario) return <div className="text-center mt-10 text-red-600">Usuario no autenticado</div>;
@@ -29,8 +28,6 @@ function MiPerfil() {
       </div>
 
       <div className="text-center">
-
-
         <Link to={'/'}>
         <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition bg-black"
             onClick={()=>{

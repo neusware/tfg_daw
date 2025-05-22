@@ -23,7 +23,7 @@ function Info() {
           {/* Imagen */}
           <div className="mt-8 md:mt-0 flex justify-center">
             <img
-              src="https://imagenes.20minutos.es/files/image_990_556/uploads/imagenes/2025/02/27/persona-eligiendo-leche-en-el-supermercado.jpeg"
+              src="https://estaticosgn-cdn.deia.eus/clip/30be9823-d5b3-44d7-b9eb-7f3de429e91e_16-9-discover-aspect-ratio_default_0.jpg"
               alt="Persona usando EcoScan en el supermercado"
               className="w-full max-w-2xl h-auto rounded-2xl shadow-xl object-cover"
             />
