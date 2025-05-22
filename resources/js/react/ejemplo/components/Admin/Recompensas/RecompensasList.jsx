@@ -12,7 +12,7 @@ const RecompensasList = () => {
   const [recompensas, setRecompensas] = useState([]);
   const [cargando, setCargando] = useState(true);
 
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
 
   // Obtener todos los datos en paralelo
   useEffect(() => {
@@ -211,7 +211,7 @@ const RecompensasList = () => {
 
 
   return (
-    <div className="p-4">      
+    <div className="p-4">
 
       <div className="flex space-x-8 mb-4">
         <h2 className="text-xl font-bold text-gray-800 dark:text-white">Lista de Recompensas</h2>
