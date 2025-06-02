@@ -56,7 +56,14 @@ class CategoriaSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-        ]);        
-        
+            [
+                'nombre' => 'Residuos Electrónicos',
+                'descripcion' => 'Residuos peligrosos que requieren un tratamiento especial.',
+                'id_contenedor' => 6,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
     }
 }

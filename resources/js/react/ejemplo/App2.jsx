@@ -1,47 +1,66 @@
 import React from 'react'
-import Landing from './landing'
-import Category from './components/Category/Category'
-import Category2 from './components/Category/Category2'
-import Services from './components/Services/Services'
-import Banner from './components/Banner/Banner'
-import Products from './components/Products/Products'
-import Blog from './components/Blog/Blog'
-import Partners from './components/Partners/Partners'
+import Landing from './Pages/Landing'
+import Footer from './components/Footer/Footer'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Lan } from '@mui/icons-material'
+import ProductPage from './Pages/Unique/ProductPage'
+import NavbarPrueba from './components/NavBar/NavbarPrueba'
+import AllProducts from './Pages/All/AllProducts'
+import AllContenedores from './Pages/All/AllContenedores'
+import ContenedorPage from './Pages/Unique/ContenedorPage'
+import RegisterPage from './Pages/RegisterPage'
+import LoginPage from './Pages/LoginPage'
+import ProtectedRoute from './ProtectedRoute'
+import AllSuscripciones from './Pages/All/AllSuscripciones'
+import DashboardLayout from './Pages/Dashboard/DashboardLayout'
+import AdminProductos from './components/Admin/Productos/AdminProductos'
+import AdminContenedores from './components/Admin/Contenedores/AdminContenedores'
+import AdminRecompensas from './components/Admin/Recompensas/AdminRecompensas'
+import AdminSuscripciones from './components/Admin/Suscripciones/AdminSuscripciones'
+import AdminCategorias from './components/Admin/Categorias/AdminCategorias'
+import AdminEmpresas from './components/Admin/Empresas/AdminEmpresas'
+import AllRecompensas from './Pages/All/AllRecompensas'
+import RecompensaPage from './Pages/Unique/RecompensaPage'
+import MiPerfil from './components/Admin/MiPerfil'
 
-const BannerData = {
-    discount:"30% OFF",
-    title:"Fine Smile",
-    date:"10 enero hasta 28 enero",
-    image:"imagen",
-    title2:"Air Solo Bass",
-    title3:"Winter Sale",
-    title4:"no lo dejes pasar",
-    bgColor:"#f42c37"
-}
-const BannerData2 = {
-    discount:"30% OFF",
-    title:"Happy Hours",
-    date:"10 enero hasta 28 enero",
-    image:"imagen",
-    title2:"Smart Solo",
-    title3:"Winter Sale",
-    title4:"no lo dejes pasar",
-    bgColor:"#2dcc6f"
-}
+
 
 function App2() {
   return (
     <div className='bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden'>
-        <Landing/>
-        <Category/>
-        <Category2/>
-        <Services/>
-        <Banner data={BannerData}/>
-        <Products/>
-        <Banner data={BannerData2}/>
-        <Blog/>
-        <Partners/>
 
+        <NavbarPrueba/>
+        <Routes>
+            {/* rutas sin proteger login y register */}
+            <Route path='/register' element={<RegisterPage/>}/>
+            <Route path='/login' element={<LoginPage/>}/>
+
+            {/* Ruta públicas */}
+            <Route path='/' element={<Landing/>}/>
+            <Route path='/producto/:id' element={<ProductPage/>}/>
+            <Route path='/productos' element={<AllProducts/>}/>
+            <Route path='/contenedores' element={<AllContenedores/>}/>
+            <Route path='/contenedores/:id' element={<ContenedorPage/>}/>
+            <Route path='/suscripciones' element={<AllSuscripciones/>}/>
+            <Route path='/suscripcion/:id' element={<ProductPage/>}/>
+            <Route path='/recompensas' element={<AllRecompensas/>}/>
+            <Route path='/recompensas/:id' element={<RecompensaPage/>}/>
+
+
+            {/* rutas para el panel de administrador */}
+            <Route path='/admin-panel' element={<ProtectedRoute><DashboardLayout/></ProtectedRoute>}>
+                <Route path='productos' element={<ProtectedRoute><AdminProductos/></ProtectedRoute>}/>
+                <Route path='contenedores' element={<ProtectedRoute><AdminContenedores/></ProtectedRoute>}/>
+                <Route path='recompensas' element={<ProtectedRoute><AdminRecompensas/></ProtectedRoute>}/>
+                <Route path='suscripciones' element={<ProtectedRoute><AdminSuscripciones/></ProtectedRoute>}/>
+                <Route path='categorias' element={<ProtectedRoute><AdminCategorias/></ProtectedRoute>}/>
+                <Route path='empresas' element={<ProtectedRoute><AdminEmpresas/></ProtectedRoute>}/>
+            </Route>
+
+            {/* ruta para acceder a la info del perfil */}
+            <Route path='/perfil' element={<ProtectedRoute><MiPerfil/></ProtectedRoute>}/>
+        </Routes>
+        <Footer/>
     </div>
   )
 }

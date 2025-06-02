@@ -25,6 +25,7 @@ class ContenedorController extends Controller
         $validated = $request->validate([
             'tipo' => 'required|string|max:255',
             'color' => 'required|string|max:255',
+            'imagen' => 'required|string|max:255'
         ]);
 
         $contenedor = Contenedor::create($validated);
@@ -48,6 +49,7 @@ class ContenedorController extends Controller
         $validated = $request->validate([
             'tipo' => 'sometimes|string|max:255',
             'color' => 'sometimes|string|max:255',
+            'imagen' => 'sometimes|string'
         ]);
 
         $contenedor = Contenedor::findOrFail($id);

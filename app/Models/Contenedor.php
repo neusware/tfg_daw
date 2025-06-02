@@ -11,7 +11,7 @@ class Contenedor extends Model
 
     protected $table = 'contenedor';
 
-    protected $fillable = ['tipo', 'color'];
+    protected $fillable = ['tipo', 'color','imagen'];
 
     public function categorias()
     {
