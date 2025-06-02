@@ -33,18 +33,18 @@ Route::post('usuario-login',  [UsuarioController::class,'login']);
         {
         "status": true,
         "message": "Has iniciado sesión en la API",
-        "token": "5|MBQob35B80GYedLCoZAWFVBzi22dVmID4b4RBIks47f88e6e",  *******************
-            "usuario": {
-                "id": 1,
-                "nombre": "Nombre del usuario",
-                "apellidos": "Apellidos del usuario",
-                "email": "email@example.com",
-                "password": "$2y$12$eb5/4odtlQDdVfYEw7gD3uA./O1GlEUYap6UwP.6LWoWP5kCVFa4K",
-                "saldo": "100.50",
-                "id_suscripcion": 1,
-                "created_at": "2025-05-08T10:37:53.000000Z",
-                "updated_at": "2025-05-08T10:37:53.000000Z"
-            }
+        "token": "6|9zaUlx6uVrNXL6kRkRzBTeCs5AOeHBkk1ZD7haifb03c3b96",
+        "usuario": {
+            "id": 1,
+            "nombre": "Nombre del usuario",
+            "apellidos": "Apellidos del usuario",
+            "email": "email@example.com",
+            "password": "$2y$12$eb5/4odtlQDdVfYEw7gD3uA./O1GlEUYap6UwP.6LWoWP5kCVFa4K",
+            "saldo": "100.50",
+            "id_suscripcion": 1,
+            "created_at": "2025-05-08T10:37:53.000000Z",
+            "updated_at": "2025-05-08T10:37:53.000000Z"
+        }
         }
     } */
 
@@ -67,6 +67,9 @@ Route::controller(UsuarioController::class)->middleware('auth:sanctum')->group(f
     Route::put('/usuario_email',  'update_email');    //update email por id
     Route::put('/usuario_password', 'update_password'); //update password por id
     Route::delete('/usuario', 'delete_usuario');    //delete por id
+
+    Route::get('/usuario/saldo', 'getSaldo'); // obtener saldo auth user
+    Route::put('/usuario/saldo', 'updateSaldo'); // update saldo del auth user
 });
 
 // -- Productos sin autenticacion
