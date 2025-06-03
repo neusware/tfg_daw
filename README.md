@@ -128,6 +128,20 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
             "password": "password_del_usuario_a_eliminar"
         }
         ```
+---
+#### Saldo de usuario
+
+4.  🔸 **Obtener saldo de usuario**
+    *   **Endpoint:** `GET /api/usuario/saldo`
+
+5.  🔸 **Actualizar saldo de usuario**
+    *   **Endpoint:** `PUT /api/usuario`
+    *   **Request Body JSON:**
+        ```json
+        {
+            "saldo":200.5
+        }
+        ```
 
 ---
 
