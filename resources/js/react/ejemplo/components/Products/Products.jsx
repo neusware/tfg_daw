@@ -18,7 +18,7 @@ function Products() {
         })
         .catch(error => console.error("Error al obtener los productos en el fetch.", error))
 
-    })
+    },[])
 
   return (
     <section className="bg-white dark:bg-gray-900 py-2">

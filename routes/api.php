@@ -14,8 +14,8 @@ use App\Http\Controllers\ContenedorController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\SuscripcionController;
 use App\Http\Controllers\EmpresaController;
-use App\Http\Controllers\RecompensaController; // Añadir esta línea
-use App\Http\Controllers\UsuarioRecompensaController; // Añadir esta línea
+use App\Http\Controllers\RecompensaController;
+use App\Http\Controllers\UsuarioRecompensaController;
 
 //ruta tipo sanctum
 // Route::get('/usuario-sanctum', function (Request $request) {
@@ -53,9 +53,7 @@ Route::post('usuario-login',  [UsuarioController::class,'login']);
 Route::post('/usuario', [UsuarioController::class, 'insert_usuario']);
 
 // !selects
-Route::get('/categorias', [CategoriaController::class, 'index']); // Obtener todas las categorías
 Route::get('/contenedores', [ContenedorController::class, 'index']); // Obtener todos los contenedores
-Route::get('/productos', [ProductoController::class, 'index']); // Obtener todos los productos
 Route::get('/recompensas', [RecompensaController::class, 'index']); // Obtener todas las recompensas
 Route::get('/suscripciones', [SuscripcionController::class, 'index']); // Obtener todas las suscripciones
 

@@ -25,7 +25,7 @@ class CategoriaController extends Controller
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
-            'id_contenedor' => 'required|exists:contenedor,id',
+            'id_contenedor' => 'required|string',
         ]);
 
         $categoria = Categoria::create($validated);

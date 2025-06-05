@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaCaretDown } from "react-icons/fa";
@@ -6,6 +6,9 @@ import DarkMode from "./DarkMode";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+// contexto para los puntos del usuario
+import { useUser } from "../Context/UserContext";
+import { point } from "leaflet";
 
 const MenuLinks = [
     {
@@ -61,6 +64,11 @@ function NavbarPrueba() {
     const location = useLocation();
     const isAdmin = location.pathname.includes("admin-panel");
 
+    //puntos del usuario
+    const {points} = useUser();
+
+
+
     return (
         <div
             className={`${
@@ -92,54 +100,63 @@ function NavbarPrueba() {
                 </div>
                 {/*seccion derecha de la navbar */}
                 <div className="flex items-center">
-                    {/* Search Bar seccion */}
-
-                    {/* seccion boton comprar */}
-
-                    {/* <button className='relative p-3'>
-                <FaUserCircle className='text-xl text-gray-600 dark:text-gray-400'/>
-                <div className='w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs'>4</div>
-                </button> */}
-
-                    <div className="relative cursor-pointer group mr-4">
-                        <div className="flex items-center gap-[2px] font-sans font-semibold text-gray-500 dark:hover:text-white py-2">
-                            {" "}
-                            <FaUserCircle className="text-4xl " />
-                            <span>
-                                <FaCaretDown className="group-hover:rotate-180 duration-300" />
-                            </span>
-                        </div>
-                        {/* enlaces dropdown */}
-                        <div className="font-sans absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white shadow-md dark:bg-gray-900 p-2 dark:text-white">
-                            <ul>
-                                {DropdownLinks.map((data, index) => (
-                                    <li key={data.id}>
-                                        <Link
-                                            to={data.link}
-                                            className="text-gray-500 hover:text-black dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
-                                        >
-                                            {data.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                            {/* boton para cerrar sesion */}
-                            <Link
-                                to={"/"}
-                                className="text-gray-500 hover:text-black dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
-                            >
-                                <button
-                                    onClick={() => {
-                                        sessionStorage.removeItem("token");
-                                        localStorage.removeItem("usuario");
-                                    }}
+                    {/* diferente menú en función si el usuario está autenticado o no */}
+                    {sessionStorage.getItem("token") ? (
+                        // Usuario autenticado: menú desplegable y cerrar sesión
+                        <div className="relative cursor-pointer group mr-4">
+                            <div className="flex items-center gap-2 font-sans font-semibold text-gray-500 dark:hover:text-white py-2">
+                                    <span className="text-sm bg-yellow-400 text-black px-2 py-1 rounded-full">
+                                        ⭐ {points} pts
+                                    </span>
+                                <FaUserCircle className="text-4xl" />
+                                <span>
+                                    <FaCaretDown className="group-hover:rotate-180 duration-300" />
+                                </span>
+                            </div>
+                            <div className="font-sans absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white shadow-md dark:bg-gray-900 p-2 dark:text-white">
+                                <ul>
+                                    {DropdownLinks.map((data) => (
+                                        <li key={data.id}>
+                                            <Link
+                                                to={data.link}
+                                                className="text-gray-500 hover:text-black dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
+                                            >
+                                                {data.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <Link
+                                    to={"/"}
+                                    className="text-gray-500 hover:text-black dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
                                 >
-                                    Cerrar sesión
+                                    <button
+                                        onClick={() => {
+                                            sessionStorage.removeItem("token");
+                                            localStorage.removeItem("usuario");
+                                            window.location.reload(); // fuerza actualización del navbar
+                                        }}
+                                    >
+                                        Cerrar sesión
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+                    ) : (
+                        // Usuario NO autenticado: mostrar botones de registro y login
+                        <div className="flex gap-4 mr-4">
+                            <Link to="/register">
+                                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                                    Registro
                                 </button>
                             </Link>
-                            {/* boton para cerrar sesion */}
+                            <Link to="/login">
+                                <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                                    Login
+                                </button>
+                            </Link>
                         </div>
-                    </div>
+                    )}
 
                     {/* modo oscuro seccion */}
                     <div>{/* <DarkMode/> */}</div>
