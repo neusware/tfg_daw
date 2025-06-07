@@ -21,7 +21,7 @@ class ProductoSeeder extends Seeder
                 'fabricante' => 'Aguas del Sur S.A.',
                 'composicion' => 'Plástico PET reciclable',
                 'puntos' => 10,
-                'imagen' => 'https://es.vecteezy.com/png-gratis/botella-de-agua',
+                'imagen' => 'https://5sentidos.es/wp-content/uploads/2023/12/Agua-Mineral-Font-Vella-Botella-1.5-Litros-600px-1200x900.png',
                 'enlace_qr' => ' ',
                 'id_categoria' => 1, // Plástico
                 'id_empresa' => 1,
@@ -35,7 +35,7 @@ class ProductoSeeder extends Seeder
                 'fabricante' => 'GlassCo',
                 'composicion' => 'Silicato de sodio y calcio',
                 'puntos' => 5,
-                'imagen' => 'https://i.pinimg.com/564x/76/8e/55/768e553c1649e156b753b98dcdbbebef.jpg',
+                'imagen' => 'https://www.vicrisol.com/wp-content/uploads/BOTELLA-CUADRADA-12CM-COLOR-VERDE-1.png',
                 'enlace_qr' => ' ',
                 'id_categoria' => 4,
                 'id_empresa' => 2,

@@ -15,7 +15,7 @@ const ProductosList = () => {
   const [empresas, setEmpresas] = useState([]);
   const [cargando, setCargando] = useState(true);
 
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
 
   // Obtener todos los datos en paralelo
   useEffect(() => {
@@ -96,7 +96,7 @@ const ProductosList = () => {
         <QRCode value={`https://tfgdaw-production.up.railway.app/producto/${idProducto}`} />
       </div>
     );
-    
+
     MySwal.fire({
       title: `Código QR`,
       html: ReactDOMServer.renderToString(qrElemento),
@@ -151,32 +151,32 @@ const ProductosList = () => {
             <label for="fabricante" style="font-weight: 700; margin-bottom: 0.25rem;">Fabricante</label>
             <input id="fabricante" class="swal2-input" placeholder="Fabricante" value="${producto.fabricante || ''}">
           </div>
-          
+
           <div style="display: flex; flex-direction: column;">
             <label for="descripcion" style="font-weight: 700; margin-bottom: 0.25rem;">Descripción</label>
             <textarea id="descripcion" class="swal2-textarea" placeholder="Descripción">${producto.descripcion || ''}</textarea>
           </div>
-          
+
           <div style="display: flex; flex-direction: column;">
             <label for="ingredientes" style="font-weight: 700; margin-bottom: 0.25rem;">Ingredientes</label>
             <textarea id="ingredientes" class="swal2-textarea" placeholder="Ingredientes">${producto.ingredientes || ''}</textarea>
           </div>
-                    
+
           <div style="display: flex; flex-direction: column;">
             <label for="composicion" style="font-weight: 700; margin-bottom: 0.25rem;">Composición</label>
             <input id="composicion" class="swal2-input" placeholder="Composición" value="${producto.composicion || ''}">
           </div>
-          
+
           <div style="display: flex; flex-direction: column;">
             <label for="puntos" style="font-weight: 700; margin-bottom: 0.25rem;">Puntos</label>
             <input id="puntos" type="number" class="swal2-input" placeholder="Puntos" value="${producto.puntos || 0}">
-          </div>         
-          
+          </div>
+
           <div style="display: flex; flex-direction: column;">
             <label for="id_categoria" style="font-weight: 700; margin-bottom: 0.25rem;">Categoría</label>
             <select id="id_categoria" class="swal2-select" style="border: 1px solid #ccc; border-radius: 4px;">${categoriaOptions}</select>
           </div>
-          
+
           <div style="display: flex; flex-direction: column;">
             <label for="id_empresa" style="font-weight: 700; margin-bottom: 0.25rem;">Empresa</label>
             <select id="id_empresa" class="swal2-select" style="border: 1px solid #ccc; border-radius: 4px;">${empresaOptions}</select>
@@ -297,7 +297,6 @@ const ProductosList = () => {
       },
       confirmButtonText: 'Crear',
       preConfirm: async () => {
-        const token = localStorage.getItem('token');
         const nuevoProducto = {
           nombre: document.getElementById('nombre').value,
           descripcion: document.getElementById('descripcion').value,
@@ -306,26 +305,41 @@ const ProductosList = () => {
           composicion: document.getElementById('composicion').value,
           puntos: parseInt(document.getElementById('puntos').value),
           imagen: document.getElementById('imagen').value,
-          id_categoria: parseInt(document.getElementById('id_categoria').value),
-          id_empresa: parseInt(document.getElementById('id_empresa').value),
+          id_categoria: document.getElementById('id_categoria').value,
+          id_empresa: document.getElementById('id_empresa').value
         };
 
-        try {
-          const res = await fetch('/api/productos', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify(nuevoProducto)
-          });
+        console.log("Datos enviados "+ JSON.stringify(nuevoProducto))
+        console.log(token)
 
-          if (!res.ok) throw new Error('Error al crear producto');
-          return true;
-        } catch (error) {
-          Swal.showValidationMessage(`Error: ${error.message}`);
-          return false;
+        try {
+            const res = await fetch('/api/productos/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'credentials': 'include',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify(nuevoProducto)
+            });
+
+            console.log('Response status:', res.status);
+            console.log('Response headers:', [...res.headers.entries()]);
+
+            if (!res.ok) {
+              const errorText = await res.text();
+              console.log('Error response:', errorText);
+              throw new Error(`Error ${res.status}: ${errorText}`);
+            }
+
+            return true;
+          } catch (error) {
+            console.error('Fetch error:', error);
+            Swal.showValidationMessage(`Error: ${error.message}`);
+            return false;
         }
+
       }
     }).then(result => {
       if (result.isConfirmed) {
