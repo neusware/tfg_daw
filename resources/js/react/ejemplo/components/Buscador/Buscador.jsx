@@ -9,7 +9,7 @@ function Buscador() {
       <div className="max-w-prose text-left">
         <h1 className="text-4xl font-bold text-white sm:text-5xl dark:text-white capitalize">
           Escanea, conoce y
-          <strong className="text-red uppercase"> decide mejor </strong>
+          <strong className="text-green uppercase"> decide mejor </strong>
           lo que consumes
         </h1>
 
@@ -18,7 +18,7 @@ function Buscador() {
         </p>
 
         <div className="mt-4 flex gap-4 sm:mt-6">
-          <a className="inline-block rounded border border-indigo-600 bg-primary px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-red"
+          <a className="inline-block rounded border border-indigo-600 bg-primary px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-greenDark"
             href="/productos">
             Empezar ahora
           </a>

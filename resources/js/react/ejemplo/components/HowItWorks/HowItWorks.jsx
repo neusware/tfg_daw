@@ -6,7 +6,7 @@ function HowItWorks() {
     <div className="px-4 my-12 py-16 bg-white">
       <div className="container mx-auto">
         <h2 className="text-4xl font-bold text-center mb-14 text-gray-800">
-          ¿Cómo funciona <span className="text-red">EcoScan</span>?
+          ¿Cómo funciona <span className="text-green">EcoScan</span>?
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -20,7 +20,7 @@ function HowItWorks() {
           </div>
 
           {/* Paso 2 */}
-          <div className="h-[240px] bg-gradient-to-br from-redDark to-red text-white rounded-3xl p-6 flex flex-col justify-end shadow-md transition hover:scale-[1.01]">
+          <div className="h-[240px] bg-gradient-to-br from-green to-greenDark text-white rounded-3xl p-6 flex flex-col justify-end shadow-md transition hover:scale-[1.01]">
             <div>
               <p className="text-sm text-white mb-1">Paso 2</p>
               <h3 className="text-2xl font-semibold mb-1">Explora su información</h3>

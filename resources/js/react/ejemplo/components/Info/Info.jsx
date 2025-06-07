@@ -9,7 +9,7 @@ function Info() {
           {/* Texto */}
           <div className="text-black font-sans text-left">
             <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
-              ¿Qué es <span className="text-red">EcoScan</span>?
+              ¿Qué es <span className="text-green">EcoScan</span>?
             </h2>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
               <strong>EcoScan</strong> te ofrece acceso instantáneo a <strong>información clara y completa</strong> sobre los productos que compras. Solo escanea el código QR del envase y descubre <strong>ingredientes</strong>, <strong>valores nutricionales</strong>, <strong>impacto ambiental</strong>, <strong>alérgenos</strong> y más. <strong>Compra con conciencia, vive mejor.</strong>
