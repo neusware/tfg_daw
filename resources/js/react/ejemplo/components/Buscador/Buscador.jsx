@@ -4,14 +4,12 @@ import Button from '../Shared/Button';
 function Buscador() {
   return (
   <section className="bg-second lg:grid lg:place-content-center dark:bg-gray-900">
-    <div
-      className="mx-auto w-screen h-[85vh] max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 md:grid md:grid-cols-2 md:items-center md:gap-4 lg:px-8 lg:py-32"
-    >
+    <div className="mx-auto w-screen h-[85vh] max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 md:grid md:grid-cols-2 md:items-center md:gap-4 lg:px-8 lg:py-32">
       {/* Texto a la izquierda */}
       <div className="max-w-prose text-left">
         <h1 className="text-4xl font-bold text-white sm:text-5xl dark:text-white capitalize">
           Escanea, conoce y
-          <strong className="text-red uppercase"> decide mejor </strong>
+          <strong className="text-green uppercase"> decide mejor </strong>
           lo que consumes
         </h1>
 
@@ -20,16 +18,16 @@ function Buscador() {
         </p>
 
         <div className="mt-4 flex gap-4 sm:mt-6">
-          <a className="inline-block rounded border border-indigo-600 bg-primary px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-red"
-            href="#">
+          <a className="inline-block rounded border border-indigo-600 bg-primary px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-greenDark"
+            href="/productos">
             Empezar ahora
           </a>
 
           <a
             className="inline-block rounded border border-gray-200 px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white"
-            href="#"
+            href="/login"
           >
-            Saber más
+            Iniciar sesión
           </a>
         </div>
       </div>
@@ -44,7 +42,6 @@ function Buscador() {
       </div>
     </div>
   </section>
-
 
   );
 }
