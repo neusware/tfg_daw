@@ -30,22 +30,22 @@ use App\Http\Controllers\UsuarioRecompensaController; // Añadir esta línea
 Route::post('usuario-login',  [UsuarioController::class,'login']);
 
     /*
-        {
-        "status": true,
-        "message": "Has iniciado sesión en la API",
-        "token": "6|9zaUlx6uVrNXL6kRkRzBTeCs5AOeHBkk1ZD7haifb03c3b96",
-        "usuario": {
-            "id": 1,
-            "nombre": "Nombre del usuario",
-            "apellidos": "Apellidos del usuario",
-            "email": "email@example.com",
-            "password": "$2y$12$eb5/4odtlQDdVfYEw7gD3uA./O1GlEUYap6UwP.6LWoWP5kCVFa4K",
-            "saldo": "100.50",
-            "id_suscripcion": 1,
-            "created_at": "2025-05-08T10:37:53.000000Z",
-            "updated_at": "2025-05-08T10:37:53.000000Z"
-        }
-        }
+{
+  "status": true,
+  "message": "Has iniciado sesión en la API",
+  "token": "8|JLT7xWyAmrKT9Cauy0HOzHbEdpAwmf1vsbJTMV1x45e7dd0b",
+  "usuario": {
+    "id": 1,
+    "nombre": "Nombre del usuario",
+    "apellidos": "Apellidos del usuario",
+    "email": "email@example.com",
+    "password": "$2y$12$eb5/4odtlQDdVfYEw7gD3uA./O1GlEUYap6UwP.6LWoWP5kCVFa4K", -> contraseña123
+    "saldo": "200.50",
+    "id_suscripcion": 2,
+    "created_at": "2025-05-08T10:37:53.000000Z",
+    "updated_at": "2025-06-08T17:37:55.000000Z"
+  }
+}
     } */
 
 //!sign up
@@ -70,6 +70,9 @@ Route::controller(UsuarioController::class)->middleware('auth:sanctum')->group(f
 
     Route::get('/usuario/saldo', 'getSaldo'); // obtener saldo auth user
     Route::put('/usuario/saldo', 'updateSaldo'); // update saldo del auth user
+
+    Route::get('/usuario/{id}/suscripcion', 'getSuscripcion'); // obtener subscripción auth user
+    Route::put('/usuario/{id}/suscripcion', 'updateSuscripcion'); // update subscripción del auth user
 });
 
 // -- Productos sin autenticacion
