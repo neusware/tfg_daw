@@ -22,6 +22,7 @@ import AdminEmpresas from './components/Admin/Empresas/AdminEmpresas'
 import AllRecompensas from './Pages/All/AllRecompensas'
 import RecompensaPage from './Pages/Unique/RecompensaPage'
 import MiPerfil from './components/Admin/MiPerfil'
+import SuscripcionPage from './Pages/Unique/SuscripcionPage'
 
 
 
@@ -42,7 +43,7 @@ function App2() {
             <Route path='/contenedores' element={<AllContenedores/>}/>
             <Route path='/contenedores/:id' element={<ContenedorPage/>}/>
             <Route path='/suscripciones' element={<AllSuscripciones/>}/>
-            <Route path='/suscripcion/:id' element={<ProductPage/>}/>
+            <Route path='/suscripcion/:id' element={<SuscripcionPage/>}/>
             <Route path='/recompensas' element={<AllRecompensas/>}/>
             <Route path='/recompensas/:id' element={<RecompensaPage/>}/>
 

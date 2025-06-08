@@ -25,7 +25,7 @@ function Products() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12 text-center">
-            <h2 className="text-4xl font-bold text-center mb-14 text-gray-800">Nuestros Productos</h2>
+            <h2 className="text-4xl font-bold text-center mb-14 text-gray-800">Productos Destacados</h2>
         </div>
 
         {/* Grid de productos */}

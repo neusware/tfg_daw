@@ -2,6 +2,9 @@ import React from 'react';
 import Button from '../Shared/Button';
 
 function Buscador() {
+
+    // obtener el token del usuario para ver si está registrado
+    const token = sessionStorage.getItem('token')
   return (
   <section className="bg-second lg:grid lg:place-content-center dark:bg-gray-900">
     <div className="mx-auto w-screen h-[85vh] max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 md:grid md:grid-cols-2 md:items-center md:gap-4 lg:px-8 lg:py-32">
@@ -23,12 +26,17 @@ function Buscador() {
             Empezar ahora
           </a>
 
-          <a
-            className="inline-block rounded border border-gray-200 px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white"
-            href="/login"
-          >
-            Iniciar sesión
-          </a>
+            {
+                !token && (
+                <a
+                    className="inline-block rounded border border-gray-200 px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white"
+                    href="/login"
+                >
+                    Iniciar sesión
+                </a>
+
+                )
+            }
         </div>
       </div>
 

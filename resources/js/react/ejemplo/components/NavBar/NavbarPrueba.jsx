@@ -18,8 +18,6 @@ const MenuLinks = [
 
 const DropdownLinks = [
   { id: 1, name: "Administrar Productos", link: "/admin-panel/productos" },
-  { id: 2, name: "Registrar", link: "/register" },
-  { id: 3, name: "login", link: "/login" },
   { id: 4, name: "Mi perfil", link: "/perfil" },
 ];
 
