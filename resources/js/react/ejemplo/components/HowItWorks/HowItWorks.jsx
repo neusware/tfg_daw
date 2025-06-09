@@ -15,7 +15,7 @@ function HowItWorks() {
             <div>
               <p className="text-sm text-gray-400 mb-1">Paso 1</p>
               <h3 className="text-2xl font-semibold mb-1">Busca un producto</h3>
-              <p className="text-4xl xl:text-5xl font-bold opacity-20 mb-4">Buscar</p>
+              <p className="text-4xl xl:text-5xl font-bold opacity-20 mb-4">Escanea</p>
             </div>
           </div>
 

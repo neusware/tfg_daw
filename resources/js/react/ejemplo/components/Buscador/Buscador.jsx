@@ -46,7 +46,7 @@ function Buscador() {
         <div className="max-w-prose text-left">
           <h1 className="text-4xl font-bold text-white sm:text-5xl dark:text-white capitalize">
             Escanea, conoce y
-            <strong className="text-acento uppercase"> decide mejor </strong>
+            <strong className="text-acentoClaro uppercase"> decide mejor </strong>
             lo que consumes
           </h1>
           <p className="mt-4 text-white text-base text-pretty sm:text-lg/relaxed dark:text-gray-200">

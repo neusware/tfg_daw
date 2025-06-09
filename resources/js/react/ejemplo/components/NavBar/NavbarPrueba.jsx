@@ -98,12 +98,12 @@ function NavbarPrueba() {
           ) : (
             <div className="flex gap-4">
               <Link to="/register">
-                <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                <button className="px-4 py-2 inline-block rounded-md border bg-acento font-medium text-white shadow-sm transition-colors hover:bg-primary">
                   Registro
                 </button>
               </Link>
               <Link to="/login">
-                <button className="px-4 py-2 bg-green text-white rounded-lg hover:bg-greenDark transition">
+                <button className="px-4 py-2 inline-block rounded-md border bg-primary font-medium text-white shadow-sm transition-colors hover:bg-acento">
                   Login
                 </button>
               </Link>

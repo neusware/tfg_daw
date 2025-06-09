@@ -39,7 +39,7 @@ function Products() {
         <div className="mt-12 text-center">
           <Link
             to="/productos"
-            className="inline-block px-6 py-3 text-white font-medium rounded border border-indigo-600 bg-primary rounded-lg shadow hover:bg-greenDark transition-colors"
+            className="px-6 py-3 inline-block rounded-md border bg-primary font-medium text-white shadow-sm transition-colors hover:bg-acento"
           >
             Ver todos los productos
           </Link>

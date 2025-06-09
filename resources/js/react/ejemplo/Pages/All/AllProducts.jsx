@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ProductCard from "../../components/Products/ProductCard";
+import Transicion from "../../components/Transicion";
 
 function AllProducts() {
   const [productos, setProductos] = useState([]);
@@ -50,7 +51,9 @@ function AllProducts() {
   });
 
   return (
+
     <div className="container mx-auto p-16 font-sans">
+    <Transicion>
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-800 dark:text-white">
           Todos los productos
@@ -69,7 +72,7 @@ function AllProducts() {
           onChange={(e) => setBusqueda(e.target.value)}
         />
         <select
-          className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
+          className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary text-gray-800 bg-white dark:bg-gray-800 dark:text-white"
           value={categoriaSeleccionada}
           onChange={(e) => setCategoriaSeleccionada(e.target.value)}
         >
@@ -82,17 +85,21 @@ function AllProducts() {
         </select>
       </div>
 
+
       <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {productosFiltrados.length > 0 ? (
-          productosFiltrados.map((producto, index) => (
-            <ProductCard key={index} data={producto} />
-          ))
+            productosFiltrados.map((producto, index) => (
+                <ProductCard key={index} data={producto} />
+            ))
         ) : (
-          <p className="col-span-full text-center text-gray-500">
+            <p className="col-span-full text-center text-gray-500">
             No se encontraron productos que coincidan con los filtros aplicados.
           </p>
         )}
       </div>
+
+
+        </Transicion>
     </div>
   );
 }

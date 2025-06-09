@@ -5,7 +5,7 @@ function Banner() {
   return (
     <div className='min-h-[500px] flex justify-center items-center'>
       <div className='container'>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-white rounded-3xl  bg-gradient-to-br from-indigo-900  to-indigo-400 shadow-xl overflow-hidden'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-white rounded-3xl bg-gradient-to-br from-[#0F5E2B] via-[#18703A] to-[#A4D9A0] shadow-xl overflow-hidden'>
           {/* primera columna */}
           <div className='p-6 sm:p-8'>
             <p className='text-sm'>¡Promoción exclusiva!</p>
