@@ -17,21 +17,21 @@ class ContenedorSeeder extends Seeder
             [
                 'tipo' => 'Plástico',
                 'color' => 'Amarillo',
-                'imagen' => 'https://www.derichebourgespana.com/wp-content/uploads/2019/02/contenedor_amarillo.jpg',
+                'imagen' => 'https://www.solocontenedores.com/wp-content/uploads/04015amarillo.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'tipo' => 'Organico',
                 'color' => 'Marron',
-                'imagen' => 'https://osera.deebro.es/wp-content/uploads/2024/08/contenedormarron_2_forCrop.jpg',
+                'imagen' => 'https://www.solocontenedores.com/wp-content/uploads/04015-SOLO-marron.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'tipo' => 'Cartón y Papel',
                 'color' => 'Azul',
-                'imagen' => 'https://www.distoc.es/data/productos/d_contenedor-1100-l-azul.jpg',
+                'imagen' => 'https://www.solocontenedores.com/wp-content/uploads/04015azul.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -45,7 +45,7 @@ class ContenedorSeeder extends Seeder
             [
                 'tipo' => 'Restos',
                 'color' => 'Gris',
-                'imagen' => 'https://cdn.shopworld.cloud/media/7/Images/Products/contenedor-basura-1100-l-tapa-plana-color-grisantracita-1200-1200.jpg',
+                'imagen' => 'https://www.solocontenedores.com/wp-content/uploads/04015-SOLO-gris.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

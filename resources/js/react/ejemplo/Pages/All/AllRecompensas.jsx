@@ -31,9 +31,9 @@ function AllRecompensas() {
 
     return (
         <div className="container mx-auto px-4 m-8 pb-20">
-            <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">
-                Recompensas
-            </h2>
+            <h1 className="text-4xl font-bold sm:text-5xl dark:text-white capitalize text-center mb-12">
+            Recompensas
+            </h1>
 
             <div className="flex justify-center">
                 <div className="grid w-fit grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10 p-8">

@@ -75,10 +75,10 @@ function ProductPage() {
     });
 
     const CATEGORIA_MAP = {
-        1: "ORGANICA",
-        2: "VIDRIO",
+        1: "INERTE",
+        2: "ORGANICA",
         3: "PAPEL/CARTON",
-        4: "INERTE",
+        4: "VIDRIO",
     };
 
     const residuoNombre = CATEGORIA_MAP[producto.id_categoria];

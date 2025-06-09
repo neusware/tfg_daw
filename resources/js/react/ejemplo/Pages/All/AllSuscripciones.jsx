@@ -15,15 +15,16 @@ function AllSuscripciones() {
 
   return (
     <div className="container mx-auto p-6 mt-10 pb-32 font-sans">
-      <section className="text-center mb-12">
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 dark:text-white">
+      <section className="text-center mb-12 max-w-3xl mx-auto px-4">
+        <h1 className="text-4xl font-bold sm:text-5xl dark:text-white capitalize">
           Nuestras Suscripciones
-        </h2>
-        <p className="max-w-3xl mx-auto text-gray-600 dark:text-gray-300 mt-4 leading-relaxed">
+        </h1>
+        <p className="mt-4 text-base text-pretty sm:text-lg/relaxed dark:text-gray-200">
           Elige una suscripción que se adapte a tus necesidades para disfrutar de
           beneficios exclusivos. ¡Recicla más, gana más!
         </p>
       </section>
+
 
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
         {suscripciones.map((item, index) => (
