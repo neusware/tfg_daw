@@ -30,7 +30,7 @@ function Products() {
 
         {/* Grid de productos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-          {productos.slice(0, 4).map((producto, index) => (
+          {productos.slice(0, 6).map((producto, index) => (
             <ProductCard key={index} data={producto} />
           ))}
         </div>

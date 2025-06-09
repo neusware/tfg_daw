@@ -41,23 +41,26 @@ function Buscador() {
   };
 
   return (
-    <section className="bg-second lg:grid lg:place-content-center dark:bg-gray-900">
-      <div className="mx-auto w-screen h-[85vh] max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 md:grid md:grid-cols-2 md:items-center md:gap-4 lg:px-8 lg:py-32">
-        <div className="max-w-prose text-left">
-          <h1 className="text-4xl font-bold text-white sm:text-5xl dark:text-white capitalize">
+    <section className="bg-second min-h-screen flex items-center dark:bg-gray-900">
+      <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-20 md:grid md:grid-cols-2 md:gap-8 lg:px-8 lg:py-28">
+        
+        {/* Columna izquierda: Texto */}
+        <div className="order-2 md:order-1 max-w-prose text-left">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white capitalize dark:text-white leading-tight">
             Escanea, conoce y
             <strong className="text-green uppercase"> decide mejor </strong>
             lo que consumes
           </h1>
-          <p className="mt-4 text-white text-base text-pretty sm:text-lg/relaxed dark:text-gray-200">
+          <p className="mt-4 text-white text-base sm:text-lg dark:text-gray-200 text-pretty">
             Con EcoScan accedes a información detallada sobre productos alimenticios con solo escanear el QR del envase. Ingredientes, alérgenos, origen, sostenibilidad y mucho más, al instante.
           </p>
-          <div className="mt-4 flex gap-4 sm:mt-6">
+
+          <div className="mt-6 flex flex-wrap gap-4">
             <a
               className="inline-block rounded border border-indigo-600 bg-primary px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-greenDark"
               href="/productos"
             >
-              Empezar ahora
+              Ver productos
             </a>
             {!token && (
               <a
@@ -69,25 +72,29 @@ function Buscador() {
             )}
           </div>
         </div>
-        <div className="mt-8 md:mt-0 flex justify-center">
-          <div className="w-full max-w-xl bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg relative">
+
+        {/* Columna derecha: Buscador */}
+        <div className="order-1 md:order-2 mt-10 md:mt-0 flex justify-center">
+          <div className="w-full max-w-xl h-[30vh] bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg relative">
             <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Buscar productos</h2>
-            <div className="flex">
+            <div className="flex flex-col sm:flex-row">
               <input
                 type="text"
                 placeholder="Nombre del producto..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyPress={handleKeyPress}
-                className="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-greenDark dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md sm:rounded-l-md sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-greenDark dark:bg-gray-700 dark:text-white dark:border-gray-600"
               />
               <button
                 onClick={handleSearch}
-                className="bg-primary text-white px-4 py-2 rounded-r-md hover:bg-greenDark transition-colors"
+                className="mt-2 sm:mt-0 sm:ml-2 bg-primary text-white px-4 py-2 rounded-md sm:rounded-r-md sm:rounded-l-none hover:bg-greenDark transition-colors"
               >
                 Buscar
               </button>
             </div>
+
+            {/* Resultados */}
             {query && filteredProductos.length > 0 && (
               <div className="absolute w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md mt-2 max-h-64 overflow-y-auto z-10">
                 {filteredProductos.map((producto) => (
@@ -110,6 +117,7 @@ function Buscador() {
         </div>
       </div>
     </section>
+
   );
 }
 
