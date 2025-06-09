@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('apellidos');
             $table->string('email');
             $table->string('password');
-            $table->decimal('saldo');
+            $table->integer('saldo');
             $table->foreignId('id_suscripcion')->nullable()->constrained('suscripcion')->onDelete('set null');
             $table->timestamps();
         });

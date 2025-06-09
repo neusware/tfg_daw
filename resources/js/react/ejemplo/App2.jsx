@@ -47,6 +47,7 @@ function App2() {
             <Route path='/recompensas' element={<AllRecompensas/>}/>
             <Route path='/recompensas/:id' element={<RecompensaPage/>}/>
 
+            <Route path='/perfil' element={<ProtectedRoute><MiPerfil/></ProtectedRoute>}/>
 
             {/* rutas para el panel de administrador */}
             <Route path='/admin-panel' element={<ProtectedRoute><DashboardLayout/></ProtectedRoute>}>
@@ -59,7 +60,6 @@ function App2() {
             </Route>
 
             {/* ruta para acceder a la info del perfil */}
-            <Route path='/perfil' element={<ProtectedRoute><MiPerfil/></ProtectedRoute>}/>
         </Routes>
         <Footer/>
     </div>
