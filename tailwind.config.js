@@ -11,11 +11,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#7180AC",          // Azul
-        second: "#2B4570",           // Azul oscuro
+        primary: "#063801",          // Azul
+        second: "#18703A",           // Azul oscuro
         third: "#A8D0DB",           // Azul claro
-        green: "#098806",             // Verde corporativo 
-        greenDark: "#1a6617",         // Verde oscuro
+        green: "#098806",             // Verde corporativo
+        greenDark: "#1a6617",
+        acento: "#A4D9A0",        // Verde oscuro
       },
       fontFamily: {
         sans: ['Urbanist', 'Arial', 'sans-serif'],  // Añadir la fuente Urbanist

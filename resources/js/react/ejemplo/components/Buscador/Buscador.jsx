@@ -41,14 +41,12 @@ function Buscador() {
   };
 
   return (
-    <section className="bg-second min-h-screen flex items-center dark:bg-gray-900">
-      <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-20 md:grid md:grid-cols-2 md:gap-8 lg:px-8 lg:py-28">
-        
-        {/* Columna izquierda: Texto */}
-        <div className="order-2 md:order-1 max-w-prose text-left">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white capitalize dark:text-white leading-tight">
+    <section className="bg-gradient-to-br from-[#0F5E2B] via-[#18703A] to-[#A4D9A0]  lg:grid lg:place-content-center dark:bg-gray-900">
+      <div className="mx-auto w-screen h-[85vh] max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 md:grid md:grid-cols-2 md:items-center md:gap-4 lg:px-8 lg:py-32">
+        <div className="max-w-prose text-left">
+          <h1 className="text-4xl font-bold text-white sm:text-5xl dark:text-white capitalize">
             Escanea, conoce y
-            <strong className="text-green uppercase"> decide mejor </strong>
+            <strong className="text-acento uppercase"> decide mejor </strong>
             lo que consumes
           </h1>
           <p className="mt-4 text-white text-base sm:text-lg dark:text-gray-200 text-pretty">
@@ -57,7 +55,7 @@ function Buscador() {
 
           <div className="mt-6 flex flex-wrap gap-4">
             <a
-              className="inline-block rounded border border-indigo-600 bg-primary px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-greenDark"
+              className="inline-block rounded-md border bg-primary px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-acento"
               href="/productos"
             >
               Ver productos
@@ -88,7 +86,7 @@ function Buscador() {
               />
               <button
                 onClick={handleSearch}
-                className="mt-2 sm:mt-0 sm:ml-2 bg-primary text-white px-4 py-2 rounded-md sm:rounded-r-md sm:rounded-l-none hover:bg-greenDark transition-colors"
+                className="bg-primary text-white px-4 py-2 rounded-r-md hover:bg-acento transition-colors"
               >
                 Buscar
               </button>
