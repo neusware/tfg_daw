@@ -46,11 +46,12 @@ function ContenedorPage({ data }) {
 
             {/* Imagen representativa opcional */}
             <div className="flex justify-center">
-                <div
-                    className={`w-40 h-40 rounded-full shadow-xl border-4`}
-                    //   style={{ backgroundColor: contenedor[id].color.toLowerCase() }}
-                    title={`Color: ${contenedor.color}`}
-                ></div>
+            <img
+                src={contenedor.imagen}
+                alt={`Imagen de contenedor de ${contenedor.tipo}`}
+                className="w-40 h-40 rounded-full shadow-xl border-4 object-cover"
+                title={`Color: ${contenedor.color}`}
+            />
             </div>
 
             {/* Información adicional o recomendaciones */}
