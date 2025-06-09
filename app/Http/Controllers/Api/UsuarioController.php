@@ -817,8 +817,7 @@ Formato JSON tipo
      *       "message": "Usuario no autenticado."
      *     }
      */
-    public function getSaldo(Request $request)
-    {
+    public function getSaldo(Request $request){
         $usuario = $request->user(); // Obtiene el usuario autenticado a través de Sanctum
 
         if (!$usuario) {
@@ -899,8 +898,7 @@ Formato JSON tipo
      *       "message": "Error al actualizar el saldo."
      *     }
      */
-    public function updateSaldo(Request $request)
-    {
+    public function updateSaldo(Request $request){
         $usuario = $request->user(); // obtengo user autenticado
 
         // evalúo el user
@@ -941,5 +939,158 @@ Formato JSON tipo
                 'message' => 'Error al actualizar el saldo.'
             ], 500); // error interno del servidor, bd
         }
+    }
+
+
+        /**
+     * Obtiene la suscripción del usuario autenticado.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @api {get} /api/usuario/saldo Obtener Saldo
+     * @apiName GetSaldoUsuario
+     * @apiGroup Usuario
+     * @apiHeader {String} Authorization Token de autorización Bearer.
+     *
+     * @apiSuccess {Boolean} status Estado de la operación.
+     * @apiSuccess {String} message Mensaje descriptivo.
+     * @apiSuccess {Number} saldo Saldo actual del usuario.
+     *
+     * @apiSuccessExample {json} Respuesta Exitosa:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "status": true,
+     *       "message": "Saldo obtenido correctamente.",
+     *       "saldo": "100.50"
+     *     }
+     *
+     * @apiError {Boolean} status Estado de la operación.
+     * @apiError {String} message Mensaje de error.
+     * @apiErrorExample {json} Usuario no autenticado:
+     *     HTTP/1.1 401 Unauthorized
+     *     {
+     *       "status": false,
+     *       "message": "Usuario no autenticado."
+     *     }
+     */
+    public function getSuscripcion(Request $request, $id){
+         //recupero user
+        $usuario = Usuario::find($id);
+
+        // evalúo
+        if (!$usuario) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Usuario no encontrado.'
+            ], 404);
+        }
+
+        // actualizo
+        $usuario->id_suscripcion=$request->id_suscripcion;
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Suscripción obtenida correctamente.',
+            'suscripcion' => $usuario->suscripcion
+        ], 200);
+    }
+
+        /**
+     * Actualiza el saldo del usuario autenticado.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @api {put} /api/usuario/saldo Actualizar Saldo
+     * @apiName UpdateSaldoUsuario
+     * @apiGroup Usuario
+     * @apiHeader {String} Authorization Token de autorización Bearer.
+     *
+     * @apiParam {Number} saldo El nuevo saldo para el usuario. Debe ser un valor numérico no negativo.
+     *
+     * @apiParamExample {json} Ejemplo de Request:
+     *     {
+     *       "saldo": 150.75
+     *     }
+     *
+     * @apiSuccess {Boolean} status Estado de la operación.
+     * @apiSuccess {String} message Mensaje descriptivo.
+     * @apiSuccess {Object} usuario El objeto del usuario con el saldo actualizado.
+     *
+     * @apiSuccessExample {json} Respuesta Exitosa:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "status": true,
+     *       "message": "Saldo actualizado correctamente.",
+     *       "usuario": {
+     *         "id": 1,
+     *         "nombre": "Nombre del usuario",
+     *         "apellidos": "Apellidos del usuario",
+     *         "email": "email@example.com",
+     *         "saldo": "150.75",
+     *         // ...otros campos del usuario
+     *       }
+     *     }
+     *
+     * @apiError {Boolean} status Estado de la operación.
+     * @apiError {String} message Mensaje de error.
+     * @apiError {Object} [errors] Objeto con los errores de validación.
+     *
+     * @apiErrorExample {json} Error de Validación:
+     *     HTTP/1.1 422 Unprocessable Entity
+     *     {
+     *       "status": false,
+     *       "message": "Error en la validación del saldo.",
+     *       "errors": {
+     *         "saldo": ["El campo saldo es obligatorio y debe ser un número no negativo."]
+     *       }
+     *     }
+     * @apiErrorExample {json} Usuario no autenticado:
+     *     HTTP/1.1 401 Unauthorized
+     *     {
+     *       "status": false,
+     *       "message": "Usuario no autenticado."
+     *     }
+     * @apiErrorExample {json} Error al guardar:
+     *     HTTP/1.1 500 Internal Server Error
+     *     {
+     *       "status": false,
+     *       "message": "Error al actualizar el saldo."
+     *     }
+     */
+        public function updateSuscripcion(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'id_suscripcion' => 'required|exists:suscripcion,id', // existe
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Error en la validación.',
+                'errors' => $validator->errors()
+            ], 400);
+        }
+
+        //recupero user
+        $usuario = Usuario::find($id);
+
+        // evalúo
+        if (!$usuario) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Usuario no encontrado.'
+            ], 404);
+        }
+
+        // actualizo
+        $usuario->id_suscripcion=$request->id_suscripcion;
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Suscripcion actualizada exitosamente.',
+            'usuario' => $usuario
+        ], 200);
     }
 }

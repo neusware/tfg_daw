@@ -38,7 +38,7 @@ function LoginPage() {
                 throw new Error(result.message || "Credenciales incorrectas");
             }
 
-            // Guardar token en localStorage
+            // Guardar token en sessionStorage
             sessionStorage.setItem("token", result.token);
             sessionStorage.setItem("usuario", JSON.stringify(result.usuario));
             navigate("/");
