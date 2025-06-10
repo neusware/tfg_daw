@@ -210,7 +210,7 @@ function ProductPage() {
                 </div>
 
                 {/* Ingredientes */}
-                <div className="flex-1 w-full space-y-4">
+                <div className="flex-1 w-full space-y-4 pw-4">
                     <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
                         {producto.nombre}
                     </h1>
@@ -235,98 +235,63 @@ function ProductPage() {
                             ingredientes.length > 0
                         ) {
                             return (
-                                <div>
-                                    <span className="text-xl font-bold text-primary flex items-center gap-2 mb-4">
-                                        Ingredientes
-                                    </span>
-                                    <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-                                        {ingredientes.map(
-                                            (ingrediente, index) => (
-                                                <div
-                                                    key={index}
-                                                    className="w-[60vh] p-5 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 space-y-2"
-                                                >
-                                                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                                        {ingrediente.nombre}
-                                                    </h4>
-                                                    <ul className="text-sm text-gray-700 dark:text-gray-300 divide-y divide-gray-200 dark:divide-gray-700">
-                                                        <li>
-                                                            <strong className="text-gray-900 dark:text-white">
-                                                                Cantidad:
-                                                            </strong>{" "}
-                                                            {
-                                                                ingrediente.cantidad
-                                                            }{" "}
-                                                            {ingrediente.unidad}
-                                                        </li>
-                                                        <li>
-                                                            <strong className="text-gray-900 dark:text-white">
-                                                                Calorías:
-                                                            </strong>{" "}
-                                                            {
-                                                                ingrediente.calorias
-                                                            }{" "}
-                                                            kcal
-                                                        </li>
-                                                        <li>
-                                                            <strong className="text-gray-900 dark:text-white">
-                                                                Porcentaje:
-                                                            </strong>{" "}
-                                                            {
-                                                                ingrediente.porcentaje
-                                                            }
-                                                            %
-                                                        </li>
-                                                        <li>
-                                                            <strong className="text-gray-900 dark:text-white">
-                                                                Proteínas:
-                                                            </strong>{" "}
-                                                            {ingrediente.proteinas ||
-                                                                0}{" "}
-                                                            g
-                                                        </li>
-                                                        <li>
-                                                            <strong className="text-gray-900 dark:text-white">
-                                                                Grasas:
-                                                            </strong>{" "}
-                                                            {ingrediente.grasas ||
-                                                                0}{" "}
-                                                            g
-                                                        </li>
-                                                        <li>
-                                                            <strong className="text-gray-900 dark:text-white">
-                                                                Carbohidratos:
-                                                            </strong>{" "}
-                                                            {ingrediente.carbohidratos ||
-                                                                0}{" "}
-                                                            g
-                                                        </li>
-                                                        <li>
-                                                            <strong className="text-gray-900 dark:text-white">
-                                                                Tipo:
-                                                            </strong>{" "}
-                                                            {ingrediente.tipo}
-                                                        </li>
-                                                        <li>
-                                                            <strong className="text-gray-900 dark:text-white">
-                                                                Origen:
-                                                            </strong>{" "}
-                                                            {ingrediente.origen}
-                                                        </li>
-                                                        {ingrediente.notas && (
-                                                            <li className="italic text-gray-600 dark:text-gray-400">
-                                                                Notas:{" "}
-                                                                {
-                                                                    ingrediente.notas
-                                                                }
-                                                            </li>
-                                                        )}
-                                                    </ul>
-                                                </div>
-                                            )
+                                <div className="w-full px-4">
+                                <span className="text-xl font-bold text-primary flex items-center gap-2 mb-4">
+                                    Ingredientes
+                                </span>
+                                <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+                                    {ingredientes.map((ingrediente, index) => (
+                                    <div
+                                        key={index}
+                                        className="w-full max-w-md p-5 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 space-y-2 mx-auto"
+                                    >
+                                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                        {ingrediente.nombre}
+                                        </h4>
+                                        <ul className="text-sm text-gray-700 dark:text-gray-300 divide-y divide-gray-200 dark:divide-gray-700">
+                                        <li>
+                                            <strong className="text-gray-900 dark:text-white">Cantidad:</strong>{" "}
+                                            {ingrediente.cantidad} {ingrediente.unidad}
+                                        </li>
+                                        <li>
+                                            <strong className="text-gray-900 dark:text-white">Calorías:</strong>{" "}
+                                            {ingrediente.calorias} kcal
+                                        </li>
+                                        <li>
+                                            <strong className="text-gray-900 dark:text-white">Porcentaje:</strong>{" "}
+                                            {ingrediente.porcentaje}%
+                                        </li>
+                                        <li>
+                                            <strong className="text-gray-900 dark:text-white">Proteínas:</strong>{" "}
+                                            {ingrediente.proteinas || 0} g
+                                        </li>
+                                        <li>
+                                            <strong className="text-gray-900 dark:text-white">Grasas:</strong>{" "}
+                                            {ingrediente.grasas || 0} g
+                                        </li>
+                                        <li>
+                                            <strong className="text-gray-900 dark:text-white">Carbohidratos:</strong>{" "}
+                                            {ingrediente.carbohidratos || 0} g
+                                        </li>
+                                        <li>
+                                            <strong className="text-gray-900 dark:text-white">Tipo:</strong>{" "}
+                                            {ingrediente.tipo}
+                                        </li>
+                                        <li>
+                                            <strong className="text-gray-900 dark:text-white">Origen:</strong>{" "}
+                                            {ingrediente.origen}
+                                        </li>
+                                        {ingrediente.notas && (
+                                            <li className="italic text-gray-600 dark:text-gray-400">
+                                            Notas: {ingrediente.notas}
+                                            </li>
                                         )}
+                                        </ul>
                                     </div>
+                                    ))}
                                 </div>
+                                </div>
+
                             );
                         }
                         return (

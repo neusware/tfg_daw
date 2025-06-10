@@ -48,7 +48,6 @@ function LoginPage() {
                 sessionStorage.removeItem("pendingProductPoints");
                 navigate(`/productos/${pendingProductId}`);
             }
-
             setMensaje(result.message || "Inicio de sesión exitoso");
         } catch (err) {
             console.error(err);
@@ -149,25 +148,16 @@ function LoginPage() {
 
                         <button
                             type="submit"
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
+                            className="w-full bg-green hover:bg-acento text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
                         >
                             Iniciar sesión
                         </button>
-
-                        <div className="text-center">
-                            <a
-                                href="#"
-                                className="text-sm text-blue-500 hover:underline dark:text-blue-400"
-                            >
-                                ¿Olvidaste tu contraseña?
-                            </a>
-                        </div>
 
                         <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
                             ¿No tienes cuenta?{" "}
                             <a
                                 href="/register"
-                                className="text-blue-600 hover:underline dark:text-blue-400"
+                                className="text-primary hover:underline dark:text-acento"
                             >
                                 Regístrate ahora
                             </a>

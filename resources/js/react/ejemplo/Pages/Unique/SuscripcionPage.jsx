@@ -26,7 +26,7 @@ function SuscripcionPage() {
 
   const handleComprar = () => {
     MySwal.fire({
-      title: `Pagar suscripción de ${suscripcion.tipo}`,
+      title: `Pagar suscripción ${suscripcion.tipo}`,
       html: `
         <input id="swal-nombre" class="swal2-input" placeholder="Nombre del titular"/>
         <input id="swal-tarjeta" class="swal2-input" placeholder="Número de tarjeta" maxlength="19"/>

@@ -143,7 +143,7 @@ function RecompensaPage() {
                 <div className="flex-1 max-w-md w-full rounded-2xl overflow-hidden shadow-2xl">
                     <img
                         src={
-                            recompensa.imagen ||
+                            recompensa.foto ||
                             "https://www.lavanguardia.com/files/og_thumbnail/uploads/2018/06/15/5fa43d71a111f.jpeg"
                         }
                         alt={recompensa.nombre}
