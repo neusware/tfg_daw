@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import {  useNavigate,Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Map from "../../components/Map/Map";
 import Swal from "sweetalert2";
+import { useUser } from "../../components/Context/UserContext";
 
 function ProductPage() {
     const { id } = useParams();
@@ -11,6 +12,19 @@ function ProductPage() {
     const [empresas, setEmpresas] = useState([]);
     const [loading, setLoading] = useState(true); // Estado de carga
     const [puntosProducto, setPuntosProducto] = useState(0);
+    const [searchParams] = useSearchParams();
+    const [userPoints, setUserPoints] = useState(0)
+    const showRewardModal = searchParams.get("from") === "scan";
+
+
+    // actualizar los puntos del usuario
+    const {setPoints} = useUser();
+
+    // navigate para las rutas
+    const navigate = useNavigate();
+
+    // obtener el token del usuario
+    const token = sessionStorage.getItem('token');
 
     // funcion para detectar el tipo de dispositivo desde el cual se está ejecutan la app
     const esDispositivoMovil = () => {
@@ -58,69 +72,96 @@ function ProductPage() {
             } finally {
                 setLoading(false);
             }
+        };
 
-            // logica para sumar los puntos al usuario si está en un dispositivo móvil o tablet
-            const token = sessionStorage.getItem("token");
+        fetchData();
+    }, []);
 
-            // si no está en un dispositivo móvil o tablet no hacer nada
-            if (!esDispositivoMovil()) return;
+    // useEffect para, en caso de escanear el producto, mostrar el mensaje popUp
+    useEffect(() => {
+    if (!showRewardModal || !esDispositivoMovil()) return;
 
-            if (token) {
-                const sumarPuntos = async () => {
-                    try {
-                        const res = await fetch("/api/usuario/saldo", {
-                            method: "PUT",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: `Bearer ${token}`,
-                            },
-                            body: {
-                                saldo: puntosProducto,
-                            },
-                        });
+    const token = sessionStorage.getItem("token");
+    const puntos = producto?.puntos || 0;
+    setPuntosProducto(puntos);
 
-                        if (!res.ok)
-                            throw new Error("Error al sumar los puntos");
+    if (!producto) return;
 
-                        const data = await res.json();
+    if (token) {
+        const sumarPuntos = async () => {
+            try {
+                const res = await fetch("/api/usuario/saldo", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        "saldo":  (userPoints +  puntos),
+                    }),
+                });
 
-                        Swal.fire({
-                            icon: "success",
-                            title: "¡Puntos Sumados!",
-                            text: `Has acumulado ${puntosProducto} puntos por escanear este producto.`,
-                            confirmButtonText: "Aceptar",
-                        });
-                    } catch (error) {
-                        console.error(error);
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: "Hubo un problema al sumar los puntos. Intenta de nuevo.",
-                        });
-                    }
-                };
-                sumarPuntos();
-            } else {
-                // Usuario no autenticado
+                if (!res.ok)
+                    throw new Error("Error al sumar los puntos");
+
+                const data = await res.json();
+
                 Swal.fire({
-                    icon: "info",
-                    title: "¡Inicia sesión para ganar puntos!",
-                    text: "Debes iniciar sesión o crear una cuenta para acumular puntos.",
-                    showCancelButton: true,
-                    confirmButtonText: "Iniciar sesión",
-                    cancelButtonText: "Cancelar",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        sessionStorage.setItem("pendingProductPoints", id);
-                        navigate("/login");
-                    }
+                    icon: "success",
+                    title: "¡Puntos Sumados!",
+                    text: `Has acumulado ${puntos} puntos por escanear este producto.`,
+                    confirmButtonText: "Aceptar",
+                });
+                setPoints(userPoints+puntos);
+
+            } catch (error) {
+                console.error(error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Hubo un problema al sumar los puntos. Intenta de nuevo.",
                 });
             }
         };
 
-        fetchData();
+        sumarPuntos();
+    } else {
+        Swal.fire({
+            icon: "info",
+            title: "¡Inicia sesión para ganar puntos!",
+            text: "Debes iniciar sesión o crear una cuenta para acumular puntos.",
+            showCancelButton: true,
+            confirmButtonText: "Iniciar sesión",
+            cancelButtonText: "Cancelar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                sessionStorage.setItem("pendingProductPoints", id);
+                navigate("/login");
+            }
+        });
+    }
+    }, [producto, showRewardModal]);
 
-    }, [id,producto]);
+    // obtener los puntos del Usuario
+    useEffect(()=> {
+                if (token) {
+            fetch("/api/usuario/saldo", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("🔍 Saldo del usuario:", data);
+                    setUserPoints(data.saldo);
+                })
+                .catch((err) => {
+                    console.error("❌ Error al obtener saldo:", err);
+                    setUserPoints(0);
+                });
+        }
+    },[])
+
 
     if (loading)
         return <div className="text-center mt-10">Cargando producto...</div>;
