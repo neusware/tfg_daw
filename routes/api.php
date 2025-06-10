@@ -14,8 +14,8 @@ use App\Http\Controllers\ContenedorController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\SuscripcionController;
 use App\Http\Controllers\EmpresaController;
-use App\Http\Controllers\RecompensaController; // Añadir esta línea
-use App\Http\Controllers\UsuarioRecompensaController; // Añadir esta línea
+use App\Http\Controllers\RecompensaController;
+use App\Http\Controllers\UsuarioRecompensaController;
 
 //ruta tipo sanctum
 // Route::get('/usuario-sanctum', function (Request $request) {
@@ -30,22 +30,22 @@ use App\Http\Controllers\UsuarioRecompensaController; // Añadir esta línea
 Route::post('usuario-login',  [UsuarioController::class,'login']);
 
     /*
-        {
-        "status": true,
-        "message": "Has iniciado sesión en la API",
-        "token": "5|MBQob35B80GYedLCoZAWFVBzi22dVmID4b4RBIks47f88e6e",  *******************
-            "usuario": {
-                "id": 1,
-                "nombre": "Nombre del usuario",
-                "apellidos": "Apellidos del usuario",
-                "email": "email@example.com",
-                "password": "$2y$12$eb5/4odtlQDdVfYEw7gD3uA./O1GlEUYap6UwP.6LWoWP5kCVFa4K",
-                "saldo": "100.50",
-                "id_suscripcion": 1,
-                "created_at": "2025-05-08T10:37:53.000000Z",
-                "updated_at": "2025-05-08T10:37:53.000000Z"
-            }
-        }
+{
+  "status": true,
+  "message": "Has iniciado sesión en la API",
+  "token": "8|JLT7xWyAmrKT9Cauy0HOzHbEdpAwmf1vsbJTMV1x45e7dd0b",
+  "usuario": {
+    "id": 1,
+    "nombre": "Nombre del usuario",
+    "apellidos": "Apellidos del usuario",
+    "email": "email@example.com",
+    "password": "$2y$12$eb5/4odtlQDdVfYEw7gD3uA./O1GlEUYap6UwP.6LWoWP5kCVFa4K", -> contraseña123
+    "saldo": "200.50",
+    "id_suscripcion": 2,
+    "created_at": "2025-05-08T10:37:53.000000Z",
+    "updated_at": "2025-06-08T17:37:55.000000Z"
+  }
+}
     } */
 
 //!sign up
@@ -53,9 +53,7 @@ Route::post('usuario-login',  [UsuarioController::class,'login']);
 Route::post('/usuario', [UsuarioController::class, 'insert_usuario']);
 
 // !selects
-Route::get('/categorias', [CategoriaController::class, 'index']); // Obtener todas las categorías
 Route::get('/contenedores', [ContenedorController::class, 'index']); // Obtener todos los contenedores
-Route::get('/productos', [ProductoController::class, 'index']); // Obtener todos los productos
 Route::get('/recompensas', [RecompensaController::class, 'index']); // Obtener todas las recompensas
 Route::get('/suscripciones', [SuscripcionController::class, 'index']); // Obtener todas las suscripciones
 
@@ -67,6 +65,12 @@ Route::controller(UsuarioController::class)->middleware('auth:sanctum')->group(f
     Route::put('/usuario_email',  'update_email');    //update email por id
     Route::put('/usuario_password', 'update_password'); //update password por id
     Route::delete('/usuario', 'delete_usuario');    //delete por id
+
+    Route::get('/usuario/saldo', 'getSaldo'); // obtener saldo auth user
+    Route::put('/usuario/saldo', 'updateSaldo'); // update saldo del auth user
+
+    Route::get('/usuario/{id}/suscripcion', 'getSuscripcion'); // obtener subscripción auth user
+    Route::put('/usuario/{id}/suscripcion', 'updateSuscripcion'); // update subscripción del auth user
 });
 
 // -- Productos sin autenticacion

@@ -44,6 +44,13 @@ class ProductoController extends Controller
     */
     public function store(Request $request)
     {
+        if (!auth()->check()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No autenticado en store().'
+            ], 401);
+        }
+
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
@@ -53,8 +60,8 @@ class ProductoController extends Controller
             'puntos' => 'required|integer',
             'imagen' => 'nullable|string',
             'enlace_qr' => 'nullable|string',
-            'id_categoria' => 'required|exists:categoria,id',
-            'id_empresa' => 'required|exists:empresa,id',
+            'id_categoria' => 'nullable|string',
+            'id_empresa' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {

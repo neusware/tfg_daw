@@ -17,6 +17,10 @@ class Producto extends Model
         'id_categoria', 'id_empresa'
     ];
 
+    protected $casts = [
+        'ingredientes' => 'array',
+    ];
+
     public function categoria()
     {
         return $this->belongsTo(Categoria::class, 'id_categoria');

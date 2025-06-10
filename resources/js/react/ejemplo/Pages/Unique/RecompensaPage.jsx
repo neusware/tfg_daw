@@ -1,51 +1,129 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import Swal from "sweetalert2";
+// puntos del usuario
+import { useUser } from "../../components/Context/UserContext";
 
 function RecompensaPage() {
     const { id } = useParams();
     const [recompensas, setRecompensas] = useState([]);
-    const [loading, setLoading] = useState(true); // Estado de carga
+    const [loading, setLoading] = useState(true);
+    const [userPoints, setUserPoints] = useState(null);
+    const [buttonDisabled, setButtonDisabled] = useState(false);
 
+    // puntos del usuario
+    const {setPoints} = useUser();
+
+    //  obtener el token del usuario guardado en sessionStorage
+    const token = sessionStorage.getItem("token");
+
+
+    // llamadas a los endpoints
     useEffect(() => {
-        const token = localStorage.getItem("token");
 
         fetch("/api/recompensas")
-            .then((res) => {
-                if (!res.ok) throw new Error("Error al cargar las recompensas");
-                return res.json();
-            })
+            .then((res) => res.json())
             .then((data) => {
                 setRecompensas(data.recompensas || data);
                 setLoading(false);
             })
             .catch((err) => {
                 console.error(err);
-                setError("No se pudo cargar las recompensas");
                 setLoading(false);
             });
+
+        if (token) {
+            fetch("/api/usuario/saldo", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("🔍 Saldo del usuario:", data);
+                    setUserPoints(data.saldo);
+                })
+                .catch((err) => {
+                    console.error("❌ Error al obtener saldo:", err);
+                    setUserPoints(0);
+                });
+        }
     }, []);
 
-    //buscar la recompensa seleccionada
+    // encontrar la recompensa seleccionada para mostrar su información
     const recompensa = recompensas.find((r) => r.id === parseInt(id));
+
+    // función para canjear los puntos
+    const handleCanjear = () => {
+        if (!recompensa || userPoints === null) return;
+
+        if (userPoints < recompensa.precio_pts) {
+            Swal.fire({
+                icon: "error",
+                title: "Puntos insuficientes",
+                text: "No tienes suficientes puntos para canjear esta recompensa.",
+            });
+            return;
+        }
+
+
+        setButtonDisabled(true);
+
+        fetch("/api/usuario/saldo", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                "saldo": (userPoints - recompensa.precio_pts),
+            }),
+        })
+            .then((res) => {
+                if (!res.ok) throw new Error("Error al canjear");
+                return res.json();
+            })
+            .then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "¡Recompensa canjeada con éxito!",
+                    text: `Has canjeado ${recompensa.nombre} correctamente.`,
+                });
+
+                const nuevoSaldo = userPoints - recompensa.precio_pts;
+                setUserPoints(userPoints - recompensa.precio_pts);
+                setPoints(nuevoSaldo);
+            })
+            .catch((err) => {
+                console.error("❌ Error al canjear:", err);
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Hubo un problema al canjear la recompensa.",
+                });
+            })
+            .finally(() => {
+                setButtonDisabled(false);
+            });
+    };
 
     if (loading)
         return <div className="text-center mt-10">Cargando recompensa...</div>;
+
     if (!recompensa)
         return (
             <div className="text-center mt-10 text-red-600">
-                Recompensa no encontrado
+                Recompensa no encontrada
             </div>
         );
 
     return (
         <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 space-y-20">
-            {/* Fila principal */}
             <div className="flex flex-col md:flex-row gap-16 items-center">
-                {/* Imagen de la recompensa */}
                 <div className="flex-1 max-w-md w-full rounded-2xl overflow-hidden shadow-2xl">
                     <img
                         src={
+                            recompensa.imagen ||
                             "https://www.lavanguardia.com/files/og_thumbnail/uploads/2018/06/15/5fa43d71a111f.jpeg"
                         }
                         alt={recompensa.nombre}
@@ -53,7 +131,6 @@ function RecompensaPage() {
                     />
                 </div>
 
-                {/* Información del producto */}
                 <div className="flex-1 space-y-8 text-center md:text-left">
                     <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white">
                         {recompensa.nombre}
@@ -61,10 +138,9 @@ function RecompensaPage() {
 
                     <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
                         {recompensa.descripcion ||
-                            "Este producto destaca por su excelente calidad y composición equilibrada. Ideal para consumidores conscientes que buscan una opción confiable y transparente."}
+                            "Este producto destaca por su excelente calidad."}
                     </p>
 
-                    {/* Ficha técnica */}
                     <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-6 rounded-2xl shadow-sm space-y-4 text-gray-800 dark:text-gray-300 text-left">
                         <p>
                             <span className="font-semibold text-primary">
@@ -76,7 +152,20 @@ function RecompensaPage() {
                 </div>
             </div>
 
-            {/* Llamado a la acción */}
+            <div className="text-center">
+                <button
+                    onClick={handleCanjear}
+                    className={`${
+                        userPoints < recompensa.precio_pts
+                            ? "bg-gray-500 cursor-not-allowed"
+                            : "bg-blue-600 hover:bg-blue-700"
+                    } text-white py-2 px-6 rounded-xl mt-6`}
+                    disabled={buttonDisabled || userPoints < recompensa.precio_pts}
+                >
+                    Canjear recompensa
+                </button>
+            </div>
+
             <div className="bg-primary text-white rounded-2xl shadow-xl px-8 py-10 text-center space-y-4">
                 <h2 className="text-2xl font-bold">
                     ¡Sigue explorando los productos responsables!

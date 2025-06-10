@@ -8,7 +8,7 @@ function SetViewToUser({ position }) {
   const map = useMap();
   useEffect(() => {
     if (position) {
-      map.setView(position, 14);
+      map.setView(position, 22);
     }
   }, [map, position]);
   return null;
@@ -61,13 +61,12 @@ const Map = ({ categoriaId }) => {
     }
   };
 
+
   const onEachFeature = (feature, layer) => {
     if (feature.properties) {
       const { RESIDUO, VOLUMEN_L, 'CALLE ubic': calle } = feature.properties;
       layer.bindPopup(
-        `<strong>Tipo de residuo:</strong> ${RESIDUO}<br/>
-         <strong>Volumen:</strong> ${VOLUMEN_L || 'N/A'} L<br/>
-         <strong>Calle:</strong> ${calle || 'Desconocida'}`
+        `<strong>Calle:</strong> ${calle || 'Desconocida'}`
       );
     }
   };

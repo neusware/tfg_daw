@@ -38,10 +38,16 @@ function LoginPage() {
                 throw new Error(result.message || "Credenciales incorrectas");
             }
 
-            // Guardar token en localStorage
+            // Guardar token en sessionStorage
             sessionStorage.setItem("token", result.token);
             sessionStorage.setItem("usuario", JSON.stringify(result.usuario));
             navigate("/");
+
+            const pendingProductId = sessionStorage.getItem("pendingProductPoints");
+            if (pendingProductId) {
+                sessionStorage.removeItem("pendingProductPoints");
+                navigate(`/productos/${pendingProductId}`);
+            }
 
             setMensaje(result.message || "Inicio de sesión exitoso");
         } catch (err) {
