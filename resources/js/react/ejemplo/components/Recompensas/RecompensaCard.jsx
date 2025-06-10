@@ -7,11 +7,11 @@ function RecompensaCard({ data }) {
     <div className="mb-8">
       <Link to={`/recompensas/${data.id}`} key={data.id}>
         <div className="group bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden m-3">
-          <div className="relative">
+          <div className="relative bg-white h-[180px] flex items-center justify-center py-4">
             <img
-              src="https://www.lavanguardia.com/files/og_thumbnail/uploads/2018/06/15/5fa43d71a111f.jpeg"
+              src="https://cdn-icons-png.flaticon.com/512/2666/2666513.png"
               alt={data.nombre}
-              className="h-[220px] w-full object-cover"
+              className="h-[140px] object-contain"
             />
             {/* Botón en hover */}
             <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300">

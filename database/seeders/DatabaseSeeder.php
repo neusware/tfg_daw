@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CategoriaSeeder::class,
             EmpresaSeeder::class,
             ProductoSeeder::class,
+            RecompensaSeeder::class,
         ]);
     }
 }
