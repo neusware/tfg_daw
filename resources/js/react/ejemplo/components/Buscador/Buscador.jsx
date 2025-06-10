@@ -73,8 +73,8 @@ function Buscador() {
 
         {/* Columna derecha: Buscador */}
         <div className="order-1 md:order-2 mt-10 md:mt-0 flex justify-center">
-          <div className="w-2/3 max-w-xl h-[30vh] bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg relative">
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Buscar productos</h2>
+          <div className="w-2/3 max-w-xl bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg relative">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Buscar productos</h2>
             <div className="flex flex-col sm:flex-row">
               <input
                 type="text"

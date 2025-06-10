@@ -196,9 +196,9 @@ function ProductPage() {
 
     const residuoNombre = CATEGORIA_MAP[producto.id_categoria];
     return (
-        <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 space-y-20">
+        <div className="max-w-7xl mx-auto py-2 md:py-20 px-4 sm:px-6 lg:px-8">
             {/* Imagen y ingredientes en la misma fila */}
-            <div className="flex flex-col md:flex-row gap-10 items-start">
+            <div className="flex flex-col md:flex-row gap-10 items-center">
                 {/* Imagen del producto */}
                 <div className="flex-1 max-w-md w-full rounded-2xl overflow-hidden shadow-2xl">
                     <img
@@ -243,7 +243,7 @@ function ProductPage() {
                                             (ingrediente, index) => (
                                                 <div
                                                     key={index}
-                                                    className="w-[80vh] p-5 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 space-y-2"
+                                                    className="w-[60vh] p-5 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 space-y-2"
                                                 >
                                                     <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
                                                         {ingrediente.nombre}
@@ -344,7 +344,8 @@ function ProductPage() {
             </div>
 
             {/* Resto de información del producto */}
-            <div className="space-y-8 text-center md:text-left">
+            <div className="space-y-8 my-12 text-center md:text-left">
+                <h2 className="text-3xl font-extrabold text-gray-900">Más información</h2>
                 <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-6 rounded-2xl shadow-sm space-y-4 text-gray-800 dark:text-gray-300 text-left">
                     {producto.composicion && (
                         <p>
@@ -384,12 +385,15 @@ function ProductPage() {
             {/* Mapa con los contenedores de la categoría */}
             {producto.id_categoria && (
                 <div className="rounded-2xl overflow-hidden shadow-lg">
+                    <h2 className="text-3xl text-center py-10 font-extrabold text-gray-900 dark:text-white tracking-tight">
+                    Contenedores <span className="text-green">{residuoNombre}</span> más cercanos
+                    </h2>
                     <Map categoriaId={residuoNombre} />
                 </div>
             )}
 
             {/* Llamado a la acción */}
-            <div className="bg-primary text-white rounded-2xl shadow-xl px-8 py-10 text-center space-y-4">
+            <div className="bg-primary text-white rounded-2xl shadow-xl px-8 py-10 my-12 text-center space-y-4">
                 <h2 className="text-2xl font-bold">
                     ¡Sigue explorando productos responsables!
                 </h2>
