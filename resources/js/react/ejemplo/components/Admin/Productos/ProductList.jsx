@@ -391,7 +391,7 @@ const ProductosList = () => {
                     </button>
                     <button
                       onClick={() => handleMostrarQr(producto.id)}
-                      className="bg-green-600 hover:bg-green-700 text-white p-1.5 rounded"
+                      className="bg-acento hover:bg-green-700 text-white p-1.5 rounded"
                       title="QR"
                     >
                       <FaQrcode size={16} />

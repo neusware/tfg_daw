@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Map from "../../components/Map/Map";
 import Swal from "sweetalert2";
@@ -60,72 +60,74 @@ function ProductPage() {
             } finally {
                 setLoading(false);
             }
+        };
 
-            // si no se accede desde la camara de un dispositivo movil o tablet no mostrar los puntos 
-            if(!showRewardModal && !esDispositivoMovil()) return;
+        fetchData();
+    }, []);
 
-            // logica para sumar los puntos al usuario si está en un dispositivo móvil o tablet
-            const token = sessionStorage.getItem("token");
+    // useEffect para los puntos
+    useEffect(() => {
+    if (!showRewardModal || !esDispositivoMovil()) return;
 
-            // si no está en un dispositivo móvil o tablet no hacer nada
-            if (!esDispositivoMovil()) return;
+    const token = sessionStorage.getItem("token");
+    const puntos = producto?.puntos || 0;
+    setPuntosProducto(puntos);
 
-            if (token) {
-                const sumarPuntos = async () => {
-                    try {
-                        const res = await fetch("/api/usuario/saldo", {
-                            method: "PUT",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: `Bearer ${token}`,
-                            },
-                            body: {
-                                saldo: puntosProducto,
-                            },
-                        });
+    if (!producto) return;
 
-                        if (!res.ok)
-                            throw new Error("Error al sumar los puntos");
+    if (token) {
+        const sumarPuntos = async () => {
+            try {
+                const res = await fetch("/api/usuario/saldo", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        saldo: puntos,
+                    }),
+                });
 
-                        const data = await res.json();
+                if (!res.ok)
+                    throw new Error("Error al sumar los puntos");
 
-                        Swal.fire({
-                            icon: "success",
-                            title: "¡Puntos Sumados!",
-                            text: `Has acumulado ${puntosProducto} puntos por escanear este producto.`,
-                            confirmButtonText: "Aceptar",
-                        });
-                    } catch (error) {
-                        console.error(error);
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: "Hubo un problema al sumar los puntos. Intenta de nuevo.",
-                        });
-                    }
-                };
-                sumarPuntos();
-            } else {
-                // Usuario no autenticado
+                const data = await res.json();
+
                 Swal.fire({
-                    icon: "info",
-                    title: "¡Inicia sesión para ganar puntos!",
-                    text: "Debes iniciar sesión o crear una cuenta para acumular puntos.",
-                    showCancelButton: true,
-                    confirmButtonText: "Iniciar sesión",
-                    cancelButtonText: "Cancelar",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        sessionStorage.setItem("pendingProductPoints", id);
-                        navigate("/login");
-                    }
+                    icon: "success",
+                    title: "¡Puntos Sumados!",
+                    text: `Has acumulado ${puntos} puntos por escanear este producto.`,
+                    confirmButtonText: "Aceptar",
+                });
+            } catch (error) {
+                console.error(error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Hubo un problema al sumar los puntos. Intenta de nuevo.",
                 });
             }
         };
 
-        fetchData();
+        sumarPuntos();
+    } else {
+        Swal.fire({
+            icon: "info",
+            title: "¡Inicia sesión para ganar puntos!",
+            text: "Debes iniciar sesión o crear una cuenta para acumular puntos.",
+            showCancelButton: true,
+            confirmButtonText: "Iniciar sesión",
+            cancelButtonText: "Cancelar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                sessionStorage.setItem("pendingProductPoints", id);
+                navigate("/login");
+            }
+        });
+    }
+    }, [producto, showRewardModal]);
 
-    }, [id,producto]);
 
     if (loading)
         return <div className="text-center mt-10">Cargando producto...</div>;
