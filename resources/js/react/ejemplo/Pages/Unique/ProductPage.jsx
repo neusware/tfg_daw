@@ -3,6 +3,7 @@ import { Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Map from "../../components/Map/Map";
 import Swal from "sweetalert2";
+import { useUser } from "../../components/Context/UserContext";
 
 function ProductPage() {
     const { id } = useParams();
@@ -12,7 +13,10 @@ function ProductPage() {
     const [loading, setLoading] = useState(true); // Estado de carga
     const [puntosProducto, setPuntosProducto] = useState(0);
     const [searchParams] = useSearchParams();
+    const [userPoints, setUserPoints] = useState(0)
     const showRewardModal = searchParams.get("from") === "scan";
+    // actualizar los puntos del usuario
+    const {setPoints} = useUser();
 
     // funcion para detectar el tipo de dispositivo desde el cual se está ejecutan la app
     const esDispositivoMovil = () => {
@@ -65,7 +69,7 @@ function ProductPage() {
         fetchData();
     }, []);
 
-    // useEffect para los puntos
+    // useEffect para, en caso de escanear el producto, mostrar el mensaje popUp
     useEffect(() => {
     if (!showRewardModal || !esDispositivoMovil()) return;
 
@@ -85,7 +89,7 @@ function ProductPage() {
                         Authorization: `Bearer ${token}`,
                     },
                     body: JSON.stringify({
-                        saldo: puntos,
+                        "saldo":  (userPoints +  puntos),
                     }),
                 });
 
@@ -100,6 +104,8 @@ function ProductPage() {
                     text: `Has acumulado ${puntos} puntos por escanear este producto.`,
                     confirmButtonText: "Aceptar",
                 });
+                setPoints(userPoints+puntos);
+
             } catch (error) {
                 console.error(error);
                 Swal.fire({
@@ -127,6 +133,26 @@ function ProductPage() {
         });
     }
     }, [producto, showRewardModal]);
+
+    // obtener los puntos del Usuario
+    useEffect(()=> {
+                if (token) {
+            fetch("/api/usuario/saldo", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("🔍 Saldo del usuario:", data);
+                    setUserPoints(data.saldo);
+                })
+                .catch((err) => {
+                    console.error("❌ Error al obtener saldo:", err);
+                    setUserPoints(0);
+                });
+        }
+    },[])
 
 
     if (loading)
