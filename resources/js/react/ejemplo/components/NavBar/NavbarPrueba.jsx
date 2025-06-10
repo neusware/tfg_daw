@@ -46,8 +46,8 @@ function NavbarPrueba() {
         {/* Menú Hamburguesa y Saldo (móvil) */}
         <div className="lg:hidden flex items-center gap-4">
           {isLoggedIn && (
-            <span className="text-sm bg-yellow-400 text-black px-2 py-1 rounded-full">
-              ⭐ {points} pts
+            <span className="text-sm bg-second text-white px-2 py-1 rounded-full">
+               {points} puntos
             </span>
           )}
           <HiMenu className="text-3xl cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)} />
@@ -71,8 +71,8 @@ function NavbarPrueba() {
           {isLoggedIn ? (
             <div className="relative cursor-pointer group mr-4">
               <div className="flex items-center gap-2 font-sans font-semibold text-gray-500 dark:hover:text-white py-2">
-                <span className="text-sm bg-yellow-400 text-black px-2 py-1 rounded-full">
-                  ⭐ {points} pts
+                <span className="text-sm bg-second text-white px-2 py-1 rounded-full">
+                   {points} pts
                 </span>
                 <FaUserCircle className="text-4xl" />
                 <FaCaretDown className="group-hover:rotate-180 duration-300" />

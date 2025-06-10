@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const UserContext = createContext();
-
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
@@ -22,8 +21,19 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  // Nuevo useEffect para observar el token y recargar puntos
   useEffect(() => {
-    fetchPoints();
+    const checkTokenAndFetch = () => {
+      const token = sessionStorage.getItem("token");
+      if (token) {
+        fetchPoints();
+      }
+    };
+
+    checkTokenAndFetch(); // Llama al cargar
+    const interval = setInterval(checkTokenAndFetch, 1000); // Reintenta por si aún no estaba
+
+    return () => clearInterval(interval); // Limpia al desmontar
   }, []);
 
   return (
