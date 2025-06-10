@@ -24,10 +24,10 @@ function AllContenedores() {
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 font-sans dark:bg-gray-900 min-h-screen">
       {/* Hero Section */}
       <section className="text-center mb-16">
-        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">
+        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 ">
           Explora Nuestros Contenedores de Reciclaje
         </h1>
-        <p className="max-w-2xl mx-auto mt-4 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+        <p className="max-w-2xl mx-auto mt-4 text-lg text-gray-600">
           Conoce los contenedores diseñados para una gestión eficiente de residuos, promoviendo un futuro más sostenible. Cada contenedor está pensado para facilitar el reciclaje y cuidar nuestro planeta.
         </p>
       </section>
@@ -35,7 +35,7 @@ function AllContenedores() {
       {/* Loading State */}
       {loading && (
         <div className="text-center py-12">
-          <p className="text-xl text-gray-600 dark:text-gray-300">Cargando contenedores...</p>
+          <p className="text-xl text-gray-700 dark:text-gray-300">Cargando contenedores...</p>
         </div>
       )}
 
@@ -73,7 +73,7 @@ function AllContenedores() {
         <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
           ¿Por Qué Reciclar?
         </h2>
-        <p className="max-w-3xl mx-auto text-gray-600 dark:text-gray-300 leading-relaxed mb-8 text-center">
+        <p className="max-w-3xl mx-auto text-gray-700 text-base mb-8 text-center">
           El reciclaje reduce la cantidad de residuos en vertederos, conserva recursos naturales y disminuye la contaminación. Al usar nuestros contenedores, contribuyes a un ciclo sostenible que beneficia al medio ambiente y a las generaciones futuras.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">

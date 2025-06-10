@@ -41,7 +41,7 @@ function Buscador() {
   };
 
   return (
-    <section className="bg-gradient-to-br from-[#0F5E2B] via-[#18703A] to-[#A4D9A0]  lg:grid lg:place-content-center dark:bg-gray-900">
+    <section className="bg-gradient-to-br from-[#0F5E2B] via-[#18703A] to-[#A4D9A0]  lg:grid lg:place-content-center dark:bg-gray-900 contain-content pb-6">
       <div className="mx-auto w-screen h-[85vh] max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 md:grid md:grid-cols-2 md:items-center md:gap-4 lg:px-8 lg:py-32">
         <div className="max-w-prose text-left">
           <h1 className="text-4xl font-bold text-white sm:text-5xl dark:text-white capitalize">
@@ -73,8 +73,8 @@ function Buscador() {
 
         {/* Columna derecha: Buscador */}
         <div className="order-1 md:order-2 mt-10 md:mt-0 flex justify-center">
-          <div className="w-full max-w-xl h-[30vh] bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg relative">
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Buscar productos</h2>
+          <div className="w-2/3 max-w-xl bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg relative">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Buscar productos</h2>
             <div className="flex flex-col sm:flex-row">
               <input
                 type="text"
@@ -86,7 +86,7 @@ function Buscador() {
               />
               <button
                 onClick={handleSearch}
-                className="bg-primary text-white px-4 py-2 rounded-r-md hover:bg-acento transition-colors"
+                className="bg-primary text-white px-4 py-2 m-2 rounded-md hover:bg-acento transition-colors"
               >
                 Buscar
               </button>

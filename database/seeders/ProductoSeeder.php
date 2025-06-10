@@ -2514,9 +2514,146 @@ class ProductoSeeder extends Seeder
         'created_at' => now(),
         'updated_at' => now(),
     ],
-
-
-    
+    [
+        'nombre' => 'Leche semidesnatada Dia Láctea brik 6 x 1 l',
+        'descripcion' => 'Leche semidesnatada de alta calidad, ideal para el consumo diario.',
+        'ingredientes' => json_encode([
+            [
+                'nombre' => 'Leche semidesnatada',
+                'cantidad' => 6000,
+                'porcentaje' => 100,
+                'unidad' => 'ml',
+                'calorias' => 3000, // 50 kcal/100ml aprox
+                'tipo' => 'base',
+                'origen' => 'España',
+                'proteinas' => 180, // 3g/100ml
+                'grasas' => 120, // 2g/100ml
+                'carbohidratos' => 300, // 5g/100ml
+                'notas' => 'Fuente de calcio'
+            ]
+        ]),
+        'fabricante' => 'Dia',
+        'composicion' => 'Envase de cartón reciclable.',
+        'puntos' => rand(10, 50),
+        'imagen' => 'https://www.dia.es/product_images/504P6/504P6_ISO_0_ES.jpg',
+        'enlace_qr' => '',
+        'id_categoria' => 1,
+        'id_empresa' => 1,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ],
+    [
+        'nombre' => 'Leche entera Dia Láctea brik 6 x 1 l',
+        'descripcion' => 'Leche entera natural, fresca y con todo el sabor tradicional.',
+        'ingredientes' => json_encode([
+            [
+                'nombre' => 'Leche entera',
+                'cantidad' => 6000,
+                'porcentaje' => 100,
+                'unidad' => 'ml',
+                'calorias' => 3900, // 65 kcal/100ml
+                'tipo' => 'base',
+                'origen' => 'España',
+                'proteinas' => 180, // 3g/100ml
+                'grasas' => 360, // 6g/100ml
+                'carbohidratos' => 300, // 5g/100ml
+                'notas' => 'Ideal para recetas y consumo diario'
+            ]
+        ]),
+        'fabricante' => 'Dia',
+        'composicion' => 'Envase de cartón reciclable.',
+        'puntos' => rand(10, 50),
+        'imagen' => 'https://www.dia.es/product_images/608P6/608P6_ISO_0_ES.jpg',
+        'enlace_qr' => '',
+        'id_categoria' => 1,
+        'id_empresa' => 1,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ],
+    [
+        'nombre' => 'Leche desnatada Dia Láctea brik 6 x 1 l',
+        'descripcion' => 'Leche desnatada baja en grasa, perfecta para dietas saludables.',
+        'ingredientes' => json_encode([
+            [
+                'nombre' => 'Leche desnatada',
+                'cantidad' => 6000,
+                'porcentaje' => 100,
+                'unidad' => 'ml',
+                'calorias' => 2100, // 35 kcal/100ml
+                'tipo' => 'base',
+                'origen' => 'España',
+                'proteinas' => 180, // 3g/100ml
+                'grasas' => 18, // 0.3g/100ml
+                'carbohidratos' => 300, // 5g/100ml
+                'notas' => 'Sin lactosa'
+            ]
+        ]),
+        'fabricante' => 'Dia',
+        'composicion' => 'Envase de cartón reciclable.',
+        'puntos' => rand(10, 50),
+        'imagen' => 'https://www.dia.es/product_images/607P6/607P6_ISO_0_ES.jpg',
+        'enlace_qr' => '',
+        'id_categoria' => 1,
+        'id_empresa' => 1,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ],
+    [
+        'nombre' => 'Leche semidesnatada sin lactosa Dia Láctea brik 6 x 1 l',
+        'descripcion' => 'Leche semidesnatada sin lactosa, apta para intolerantes.',
+        'ingredientes' => json_encode([
+            [
+                'nombre' => 'Leche semidesnatada sin lactosa',
+                'cantidad' => 6000,
+                'porcentaje' => 100,
+                'unidad' => 'ml',
+                'calorias' => 3000,
+                'tipo' => 'base',
+                'origen' => 'España',
+                'proteinas' => 180,
+                'grasas' => 120,
+                'carbohidratos' => 300,
+                'notas' => 'Libre de lactosa'
+            ]
+        ]),
+        'fabricante' => 'Dia',
+        'composicion' => 'Envase de cartón reciclable.',
+        'puntos' => rand(10, 50),
+        'imagen' => 'https://www.dia.es/product_images/130063P6/130063P6_ISO_0_ES.jpg',
+        'enlace_qr' => '',
+        'id_categoria' => 1,
+        'id_empresa' => 1,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ],
+    [
+        'nombre' => 'Leche semidesnatada Dia Láctea brik 1 l',
+        'descripcion' => 'Práctico envase de 1 litro de leche semidesnatada para uso diario.',
+        'ingredientes' => json_encode([
+            [
+                'nombre' => 'Leche semidesnatada',
+                'cantidad' => 1000,
+                'porcentaje' => 100,
+                'unidad' => 'ml',
+                'calorias' => 500,
+                'tipo' => 'base',
+                'origen' => 'España',
+                'proteinas' => 30,
+                'grasas' => 20,
+                'carbohidratos' => 50,
+                'notas' => 'Ideal para toda la familia'
+            ]
+        ]),
+        'fabricante' => 'Dia',
+        'composicion' => 'Envase de cartón reciclable.',
+        'puntos' => rand(10, 50),
+        'imagen' => 'https://www.dia.es/product_images/504/504_ISO_0_ES.jpg',
+        'enlace_qr' => '',
+        'id_categoria' => 1,
+        'id_empresa' => 1,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]
         
         ]);
     }
