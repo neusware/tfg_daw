@@ -7,7 +7,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { HiMenu } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 import { useUser } from "../Context/UserContext";
-import letras from './letras.png'; 
+import letras from './letras.png';
 
 const MenuLinks = [
   { id: 1, name: "Inicio", link: "/" },
@@ -84,7 +84,7 @@ function NavbarPrueba() {
                     <li key={data.id}>
                       <Link
                         to={data.link}
-                        className="text-primary hover:text-acento dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
+                        className= "text-gray-500 hover:text-black dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
                       >
                         {data.name}
                       </Link>
@@ -93,7 +93,7 @@ function NavbarPrueba() {
                 </ul>
                 <Link
                   to={"/"}
-                  className="text-primary hover:text-acento dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
+                  className=" text-gray-500 hover:text-black dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
                 >
                   <button onClick={handleLogout}>Cerrar sesión</button>
                 </Link>
@@ -150,7 +150,7 @@ function NavbarPrueba() {
                   handleLogout();
                   setIsMenuOpen(false);
                 }}
-                className="w-1/3 px-2 py-1 bg-red-600 text-white text-center rounded-lg hover:bg-red-700 font-bold"
+                className="w-1/3 px-2 py-1 text-gray-500 hover:text-black center rounded-lg dark:hover:text-white duration-200 font-bold"
               >
                 Cerrar sesión
               </button>
@@ -159,14 +159,14 @@ function NavbarPrueba() {
             <div className="flex flex-col gap-4 mt-6">
               <Link
                 to="/register"
-                className="w-1/4 px-4 py-2 bg-indigo-600 text-white text-center rounded-lg hover:bg-indigo-700"
+                className="w-1/4 px-4 py-2 bg-acento font-medium text-white text-center rounded-lg hover:bg-indigo-700"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Registro
               </Link>
               <Link
                 to="/login"
-                className="w-1/4 px-4 py-2 bg-green text-white text-center rounded-lg hover:bg-greenDark"
+                className="w-1/4 px-4 py-2 bg-primary text-white text-center rounded-lg hover:bg-acento"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Login
