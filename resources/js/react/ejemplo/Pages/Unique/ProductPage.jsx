@@ -195,6 +195,7 @@ function ProductPage() {
     };
 
     const residuoNombre = CATEGORIA_MAP[producto.id_categoria];
+    
     return (
         <div className="max-w-7xl mx-auto py-2 md:py-20 px-4 sm:px-6 lg:px-8">
             {/* Imagen y ingredientes en la misma fila */}

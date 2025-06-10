@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
+import Swal from 'sweetalert2';
 
 
 const FooterLinks = [
@@ -22,7 +23,7 @@ function Footer() {
     const location = useLocation()
     const isAdmin = location.pathname.includes("admin-panel")
 
-  return (    
+  return (
     <footer className={`bg-greenDark text-white ${isAdmin ? 'hidden' : ''}`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-2">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12 pt-6 text-center">
@@ -86,10 +87,18 @@ function Footer() {
                     className="px-4 py-2 rounded-md bg-white text-gray-700 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-acento"
                     />
                     <button
-                    type="submit"
-                    className="px-4 py-2 bg-green text-white rounded-md hover:bg-acento transition-colors duration-300"
+                        type="button"
+                        className="px-4 py-2 bg-green text-white rounded-md hover:bg-acento transition-colors duration-300"
+                        onClick={() => {
+                            Swal.fire({
+                                title: '¡Suscripción exitosa!',
+                                text: 'Te has suscrito correctamente.',
+                                icon: 'success',
+                                confirmButtonText: 'Aceptar'
+                            });
+                        }}
                     >
-                    Suscribir
+                        Suscribir
                     </button>
                 </form>
                 </div>

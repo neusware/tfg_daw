@@ -17,6 +17,9 @@ function RecompensaPage() {
     //  obtener el token del usuario guardado en sessionStorage
     const token = sessionStorage.getItem("token");
 
+    // obtener el usuario mediante sessionStorage
+    const usuario =  JSON.parse(sessionStorage.getItem("usuario"));
+
 
     // llamadas a los endpoints
     useEffect(() => {
@@ -54,58 +57,75 @@ function RecompensaPage() {
     const recompensa = recompensas.find((r) => r.id === parseInt(id));
 
     // función para canjear los puntos
-    const handleCanjear = () => {
-        if (!recompensa || userPoints === null) return;
+   const handleCanjear = () => {
+    if (!recompensa || userPoints === null) return;
 
-        if (userPoints < recompensa.precio_pts) {
+    if (userPoints < recompensa.precio_pts) {
+        Swal.fire({
+            icon: "error",
+            title: "Puntos insuficientes",
+            text: "No tienes suficientes puntos para canjear esta recompensa.",
+        });
+        return;
+    }
+
+    setButtonDisabled(true);
+
+    fetch("/api/usuario/saldo", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+            saldo: userPoints - recompensa.precio_pts,
+        }),
+    })
+        .then((res) => {
+            if (!res.ok) throw new Error("Error al actualizar saldo");
+            return res.json();
+        })
+        .then(() => {
+
+            return fetch("/api/usuario-recompensas", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    id_usuario: usuario.id,
+                    id_recompensa: recompensa.id,
+                }),
+            });
+        })
+        .then((res) => {
+            if (!res.ok) throw new Error("Error al registrar la recompensa");
+            return res.json();
+        })
+        .then(() => {
+            const nuevoSaldo = userPoints - recompensa.precio_pts;
+            setUserPoints(nuevoSaldo);
+            setPoints(nuevoSaldo);
+            Swal.fire({
+                icon: "success",
+                title: "¡Recompensa canjeada!",
+                text: `Has canjeado ${recompensa.nombre} correctamente.`,
+            });
+        })
+        .catch((err) => {
+            console.error("❌ Error:", err);
             Swal.fire({
                 icon: "error",
-                title: "Puntos insuficientes",
-                text: "No tienes suficientes puntos para canjear esta recompensa.",
+                title: "Error",
+                text: "Hubo un problema al canjear o registrar la recompensa.",
             });
-            return;
-        }
-
-
-        setButtonDisabled(true);
-
-        fetch("/api/usuario/saldo", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                "saldo": (userPoints - recompensa.precio_pts),
-            }),
         })
-            .then((res) => {
-                if (!res.ok) throw new Error("Error al canjear");
-                return res.json();
-            })
-            .then(() => {
-                Swal.fire({
-                    icon: "success",
-                    title: "¡Recompensa canjeada con éxito!",
-                    text: `Has canjeado ${recompensa.nombre} correctamente.`,
-                });
+        .finally(() => {
+            setButtonDisabled(false);
+        });
+};
 
-                const nuevoSaldo = userPoints - recompensa.precio_pts;
-                setUserPoints(userPoints - recompensa.precio_pts);
-                setPoints(nuevoSaldo);
-            })
-            .catch((err) => {
-                console.error("❌ Error al canjear:", err);
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: "Hubo un problema al canjear la recompensa.",
-                });
-            })
-            .finally(() => {
-                setButtonDisabled(false);
-            });
-    };
 
     if (loading)
         return <div className="text-center mt-10">Cargando recompensa...</div>;
