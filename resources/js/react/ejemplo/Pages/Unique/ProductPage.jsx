@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Map from "../../components/Map/Map";
+import Swal from "sweetalert2";
 
 function ProductPage() {
     const { id } = useParams();
@@ -9,6 +10,18 @@ function ProductPage() {
     const [categorias, setCategorias] = useState([]);
     const [empresas, setEmpresas] = useState([]);
     const [loading, setLoading] = useState(true); // Estado de carga
+    const [puntosProducto, setPuntosProducto] = useState(0);
+
+    // funcion para detectar el tipo de dispositivo desde el cual se está ejecutan la app
+    const esDispositivoMovil = () => {
+        return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(
+            navigator.userAgent
+        );
+    };
+
+    const producto = productos.find((p) => p.id === parseInt(id));
+
+    setPuntosProducto(producto.puntos);
 
     useEffect(() => {
         fetch("/api/productos")
@@ -18,7 +31,10 @@ function ProductPage() {
                 setLoading(false);
             })
             .catch((error) => {
-                console.error("Error al obtener los productos en el fetch.", error);
+                console.error(
+                    "Error al obtener los productos en el fetch.",
+                    error
+                );
                 setLoading(false);
             });
     }, []);
@@ -42,12 +58,68 @@ function ProductPage() {
             } finally {
                 setLoading(false);
             }
+
+            // logica para sumar los puntos al usuario si está en un dispositivo móvil o tablet
+            const token = sessionStorage.getItem("token");
+
+            // si no está en un dispositivo móvil o tablet no hacer nada
+            if (!esDispositivoMovil()) return;
+
+            if (token) {
+                const sumarPuntos = async () => {
+                    try {
+                        const res = await fetch("/api/usuario/saldo", {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${token}`,
+                            },
+                            body: {
+                                saldo: puntosProducto,
+                            },
+                        });
+
+                        if (!res.ok)
+                            throw new Error("Error al sumar los puntos");
+
+                        const data = await res.json();
+
+                        Swal.fire({
+                            icon: "success",
+                            title: "¡Puntos Sumados!",
+                            text: `Has acumulado ${puntosProducto} puntos por escanear este producto.`,
+                            confirmButtonText: "Aceptar",
+                        });
+                    } catch (error) {
+                        console.error(error);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "Hubo un problema al sumar los puntos. Intenta de nuevo.",
+                        });
+                    }
+                };
+                sumarPuntos();
+            } else {
+                // Usuario no autenticado
+                Swal.fire({
+                    icon: "info",
+                    title: "¡Inicia sesión para ganar puntos!",
+                    text: "Debes iniciar sesión o crear una cuenta para acumular puntos.",
+                    showCancelButton: true,
+                    confirmButtonText: "Iniciar sesión",
+                    cancelButtonText: "Cancelar",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        sessionStorage.setItem("pendingProductPoints", id);
+                        navigate("/login");
+                    }
+                });
+            }
         };
 
-        fetchData();
-    }, []);
 
-    const producto = productos.find((p) => p.id === parseInt(id));
+    }, [id,producto]);
 
     if (loading)
         return <div className="text-center mt-10">Cargando producto...</div>;
@@ -63,7 +135,6 @@ function ProductPage() {
         const categoria = categorias.find((cat) => cat.id === idCategoria);
         return categoria ? categoria.nombre : "Sin categoria";
     };
-
 
     delete L.Icon.Default.prototype._getIconUrl;
     L.Icon.Default.mergeOptions({
@@ -108,64 +179,111 @@ function ProductPage() {
 
                     {(() => {
                         let ingredientes = producto.ingredientes;
-                        if (typeof ingredientes === 'string') {
+                        if (typeof ingredientes === "string") {
                             try {
                                 ingredientes = JSON.parse(ingredientes);
                             } catch (e) {
                                 ingredientes = null;
                             }
                         }
-                        if (ingredientes && Array.isArray(ingredientes) && ingredientes.length > 0) {
+                        if (
+                            ingredientes &&
+                            Array.isArray(ingredientes) &&
+                            ingredientes.length > 0
+                        ) {
                             return (
                                 <div>
                                     <span className="text-xl font-bold text-primary flex items-center gap-2 mb-4">
                                         Ingredientes
                                     </span>
                                     <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-                                        {ingredientes.map((ingrediente, index) => (
-                                            <div
-                                                key={index}
-                                                className="w-[80vh] p-5 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 space-y-2"
-                                            >
-                                                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                                    {ingrediente.nombre}
-                                                </h4>
-                                                <ul className="text-sm text-gray-700 dark:text-gray-300 divide-y divide-gray-200 dark:divide-gray-700">
-                                                    <li>
-                                                        <strong className="text-gray-900 dark:text-white">Cantidad:</strong> {ingrediente.cantidad} {ingrediente.unidad}
-                                                    </li>
-                                                    <li>
-                                                        <strong className="text-gray-900 dark:text-white">Calorías:</strong> {ingrediente.calorias} kcal
-                                                    </li>
-                                                    <li>
-                                                        <strong className="text-gray-900 dark:text-white">Porcentaje:</strong> {ingrediente.porcentaje}%
-                                                    </li>
-                                                    <li>
-                                                        <strong className="text-gray-900 dark:text-white">Proteínas:</strong> {ingrediente.proteinas || 0} g
-                                                    </li>
-                                                    <li>
-                                                        <strong className="text-gray-900 dark:text-white">Grasas:</strong> {ingrediente.grasas || 0} g
-                                                    </li>
-                                                    <li>
-                                                        <strong className="text-gray-900 dark:text-white">Carbohidratos:</strong> {ingrediente.carbohidratos || 0} g
-                                                    </li>
-                                                    <li>
-                                                        <strong className="text-gray-900 dark:text-white">Tipo:</strong> {ingrediente.tipo}
-                                                    </li>
-                                                    <li>
-                                                        <strong className="text-gray-900 dark:text-white">Origen:</strong> {ingrediente.origen}
-                                                    </li>
-                                                    {ingrediente.notas && (
-                                                        <li className="italic text-gray-600 dark:text-gray-400">
-                                                            Notas: {ingrediente.notas}
+                                        {ingredientes.map(
+                                            (ingrediente, index) => (
+                                                <div
+                                                    key={index}
+                                                    className="w-[80vh] p-5 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 space-y-2"
+                                                >
+                                                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                                        {ingrediente.nombre}
+                                                    </h4>
+                                                    <ul className="text-sm text-gray-700 dark:text-gray-300 divide-y divide-gray-200 dark:divide-gray-700">
+                                                        <li>
+                                                            <strong className="text-gray-900 dark:text-white">
+                                                                Cantidad:
+                                                            </strong>{" "}
+                                                            {
+                                                                ingrediente.cantidad
+                                                            }{" "}
+                                                            {ingrediente.unidad}
                                                         </li>
-                                                    )}
-                                                </ul>
-                                            </div>
-                                        ))}
+                                                        <li>
+                                                            <strong className="text-gray-900 dark:text-white">
+                                                                Calorías:
+                                                            </strong>{" "}
+                                                            {
+                                                                ingrediente.calorias
+                                                            }{" "}
+                                                            kcal
+                                                        </li>
+                                                        <li>
+                                                            <strong className="text-gray-900 dark:text-white">
+                                                                Porcentaje:
+                                                            </strong>{" "}
+                                                            {
+                                                                ingrediente.porcentaje
+                                                            }
+                                                            %
+                                                        </li>
+                                                        <li>
+                                                            <strong className="text-gray-900 dark:text-white">
+                                                                Proteínas:
+                                                            </strong>{" "}
+                                                            {ingrediente.proteinas ||
+                                                                0}{" "}
+                                                            g
+                                                        </li>
+                                                        <li>
+                                                            <strong className="text-gray-900 dark:text-white">
+                                                                Grasas:
+                                                            </strong>{" "}
+                                                            {ingrediente.grasas ||
+                                                                0}{" "}
+                                                            g
+                                                        </li>
+                                                        <li>
+                                                            <strong className="text-gray-900 dark:text-white">
+                                                                Carbohidratos:
+                                                            </strong>{" "}
+                                                            {ingrediente.carbohidratos ||
+                                                                0}{" "}
+                                                            g
+                                                        </li>
+                                                        <li>
+                                                            <strong className="text-gray-900 dark:text-white">
+                                                                Tipo:
+                                                            </strong>{" "}
+                                                            {ingrediente.tipo}
+                                                        </li>
+                                                        <li>
+                                                            <strong className="text-gray-900 dark:text-white">
+                                                                Origen:
+                                                            </strong>{" "}
+                                                            {ingrediente.origen}
+                                                        </li>
+                                                        {ingrediente.notas && (
+                                                            <li className="italic text-gray-600 dark:text-gray-400">
+                                                                Notas:{" "}
+                                                                {
+                                                                    ingrediente.notas
+                                                                }
+                                                            </li>
+                                                        )}
+                                                    </ul>
+                                                </div>
+                                            )
+                                        )}
                                     </div>
                                 </div>
-
                             );
                         }
                         return (
@@ -173,7 +291,8 @@ function ProductPage() {
                                 <span className="font-semibold text-primary">
                                     🧪 Ingredientes:
                                 </span>{" "}
-                                {typeof producto.ingredientes === 'string' && producto.ingredientes
+                                {typeof producto.ingredientes === "string" &&
+                                producto.ingredientes
                                     ? producto.ingredientes
                                     : "No disponibles"}
                             </p>
@@ -184,8 +303,6 @@ function ProductPage() {
 
             {/* Resto de información del producto */}
             <div className="space-y-8 text-center md:text-left">
-
-
                 <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-6 rounded-2xl shadow-sm space-y-4 text-gray-800 dark:text-gray-300 text-left">
                     {producto.composicion && (
                         <p>
