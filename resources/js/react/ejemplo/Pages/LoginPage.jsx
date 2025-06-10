@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+
+    const navigate = useNavigate();
     const [credentials, setCredentials] = useState({
         email: "",
         password: "",
@@ -9,7 +11,6 @@ function LoginPage() {
 
     const [mensaje, setMensaje] = useState("");
     const [error, setError] = useState("");
-    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setCredentials({
@@ -41,12 +42,15 @@ function LoginPage() {
             // Guardar token en sessionStorage
             sessionStorage.setItem("token", result.token);
             sessionStorage.setItem("usuario", JSON.stringify(result.usuario));
-            navigate("/");
+
 
             const pendingProductId = sessionStorage.getItem("pendingProductPoints");
             if (pendingProductId) {
                 sessionStorage.removeItem("pendingProductPoints");
-                navigate(`/productos/${pendingProductId}`);
+                navigate(`/productos/${pendingProductId}/?from=scan`);
+            }
+            else{
+                navigate("/")
             }
             setMensaje(result.message || "Inicio de sesión exitoso");
         } catch (err) {

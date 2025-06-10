@@ -12,6 +12,8 @@ import Partners from '../components/Partners/Partners'
 import Transicion from '../components/Transicion'
 
 function Landing() {
+
+    
   return (
     <div>
 
