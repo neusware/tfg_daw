@@ -66,7 +66,8 @@ const Map = ({ categoriaId }) => {
     if (feature.properties) {
       const { RESIDUO, VOLUMEN_L, 'CALLE ubic': calle } = feature.properties;
       layer.bindPopup(
-        `<strong>Calle:</strong> ${calle || 'Desconocida'}`
+        `<strong>Calle:</strong> ${calle || 'Desconocida'}
+        <br><strong>Tipo: </strong>${RESIDUO || 'Desconocido'}`
       );
     }
   };
