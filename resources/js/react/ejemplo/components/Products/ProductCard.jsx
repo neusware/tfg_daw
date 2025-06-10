@@ -19,10 +19,10 @@ function ProductCard({ data }) {
             </div>
           </div>
           <div className="p-4 text-center">
-            <h2 className="text-lg font-bold text-greenDark dark:text-white">
+            <h2 className="text-lg font-bold text-gray-700 dark:text-white">
               {data.nombre}
             </h2>
-            <p className="text-green font-semibold text-base">
+            <p className="text-gray-700 font-semibold text-base">
               {data.puntos} puntos
             </p>
           </div>
