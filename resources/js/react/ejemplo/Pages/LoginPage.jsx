@@ -47,7 +47,7 @@ function LoginPage() {
             const pendingProductId = sessionStorage.getItem("pendingProductPoints");
             if (pendingProductId) {
                 sessionStorage.removeItem("pendingProductPoints");
-                navigate(`/productos/${pendingProductId}/?from=scan`);
+                navigate(`/producto/${pendingProductId}?from=scan`);
             }
             else{
                 navigate("/")
