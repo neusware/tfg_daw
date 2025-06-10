@@ -14,24 +14,26 @@ function AllSuscripciones() {
   }, []);
 
   return (
-    <div className="container mx-auto p-6 mt-10 pb-32 font-sans">
-      <section className="text-center mb-12 max-w-3xl mx-auto px-4">
-        <h1 className="text-4xl font-bold sm:text-5xl dark:text-white capitalize">
+    <div className="max-w-2xl mx-auto px-4 py-12 font-sans">
+      <section className="text-center mb-12 px-4">
+        <h1 className="text-3xl sm:text-4xl font-bold dark:text-white capitalize">
           Nuestras Suscripciones
         </h1>
-        <p className="mt-4 text-base text-pretty sm:text-lg/relaxed dark:text-gray-200">
-          Elige una suscripción que se adapte a tus necesidades para disfrutar de
-          beneficios exclusivos. ¡Recicla más, gana más!
+        <p className="mt-4 text-sm sm:text-base text-pretty dark:text-gray-200">
+          Elige una suscripción que se adapte a tus necesidades para disfrutar de beneficios exclusivos.
+          ¡Recicla más, gana más!
         </p>
       </section>
 
-
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+      <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-center items-start">
         {suscripciones.map((item, index) => (
-          <SuscripcionCard key={item.id || index} data={item} />
+          <div className="max-w-xs mx-auto">
+            <SuscripcionCard key={item.id || index} data={item} />
+          </div>
         ))}
       </section>
     </div>
+
   );
 }
 
