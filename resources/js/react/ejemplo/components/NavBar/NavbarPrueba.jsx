@@ -178,4 +178,5 @@ function NavbarPrueba() {
   );
 }
 
+//
 export default NavbarPrueba;
