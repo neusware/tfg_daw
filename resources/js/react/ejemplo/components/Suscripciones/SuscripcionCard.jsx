@@ -16,7 +16,7 @@ function SuscripcionCard({ data }) {
         </p>
 
         <Link to={`/suscripcion/${data.id}`}>
-          <button className="bg-primary text-white px-5 py-2 rounded-full hover:bg-red transition">
+          <button className="bg-primary hover:bg-acento text-white px-5 py-2 rounded-full hover:bg-red transition">
             Comprar
           </button>
         </Link>
