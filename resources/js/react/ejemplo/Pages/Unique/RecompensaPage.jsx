@@ -176,7 +176,7 @@ function RecompensaPage() {
                     <span className="text-xl font-bold">{recompensa.precio_pts}</span>
                     </p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Asegúrate de tener suficientes puntos disponibles antes de intentar el canje.
+                    Asegúrate de tener suficientes puntos disponibles antes de intentar el canjeo.
                     </p>
                 </div>
             </div>
