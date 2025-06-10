@@ -93,7 +93,7 @@ const ProductosList = () => {
   const handleMostrarQr = (idProducto) => {
     const qrElemento = (
       <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem'}}>
-        <QRCode value={`https://tfgdaw-production.up.railway.app/producto/${idProducto}`} />
+        <QRCode value={`https://tfgdaw-production.up.railway.app/producto/${idProducto}?from=scan`} />
       </div>
     );
 

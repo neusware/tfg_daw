@@ -11,6 +11,8 @@ function ProductPage() {
     const [empresas, setEmpresas] = useState([]);
     const [loading, setLoading] = useState(true); // Estado de carga
     const [puntosProducto, setPuntosProducto] = useState(0);
+    const [searchParams] = useSearchParams();
+    const showRewardModal = searchParams.get("from") === "scan";
 
     // funcion para detectar el tipo de dispositivo desde el cual se está ejecutan la app
     const esDispositivoMovil = () => {
@@ -58,6 +60,9 @@ function ProductPage() {
             } finally {
                 setLoading(false);
             }
+
+            // si no se accede desde la camara de un dispositivo movil o tablet no mostrar los puntos 
+            if(!showRewardModal && !esDispositivoMovil()) return;
 
             // logica para sumar los puntos al usuario si está en un dispositivo móvil o tablet
             const token = sessionStorage.getItem("token");
