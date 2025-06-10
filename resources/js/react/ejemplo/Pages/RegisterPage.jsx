@@ -196,7 +196,7 @@ function RegisterPage() {
 
                         <button
                             type="submit"
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
+                            className="w-full bg-green hover:bg-acento text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
                         >
                             Registrarse
                         </button>
@@ -205,7 +205,7 @@ function RegisterPage() {
                             ¿Ya tienes una cuenta?{" "}
                             <a
                                 href="/login"
-                                className="text-blue-600 hover:underline dark:text-blue-400"
+                                className="text-green hover:underline dark:text-blue-400"
                             >
                                 Inicia sesión
                             </a>

@@ -7,6 +7,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { HiMenu } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 import { useUser } from "../Context/UserContext";
+import letras from './letras.png'; 
 
 const MenuLinks = [
   { id: 1, name: "Inicio", link: "/" },
@@ -40,7 +41,7 @@ function NavbarPrueba() {
       <div className="flex items-center justify-between mx-6 md:mx-14">
         {/* Logo */}
         <Link to={"/"} className="tracking-widest text-xl sm:text-3xl">
-          <img src="./img/letras.png" alt="logo" className="w-40" />
+          <img src={letras} alt="logo" className="w-40" />
         </Link>
 
         {/* Menú Hamburguesa y Saldo (móvil) */}
@@ -134,16 +135,16 @@ function NavbarPrueba() {
 
           {isLoggedIn ? (
             <div className="flex flex-col gap-4 mt-6">
-              {DropdownLinks.map((data) => (
+                {DropdownLinks.filter(data => data.id !== 1).map((data) => (
                 <Link
-                  key={data.id}
-                  to={data.link}
-                  className="block text-gray-700 dark:text-white hover:text-black dark:hover:text-yellow-300 font-bold"
-                  onClick={() => setIsMenuOpen(false)}
+                    key={data.id}
+                    to={data.link}
+                    className="block text-gray-700 dark:text-white hover:text-black dark:hover:text-yellow-300 font-bold"
+                    onClick={() => setIsMenuOpen(false)}
                 >
-                  {data.name}
+                    {data.name}
                 </Link>
-              ))}
+                ))}
               <button
                 onClick={() => {
                   handleLogout();
