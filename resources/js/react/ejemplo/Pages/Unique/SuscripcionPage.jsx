@@ -110,35 +110,49 @@ function SuscripcionPage() {
     );
 
   return (
-    <div className="max-w-4xl mx-auto py-16 px-4 sm:px-6 lg:px-8 space-y-10">
-      <div className="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-2xl text-center">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-          Suscripción: {suscripcion.tipo}
-        </h1>
-        <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-          {suscripcion.descripcion}
-        </p>
-
-        <div className="flex justify-center mb-6">
+    <div className="max-w-4xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+      <div className="bg-white dark:bg-gray-900 p-10 rounded-3xl shadow-2xl flex flex-col md:flex-row items-center gap-10">
+        
+        {/* Imagen */}
+        <div className="flex-shrink-0">
           <img
-            src={suscripcion.imagen || "https://via.placeholder.com/200"}
-            alt={suscripcion.tipo}
-            className="rounded-xl shadow-lg w-48 h-48 object-cover"
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png"
+            alt={`Suscripción ${suscripcion.tipo}`}
+            className="w-52 h-52 object-contain rounded-2xl border-4 border-primary shadow-md"
           />
         </div>
 
-        <p className="text-2xl font-bold text-primary mb-4">
-          {suscripcion.precio} €
-        </p>
+        {/* Contenido */}
+        <div className="flex-1 space-y-6 text-center md:text-left">
+          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white">
+            Plan <span className="text-primary">{suscripcion.tipo}</span>
+          </h1>
 
-        <button
-          onClick={handleComprar}
-          className="bg-primary hover:bg-red text-white font-semibold py-3 px-6 rounded-full shadow-md transition"
-        >
-          Comprar Suscripción
-        </button>
+          <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+            {suscripcion.descripcion ||
+              "Únete a un plan exclusivo con recompensas, beneficios y herramientas personalizadas para maximizar tu impacto positivo en el planeta."}
+          </p>
+
+          <p className="text-3xl font-bold text-primary">
+            {suscripcion.precio} €
+          </p>
+
+          <button
+            onClick={handleComprar}
+            className="bg-primary hover:bg-acento text-white font-semibold text-lg py-3 px-8 rounded-full shadow-lg transition duration-300 w-full md:w-auto"
+          >
+            Comprar Suscripción
+          </button>
+
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Cancela en cualquier momento desde tu perfil.
+          </p>
+        </div>
       </div>
     </div>
+
+
+
   );
 }
 

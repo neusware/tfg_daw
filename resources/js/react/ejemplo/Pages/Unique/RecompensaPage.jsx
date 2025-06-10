@@ -116,72 +116,89 @@ function RecompensaPage() {
                 Recompensa no encontrada
             </div>
         );
-
     return (
         <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 space-y-20">
-            <div className="flex flex-col md:flex-row gap-16 items-center">
+            <div className="flex flex-col md:flex-row gap-12 items-center">
+                {/* Imagen de la recompensa */}
                 <div className="flex-1 max-w-md w-full rounded-2xl overflow-hidden shadow-2xl">
+                <div className="aspect-w-1 aspect-h-1 w-full">
                     <img
-                        src={
-                            recompensa.imagen ||
-                            "https://www.lavanguardia.com/files/og_thumbnail/uploads/2018/06/15/5fa43d71a111f.jpeg"
-                        }
-                        alt={recompensa.nombre}
-                        className="object-cover w-full h-auto transition-transform duration-300 hover:scale-105"
+                    src={
+                        recompensa.imagen ||
+                        "https://cdn-icons-png.flaticon.com/512/2666/2666513.png"
+                    }
+                    alt={recompensa.nombre}
+                    className="object-cover w-full h-full rounded-2xl"
                     />
                 </div>
+                </div>
 
-                <div className="flex-1 space-y-8 text-center md:text-left">
-                    <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white">
-                        {recompensa.nombre}
-                    </h1>
+                {/* Detalles de la recompensa */}
+                <div className="flex-1 space-y-6 text-center md:text-left">
+                <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white leading-tight">
+                    {recompensa.nombre}
+                </h1>
 
-                    <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                        {recompensa.descripcion ||
-                            "Este producto destaca por su excelente calidad."}
+                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                    {recompensa.descripcion ||
+                    "Obtén esta recompensa exclusiva por tu compromiso con el consumo responsable. Acumula puntos con cada acción sostenible y canjéalos por beneficios pensados para ti."}
+                </p>
+
+                <ul className="text-gray-700 dark:text-gray-300 list-disc pl-5 space-y-2 text-left">
+                    <li>Reconocimiento a tus decisiones sostenibles</li>
+                    <li>Edición limitada disponible por tiempo determinado</li>
+                    <li>Solo disponible para miembros registrados</li>
+                </ul>
+
+                <div className="bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 p-6 rounded-2xl shadow-inner space-y-4 text-gray-800 dark:text-gray-300">
+                    <p className="text-lg">
+                    <span className="font-semibold text-primary">Puntos necesarios:</span>{" "}
+                    <span className="text-xl font-bold">{recompensa.precio_pts}</span>
                     </p>
-
-                    <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-6 rounded-2xl shadow-sm space-y-4 text-gray-800 dark:text-gray-300 text-left">
-                        <p>
-                            <span className="font-semibold text-primary">
-                                🧪 Puntos:
-                            </span>{" "}
-                            {recompensa.precio_pts}
-                        </p>
-                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Asegúrate de tener suficientes puntos disponibles antes de intentar el canje.
+                    </p>
                 </div>
             </div>
-
-            <div className="text-center">
-                <button
-                    onClick={handleCanjear}
-                    className={`${
-                        userPoints < recompensa.precio_pts
-                            ? "bg-gray-500 cursor-not-allowed"
-                            : "bg-blue-600 hover:bg-blue-700"
-                    } text-white py-2 px-6 rounded-xl mt-6`}
-                    disabled={buttonDisabled || userPoints < recompensa.precio_pts}
-                >
-                    Canjear recompensa
-                </button>
-            </div>
-
-            <div className="bg-primary text-white rounded-2xl shadow-xl px-8 py-10 text-center space-y-4">
-                <h2 className="text-2xl font-bold">
-                    ¡Sigue explorando los productos responsables!
-                </h2>
-                <p className="text-md">
-                    Busca otro producto para conocer su información y seguir
-                    acumulando recompensas.
-                </p>
-                <Link
-                    to="/productos"
-                    className="mt-3 inline-block px-6 py-3 bg-white text-primary font-semibold rounded-xl shadow-md hover:bg-gray-100 transition duration-300"
-                >
-                    Buscar un nuevo producto
-                </Link>
-            </div>
         </div>
+
+        {/* Botón para canjear */}
+        <div className="text-center">
+            <button
+            onClick={handleCanjear}
+            className={`px-6 py-3 rounded-xl text-white font-semibold transition-colors duration-300 ${
+                userPoints < recompensa.precio_pts
+                ? "bg-gray-500 cursor-not-allowed"
+                : "bg-primary hover:bg-acento"
+            }`}
+            disabled={buttonDisabled || userPoints < recompensa.precio_pts}
+            >
+            Canjear recompensa
+            </button>
+            {userPoints < recompensa.precio_pts && (
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                Te faltan puntos para esta recompensa. Sigue participando y escaneando productos para acumular más.
+            </p>
+            )}
+        </div>
+
+        {/* CTA de exploración */}
+        <div className="bg-primary text-white rounded-2xl shadow-2xl px-8 py-10 text-center space-y-4">
+            <h2 className="text-2xl sm:text-3xl font-bold">
+            ¡Sigue explorando y sumando puntos!
+            </h2>
+            <p className="text-md sm:text-lg">
+            Cada producto escaneado es un paso más hacia una recompensa. ¡Haz que tus elecciones cuenten!
+            </p>
+            <Link
+            to="/productos"
+            className="inline-block mt-3 px-6 py-3 bg-white text-primary font-semibold rounded-xl shadow hover:bg-gray-100 transition"
+            >
+            Buscar más productos
+            </Link>
+        </div>
+        </div>
+
     );
 }
 

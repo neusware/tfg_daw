@@ -22,16 +22,9 @@ class SuscripcionSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'tipo' => 'Básica',
-                'descripcion' => 'Acceso a funcionalidades básicas y algunos servicios adicionales.',
-                'precio' => 9.99,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
                 'tipo' => 'Premium',
-                'descripcion' => 'Acceso completo a todos los servicios, características premium y soporte prioritario.',
-                'precio' => 49.99,
+                'descripcion' => 'Acceso a funcionalidades y servicios adicionales.',
+                'precio' => 9.99,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
