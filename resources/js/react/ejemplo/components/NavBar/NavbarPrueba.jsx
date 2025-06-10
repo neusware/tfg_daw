@@ -83,7 +83,7 @@ function NavbarPrueba() {
                     <li key={data.id}>
                       <Link
                         to={data.link}
-                        className="text-gray-500 hover:text-black dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
+                        className="text-primary hover:text-acento dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
                       >
                         {data.name}
                       </Link>
@@ -92,7 +92,7 @@ function NavbarPrueba() {
                 </ul>
                 <Link
                   to={"/"}
-                  className="text-gray-500 hover:text-black dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
+                  className="text-primary hover:text-acento dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
                 >
                   <button onClick={handleLogout}>Cerrar sesión</button>
                 </Link>
@@ -178,4 +178,5 @@ function NavbarPrueba() {
   );
 }
 
+//
 export default NavbarPrueba;

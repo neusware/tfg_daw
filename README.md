@@ -131,15 +131,29 @@ Authorization: Bearer <TU_TOKEN_SANCTUM>
 ---
 #### Saldo de usuario
 
-4.  🔸 **Obtener saldo de usuario**
+4.  🔸 **Obtener saldo del usuario**
     *   **Endpoint:** `GET /api/usuario/saldo`
 
-5.  🔸 **Actualizar saldo de usuario**
+5.  🔸 **Actualizar saldo del usuario**
     *   **Endpoint:** `PUT /api/usuario`
     *   **Request Body JSON:**
         ```json
         {
             "saldo":200.5
+        }
+        ```
+---
+#### Suscripción de usuario
+
+4.  🔸 **Obtener suscripción del usuario**
+    *   **Endpoint:** `GET /api/usuario/{id}/suscripcion`
+
+5.  🔸 **Actualizar suscripción del usuario**
+    *   **Endpoint:** `PUT /api/usuario/{id}/suscripcion`
+    *   **Request Body JSON:**
+        ```json
+        {
+            "id_suscripcion":1
         }
         ```
 

@@ -21,7 +21,7 @@ function ProductPage() {
 
     const producto = productos.find((p) => p.id === parseInt(id));
 
-    setPuntosProducto(producto.puntos);
+
 
     useEffect(() => {
         fetch("/api/productos")

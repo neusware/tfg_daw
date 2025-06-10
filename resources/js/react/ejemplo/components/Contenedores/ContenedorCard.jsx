@@ -19,7 +19,7 @@ function ContenedorCard({ data, image }) {
     <div className="mb-10">
       <Link to={`/contenedores/${data.id}`} key={data.id}>
         <div className="group w-full max-w-xs mx-auto rounded-lg border border-gray-200 shadow-lg hover:shadow-2xl transition duration-300 bg-white dark:bg-gray-800 min-h-[500px]">
-          
+
           {/* Imagen con botón en hover */}
           <div className="relative">
             <img
@@ -28,7 +28,7 @@ function ContenedorCard({ data, image }) {
               className="w-full h-[300px] object-cover rounded-t-lg"
             />
             <div className="hidden group-hover:flex absolute inset-0 justify-center items-center backdrop-blur-sm bg-black/50 rounded-t-lg">
-              <Button text={"Ver más"} bgColor={"bg-primary"} textColor={"text-white"} />
+              <Button text={"Ver más"} bgColor={"bg-primary hover:bg-acento"} textColor={"text-white"} />
             </div>
           </div>
 
