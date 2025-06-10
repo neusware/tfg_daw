@@ -18,6 +18,9 @@ function ProductPage() {
     // actualizar los puntos del usuario
     const {setPoints} = useUser();
 
+    // obtener el token del usuario
+    const token = sessionStorage.getItem('token');
+
     // funcion para detectar el tipo de dispositivo desde el cual se está ejecutan la app
     const esDispositivoMovil = () => {
         return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(
