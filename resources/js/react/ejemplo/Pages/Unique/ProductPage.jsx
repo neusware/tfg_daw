@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useParams, useSearchParams } from "react-router-dom";
+import {  useNavigate,Navigate, useParams, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Map from "../../components/Map/Map";
 import Swal from "sweetalert2";
@@ -15,8 +15,13 @@ function ProductPage() {
     const [searchParams] = useSearchParams();
     const [userPoints, setUserPoints] = useState(0)
     const showRewardModal = searchParams.get("from") === "scan";
+
+
     // actualizar los puntos del usuario
     const {setPoints} = useUser();
+
+    // navigate para las rutas
+    const navigate = useNavigate();
 
     // obtener el token del usuario
     const token = sessionStorage.getItem('token');
