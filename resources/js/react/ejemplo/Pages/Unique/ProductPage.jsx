@@ -118,6 +118,7 @@ function ProductPage() {
             }
         };
 
+        fetchData();
 
     }, [id,producto]);
 
