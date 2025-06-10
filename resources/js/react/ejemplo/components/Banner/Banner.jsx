@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function Banner() {
   return (
-    <div className='min-h-[500px] flex justify-center items-center'>
+    <div className='min-h-[500px] flex justify-center items-center my-12'>
       <div className='container'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-white rounded-3xl bg-gradient-to-br from-[#0F5E2B] via-[#18703A] to-[#A4D9A0] shadow-xl overflow-hidden'>
           {/* primera columna */}

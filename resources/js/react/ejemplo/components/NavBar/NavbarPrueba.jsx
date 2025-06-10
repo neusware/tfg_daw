@@ -29,6 +29,12 @@ function NavbarPrueba() {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    localStorage.removeItem("usuario");
+    window.location.reload();
+  };
+
   return (
     <div className={`${isAdmin ? "ml-60" : ""} h-[15vh] dark:bg-gray-900 dark:text-white py-8 relative z-50`}>
       <div className="flex items-center justify-between mx-6 md:mx-14">
@@ -37,12 +43,17 @@ function NavbarPrueba() {
           <img src="./img/letras.png" alt="logo" className="w-40" />
         </Link>
 
-        {/* Menú Hamburguesa */}
-        <div className="lg:hidden">
+        {/* Menú Hamburguesa y Saldo (móvil) */}
+        <div className="lg:hidden flex items-center gap-4">
+          {isLoggedIn && (
+            <span className="text-sm bg-yellow-400 text-black px-2 py-1 rounded-full">
+              ⭐ {points} pts
+            </span>
+          )}
           <HiMenu className="text-3xl cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)} />
         </div>
 
-        {/* Menú principal */}
+        {/* Menú principal (escritorio) */}
         <div className="hidden lg:flex items-center space-x-12">
           {MenuLinks.map((data) => (
             <Link
@@ -83,15 +94,7 @@ function NavbarPrueba() {
                   to={"/"}
                   className="text-gray-500 hover:text-black dark:hover:text-white duration-200 inline-block w-full p-2 hover:bg-primary/20 rounded-md font-semibold"
                 >
-                  <button
-                    onClick={() => {
-                      sessionStorage.removeItem("token");
-                      localStorage.removeItem("usuario");
-                      window.location.reload();
-                    }}
-                  >
-                    Cerrar sesión
-                  </button>
+                  <button onClick={handleLogout}>Cerrar sesión</button>
                 </Link>
               </div>
             </div>
@@ -129,7 +132,29 @@ function NavbarPrueba() {
             ))}
           </ul>
 
-          {!isLoggedIn && (
+          {isLoggedIn ? (
+            <div className="flex flex-col gap-4 mt-6">
+              {DropdownLinks.map((data) => (
+                <Link
+                  key={data.id}
+                  to={data.link}
+                  className="block text-gray-700 dark:text-white hover:text-black dark:hover:text-yellow-300 font-bold"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {data.name}
+                </Link>
+              ))}
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsMenuOpen(false);
+                }}
+                className="w-1/3 px-2 py-1 bg-red-600 text-white text-center rounded-lg hover:bg-red-700 font-bold"
+              >
+                Cerrar sesión
+              </button>
+            </div>
+          ) : (
             <div className="flex flex-col gap-4 mt-6">
               <Link
                 to="/register"

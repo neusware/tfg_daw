@@ -64,11 +64,6 @@ function ProductPage() {
         return categoria ? categoria.nombre : "Sin categoria";
     };
 
-    //funcion para encontrar el nombre de la empresa
-    const getNombreEmpresa = (idEmpresa) => {
-        const empresa = empresas.find((emp) => emp.id === idEmpresa);
-        return empresa ? empresa.nombre : "Sin empresa";
-    };
 
     delete L.Icon.Default.prototype._getIconUrl;
     L.Icon.Default.mergeOptions({
@@ -80,10 +75,10 @@ function ProductPage() {
     });
 
     const CATEGORIA_MAP = {
-        1: "ORGANICA",
-        2: "VIDRIO",
+        1: "INERTE",
+        2: "ORGANICA",
         3: "PAPEL/CARTON",
-        4: "INERTE",
+        4: "VIDRIO",
     };
 
     const residuoNombre = CATEGORIA_MAP[producto.id_categoria];
@@ -122,54 +117,54 @@ function ProductPage() {
                         }
                         if (ingredientes && Array.isArray(ingredientes) && ingredientes.length > 0) {
                             return (
-    <div>
-        <span className="text-xl font-bold text-primary flex items-center gap-2 mb-4">
-            🧪 Ingredientes
-        </span>
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-            {ingredientes.map((ingrediente, index) => (
-                <div
-                    key={index}
-                    className="p-5 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 space-y-2"
-                >
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                        {ingrediente.nombre}
-                    </h4>
-                    <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-                        <li>
-                            <strong className="text-gray-900 dark:text-white">Cantidad:</strong> {ingrediente.cantidad} {ingrediente.unidad}
-                        </li>
-                        <li>
-                            <strong className="text-gray-900 dark:text-white">Calorías:</strong> {ingrediente.calorias} kcal
-                        </li>
-                        <li>
-                            <strong className="text-gray-900 dark:text-white">Porcentaje:</strong> {ingrediente.porcentaje}%
-                        </li>
-                        <li>
-                            <strong className="text-gray-900 dark:text-white">Proteínas:</strong> {ingrediente.proteinas || 0} g
-                        </li>
-                        <li>
-                            <strong className="text-gray-900 dark:text-white">Grasas:</strong> {ingrediente.grasas || 0} g
-                        </li>
-                        <li>
-                            <strong className="text-gray-900 dark:text-white">Carbohidratos:</strong> {ingrediente.carbohidratos || 0} g
-                        </li>
-                        <li>
-                            <strong className="text-gray-900 dark:text-white">Tipo:</strong> {ingrediente.tipo}
-                        </li>
-                        <li>
-                            <strong className="text-gray-900 dark:text-white">Origen:</strong> {ingrediente.origen}
-                        </li>
-                        {ingrediente.notas && (
-                            <li className="italic text-gray-600 dark:text-gray-400">
-                                Notas: {ingrediente.notas}
-                            </li>
-                        )}
-                    </ul>
-                </div>
-            ))}
-        </div>
-    </div>
+                                <div>
+                                    <span className="text-xl font-bold text-primary flex items-center gap-2 mb-4">
+                                        Ingredientes
+                                    </span>
+                                    <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+                                        {ingredientes.map((ingrediente, index) => (
+                                            <div
+                                                key={index}
+                                                className="w-[80vh] p-5 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 space-y-2"
+                                            >
+                                                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    {ingrediente.nombre}
+                                                </h4>
+                                                <ul className="text-sm text-gray-700 dark:text-gray-300 divide-y divide-gray-200 dark:divide-gray-700">
+                                                    <li>
+                                                        <strong className="text-gray-900 dark:text-white">Cantidad:</strong> {ingrediente.cantidad} {ingrediente.unidad}
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-gray-900 dark:text-white">Calorías:</strong> {ingrediente.calorias} kcal
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-gray-900 dark:text-white">Porcentaje:</strong> {ingrediente.porcentaje}%
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-gray-900 dark:text-white">Proteínas:</strong> {ingrediente.proteinas || 0} g
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-gray-900 dark:text-white">Grasas:</strong> {ingrediente.grasas || 0} g
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-gray-900 dark:text-white">Carbohidratos:</strong> {ingrediente.carbohidratos || 0} g
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-gray-900 dark:text-white">Tipo:</strong> {ingrediente.tipo}
+                                                    </li>
+                                                    <li>
+                                                        <strong className="text-gray-900 dark:text-white">Origen:</strong> {ingrediente.origen}
+                                                    </li>
+                                                    {ingrediente.notas && (
+                                                        <li className="italic text-gray-600 dark:text-gray-400">
+                                                            Notas: {ingrediente.notas}
+                                                        </li>
+                                                    )}
+                                                </ul>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
 
                             );
                         }
@@ -195,7 +190,7 @@ function ProductPage() {
                     {producto.composicion && (
                         <p>
                             <span className="font-semibold text-primary">
-                                ⚗️ Composición:
+                                Composición:
                             </span>{" "}
                             {producto.composicion}
                         </p>
@@ -203,7 +198,7 @@ function ProductPage() {
                     {producto.fabricante && (
                         <p>
                             <span className="font-semibold text-primary">
-                                🏭 Fabricante:
+                                Fabricante:
                             </span>{" "}
                             {producto.fabricante}
                         </p>
@@ -211,7 +206,7 @@ function ProductPage() {
                     {producto.puntos !== undefined && (
                         <p>
                             <span className="font-semibold text-primary">
-                                🎁 Recompensa:
+                                Recompensa:
                             </span>{" "}
                             {producto.puntos} puntos
                         </p>
@@ -219,17 +214,9 @@ function ProductPage() {
                     {producto.id_categoria && (
                         <p>
                             <span className="font-semibold text-primary">
-                                📂 Categoría:
+                                Categoría:
                             </span>{" "}
                             {getNombreCategoria(producto.id_categoria)}
-                        </p>
-                    )}
-                    {producto.id_empresa && (
-                        <p>
-                            <span className="font-semibold text-primary">
-                                🏢 Empresa:
-                            </span>{" "}
-                            {getNombreEmpresa(producto.id_empresa)}
                         </p>
                     )}
                 </div>

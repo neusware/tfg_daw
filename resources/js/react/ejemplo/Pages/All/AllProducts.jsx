@@ -58,7 +58,7 @@ function AllProducts() {
         <h1 className="text-4xl font-bold text-gray-800 dark:text-white">
           Todos los productos
         </h1>
-        <p className="mt-2 text-gray-600 dark:text-gray-300 text-lg">
+        <p className="mt-4 text-base text-pretty sm:text-lg/relaxed dark:text-gray-200">
           Explora todos nuestros productos
         </p>
       </div>
