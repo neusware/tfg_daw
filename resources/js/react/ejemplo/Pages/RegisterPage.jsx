@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function RegisterPage() {
+
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         nombre: "",
         apellidos: "",
@@ -45,7 +48,9 @@ function RegisterPage() {
             }
 
             setMensaje(result.message || "Usuario registrado exitosamente");
-            Navigate('/login')
+
+            navigate('/login');
+            
         } catch (err) {
             console.error(err);
             setError(err.message || "Hubo un problema al registrar el usuario");
