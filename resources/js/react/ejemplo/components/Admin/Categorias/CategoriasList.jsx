@@ -13,7 +13,7 @@ const CategoriasList = () => {
   const [contenedores, setContenedores] = useState([]);
   const [cargando, setCargando] = useState(true);
 
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
 
   // Obtener todos los datos en paralelo
   useEffect(() => {
@@ -171,20 +171,21 @@ const CategoriasList = () => {
         popup: 'w-[900px]'
       },
       preConfirm: async () => {
-        const token = localStorage.getItem('token');
         const nuevaCategoria = {
             nombre: document.getElementById('nombre').value,
             descripcion: document.getElementById('descripcion').value,
-            id_contenedor: parseInt(document.getElementById('id_contenedor'))
+            id_contenedor: document.getElementById('contenedor').value
         };
 
-        const endpointCrear = "/api/categorias"
+
         try {
-          const res = await fetch(endpointCrear, {
+          const res = await fetch("/api/categorias", {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`,
+                'credentials': 'include'
             },
             body: JSON.stringify(nuevaCategoria)
           });

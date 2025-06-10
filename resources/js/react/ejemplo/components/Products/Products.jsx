@@ -18,19 +18,19 @@ function Products() {
         })
         .catch(error => console.error("Error al obtener los productos en el fetch.", error))
 
-    })
+    },[])
 
   return (
     <section className="bg-white dark:bg-gray-900 py-2">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12 text-center">
-            <h2 className="text-4xl font-bold text-center mb-14 text-gray-800">Nuestros Productos</h2>
+            <h2 className="text-4xl font-bold text-center mb-14 text-gray-800">Productos Destacados</h2>
         </div>
 
         {/* Grid de productos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-          {productos.slice(0, 4).map((producto, index) => (
+          {productos.slice(0, 6).map((producto, index) => (
             <ProductCard key={index} data={producto} />
           ))}
         </div>
@@ -39,7 +39,7 @@ function Products() {
         <div className="mt-12 text-center">
           <Link
             to="/productos"
-            className="inline-block px-6 py-3 text-white font-medium bg-indigo-600 rounded-lg shadow hover:bg-indigo-700 transition-colors"
+            className="px-6 py-3 inline-block rounded-md border bg-primary font-medium text-white shadow-sm transition-colors hover:bg-acento"
           >
             Ver todos los productos
           </Link>

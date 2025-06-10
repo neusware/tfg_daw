@@ -9,18 +9,35 @@ import Banner from '../components/Banner/Banner'
 import Products from '../components/Products/Products'
 import Blog from '../components/Blog/Blog'
 import Partners from '../components/Partners/Partners'
+import Transicion from '../components/Transicion'
 
 function Landing() {
   return (
     <div>
-        <Buscador/>
-        <Info/>
+
+
+        <Transicion>
+            <Buscador/>
+        </Transicion>
+
+        <Transicion>
+            <Info/>
+        </Transicion>
         {/*<Slider/>*/}
         {/*<Category2/>*/}
-        <HowItWorks/>
+
+        <Transicion>
+            <HowItWorks/>
+        </Transicion>
+
+        <Transicion>
+            <Products/>
+        </Transicion>
+
+        <Transicion>
+            <Banner/>
+        </Transicion>
         {/* <Services/>*/}
-        <Products/>
-        <Banner/>
         {/*<Blog/>*/}
         {/*<Partners/> */}
     </div>

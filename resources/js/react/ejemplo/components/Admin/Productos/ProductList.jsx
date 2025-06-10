@@ -93,7 +93,7 @@ const ProductosList = () => {
   const handleMostrarQr = (idProducto) => {
     const qrElemento = (
       <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem'}}>
-        <QRCode value={`https://tfgdaw-production.up.railway.app/producto/${idProducto}`} />
+        <QRCode value={`https://tfgdaw-production.up.railway.app/producto/${idProducto}?from=scan`} />
       </div>
     );
 
@@ -297,7 +297,6 @@ const ProductosList = () => {
       },
       confirmButtonText: 'Crear',
       preConfirm: async () => {
-        const token = localStorage.getItem('token');
         const nuevoProducto = {
           nombre: document.getElementById('nombre').value,
           descripcion: document.getElementById('descripcion').value,
@@ -306,26 +305,41 @@ const ProductosList = () => {
           composicion: document.getElementById('composicion').value,
           puntos: parseInt(document.getElementById('puntos').value),
           imagen: document.getElementById('imagen').value,
-          id_categoria: parseInt(document.getElementById('id_categoria').value),
-          id_empresa: parseInt(document.getElementById('id_empresa').value),
+          id_categoria: document.getElementById('id_categoria').value,
+          id_empresa: document.getElementById('id_empresa').value
         };
 
-        try {
-          const res = await fetch('/api/productos', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify(nuevoProducto)
-          });
+        console.log("Datos enviados "+ JSON.stringify(nuevoProducto))
+        console.log(token)
 
-          if (!res.ok) throw new Error('Error al crear producto');
-          return true;
-        } catch (error) {
-          Swal.showValidationMessage(`Error: ${error.message}`);
-          return false;
+        try {
+            const res = await fetch('/api/productos/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'credentials': 'include',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify(nuevoProducto)
+            });
+
+            console.log('Response status:', res.status);
+            console.log('Response headers:', [...res.headers.entries()]);
+
+            if (!res.ok) {
+              const errorText = await res.text();
+              console.log('Error response:', errorText);
+              throw new Error(`Error ${res.status}: ${errorText}`);
+            }
+
+            return true;
+          } catch (error) {
+            console.error('Fetch error:', error);
+            Swal.showValidationMessage(`Error: ${error.message}`);
+            return false;
         }
+
       }
     }).then(result => {
       if (result.isConfirmed) {
@@ -377,7 +391,7 @@ const ProductosList = () => {
                     </button>
                     <button
                       onClick={() => handleMostrarQr(producto.id)}
-                      className="bg-green-600 hover:bg-green-700 text-white p-1.5 rounded"
+                      className="bg-acento hover:bg-green-700 text-white p-1.5 rounded"
                       title="QR"
                     >
                       <FaQrcode size={16} />
